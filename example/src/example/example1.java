@@ -5,14 +5,14 @@ public class example1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner scanner = new Scanner(System.in);
+		float f = 9.1234567f;
+		double d = 9.1234567;
+		double d2 = (double)f;
 		
-		System.out.print("두자리 정수를 하나 입력해주세요.>");
-		String input = scanner.nextLine();
-		int num = Integer.parseInt(input);
+		System.out.printf("f = %20.18f\n", f);
+		System.out.printf("d = %20.18f\n", d);
+		System.out.printf("d2 = %20.18f\n", d2);
 		
-		System.out.println("입력내용: "+input);
-		System.out.printf("num=%d%n", num);
 
 	}
 
