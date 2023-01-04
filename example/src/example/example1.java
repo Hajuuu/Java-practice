@@ -1,16 +1,18 @@
 package example;
+import java.util.*;
 
 public class example1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String name = "Ja" + "va";
-		String str = name + 8.0;
+		Scanner scanner = new Scanner(System.in);
 		
-		System.out.println(name);
-		System.out.println(str);
+		System.out.print("두자리 정수를 하나 입력해주세요.>");
+		String input = scanner.nextLine();
+		int num = Integer.parseInt(input);
 		
-		System.out.println(7 + "7");
+		System.out.println("입력내용: "+input);
+		System.out.printf("num=%d%n", num);
 
 	}
 
