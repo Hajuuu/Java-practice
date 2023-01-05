@@ -5,16 +5,23 @@ public class example1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int a = 5;
-		int b = 0;
 		
-		System.out.printf("a=%d, b=%d%n",a,b);
-		System.out.printf("a!=0 || ++b!=0 = %b%n",a!=0||++b!=0);
-		System.out.printf("a=%d, b=%d%n",a,b);
-		System.out.printf("a==0 && ++b!=0 = %b%n", a==0 && ++b!=0);
-		System.out.printf("a=%d, b=%d%n",a,b);
+		int input;
 		
-
+		System.out.printf("숫자를 하나 입력하세요.>");
+		
+		Scanner scanner = new Scanner(System.in);
+		String tmp = scanner.nextLine();
+		input = Integer.parseInt(tmp);
+		
+		if(input == 0) {
+			System.out.println("입력하신 숫자는 0입니다.");	
+		}
+		
+		if(input != 0) {
+			System.out.println("입력하신 숫자는 0이 아닙니다.");
+			System.out.printf("입력하신 숫자는 %d입니다.", input);
+		}
 	}
 
 }
