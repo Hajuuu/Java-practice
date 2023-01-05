@@ -5,9 +5,20 @@ public class example1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		double pi = 3.141592;
-		double shortPi = Math.round(pi * 1000)/1000.0;
-		System.out.println(shortPi);
+		Scanner scanner = new Scanner(System.in);
+		char ch = ' ';
+		
+		System.out.printf("문자를 입력하시오: ");
+		
+		String input = scanner.nextLine();
+		ch = input.charAt(0);
+		
+		
+		if('0'<=ch && ch <= '9')
+			System.out.printf("입력하신 문자는 숫자입니다. %n");
+		
+		if(('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z'))
+			System.out.printf("입력하신 문자는 영문자입니다. %n");
 		
 
 	}
