@@ -5,23 +5,24 @@ public class example1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		int score = 0;
+		char grade = ' ';
 		
-		int input;
-		
-		System.out.printf("숫자를 하나 입력하세요.>");
-		
+		System.out.print("점수를 입력하시오.>");
 		Scanner scanner = new Scanner(System.in);
-		String tmp = scanner.nextLine();
-		input = Integer.parseInt(tmp);
+		score = scanner.nextInt();
 		
-		if(input == 0) {
-			System.out.println("입력하신 숫자는 0입니다.");	
+		if(score >= 90) {
+			grade = 'A';
+		} else if(score >= 80) {
+			grade = 'B';
+		} else if(score >= 70) {
+			grade = 'C';
+		} else {
+			grade = 'D';
 		}
 		
-		if(input != 0) {
-			System.out.println("입력하신 숫자는 0이 아닙니다.");
-			System.out.printf("입력하신 숫자는 %d입니다.", input);
-		}
+		System.out.println("당신의 학점은 "+grade+"입니다.");
 	}
 
 }
