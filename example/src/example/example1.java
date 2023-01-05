@@ -5,20 +5,14 @@ public class example1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner scanner = new Scanner(System.in);
-		char ch = ' ';
+		int a = 5;
+		int b = 0;
 		
-		System.out.printf("문자를 입력하시오: ");
-		
-		String input = scanner.nextLine();
-		ch = input.charAt(0);
-		
-		
-		if('0'<=ch && ch <= '9')
-			System.out.printf("입력하신 문자는 숫자입니다. %n");
-		
-		if(('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z'))
-			System.out.printf("입력하신 문자는 영문자입니다. %n");
+		System.out.printf("a=%d, b=%d%n",a,b);
+		System.out.printf("a!=0 || ++b!=0 = %b%n",a!=0||++b!=0);
+		System.out.printf("a=%d, b=%d%n",a,b);
+		System.out.printf("a==0 && ++b!=0 = %b%n", a==0 && ++b!=0);
+		System.out.printf("a=%d, b=%d%n",a,b);
 		
 
 	}
