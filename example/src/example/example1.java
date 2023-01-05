@@ -5,25 +5,22 @@ public class example1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.print("가위(1), 바위(2), 보(3) 중 하나를 입력하세요.>");
+		System.out.print("당신의 주민번호를 입력하세요.>");
 		
 		Scanner scanner = new Scanner(System.in);
-		int user = scanner.nextInt();
-		int com = (int) (Math.random() * 3) + 1;
+		String regNo = scanner.nextLine();
 		
-		System.out.println("당신은 "+user+"입니다.");
-		System.out.println("당신은 "+com+"입니다.");
-		
-		switch(user-com) {
-			case 2: case -1:
-				System.out.println("당신이 졌습니다.");
+		char gender = regNo.charAt(7);
+		switch(gender) {
+			case '1': case '3':
+				System.out.println("당신은 남자입니다.");
 				break;
-			case 1: case -2:
-				System.out.println("당신이 이겼습니다.");
+			case '2': case '4':
+				System.out.println("당신은 여자입니다.");
 				break;
-			case 0:
-				System.out.println("비겼습니다.");
-				break;
+			default:
+				System.out.println("유효하지 않은 주민등록번호입니다.");
+				
 		}
 	}
 	
