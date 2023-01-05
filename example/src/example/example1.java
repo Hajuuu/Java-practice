@@ -5,24 +5,27 @@ public class example1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int score = 0;
-		char grade = ' ';
+		System.out.print("가위(1), 바위(2), 보(3) 중 하나를 입력하세요.>");
 		
-		System.out.print("점수를 입력하시오.>");
 		Scanner scanner = new Scanner(System.in);
-		score = scanner.nextInt();
+		int user = scanner.nextInt();
+		int com = (int) (Math.random() * 3) + 1;
 		
-		if(score >= 90) {
-			grade = 'A';
-		} else if(score >= 80) {
-			grade = 'B';
-		} else if(score >= 70) {
-			grade = 'C';
-		} else {
-			grade = 'D';
+		System.out.println("당신은 "+user+"입니다.");
+		System.out.println("당신은 "+com+"입니다.");
+		
+		switch(user-com) {
+			case 2: case -1:
+				System.out.println("당신이 졌습니다.");
+				break;
+			case 1: case -2:
+				System.out.println("당신이 이겼습니다.");
+				break;
+			case 0:
+				System.out.println("비겼습니다.");
+				break;
 		}
-		
-		System.out.println("당신의 학점은 "+grade+"입니다.");
 	}
+	
 
 }
