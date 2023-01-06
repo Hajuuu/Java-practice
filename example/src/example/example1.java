@@ -5,21 +5,18 @@ public class example1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		char[] abc = { 'A', 'B', 'C', 'D'};
-		char[] num = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-		System.out.println(abc);
-		System.out.println(num);
+		int sum = 0;
+		float average = 0f;
 		
-		char[] result = new char[abc.length+num.length];
-		System.arraycopy(abc, 0, result, 0, abc.length);
-		System.arraycopy(num, 0, result, abc.length, num.length);
-		System.out.println(result);
+		int[] score = {100, 88, 100, 100, 90};
 		
-		System.arraycopy(abc, 0, num, 0, abc.length);
-		System.out.println(num);
+		for(int i=0; i < score.length; i++) {
+			sum += score[i];
+		}
+		average = sum / (float)score.length;
 		
-		System.arraycopy(abc, 0, num, 6, 3);
-		System.out.println(num);
+		System.out.println("총점 : "+sum);
+		System.out.println("평균 : "+average);
 	}
 	
 
