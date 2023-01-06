@@ -5,24 +5,21 @@ public class example1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] score = new int[5];
-		int k = 1;
+		char[] abc = { 'A', 'B', 'C', 'D'};
+		char[] num = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+		System.out.println(abc);
+		System.out.println(num);
 		
-		score[0] = 50;
-		score[1] = 60;
-		score[k+1] = 70;
-		score[3] = 80;
-		score[4] = 90;
+		char[] result = new char[abc.length+num.length];
+		System.arraycopy(abc, 0, result, 0, abc.length);
+		System.arraycopy(num, 0, result, abc.length, num.length);
+		System.out.println(result);
 		
-		int tmp = score[k+2] + score[4];
+		System.arraycopy(abc, 0, num, 0, abc.length);
+		System.out.println(num);
 		
-		for(int i = 0; i < 5; i++) {
-			System.out.printf("score[%d]:%d%n", i, score[i]);
-		}
-		
-		System.out.printf("tmp: %d%n",tmp);
-		
-		System.out.printf("score[%d]:%d%n", 7, score[7]);
+		System.arraycopy(abc, 0, num, 6, 3);
+		System.out.println(num);
 	}
 	
 
