@@ -5,23 +5,36 @@ public class example1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] numArr = new int[10];
-		int[] counter = new int[10];
-		
-		for(int i=0; i < numArr.length; i++) {
-			numArr[i] = (int)(Math.random() * 10);
-			System.out.print(numArr[i]);
-		}
-		System.out.println();
-		
-		for(int i=0; i < numArr.length; i++) {
-			counter[numArr[i]]++;
+		if(args.length != 3) {
+			System.out.println("usage: java ArrayEx17 NUM1 0R NUM2");
+			System.exit(0);
 		}
 		
-		for(int i=0; i < numArr.length; i++) {
-			System.out.println(i + "의 개수 :"+counter[i]);
+		int num1 = Integer.parseInt(args[0]);
+		char op = args[1].charAt(0);
+		int num2 = Integer.parseInt(args[1]);
+		int result = 0;
+		
+		switch(op) {
+			case '+':
+				result = num1 + num2;
+				break;
+			case '-':
+				result = num1 - num2;
+				break;
+			case 'x':
+				result = num1 * num2;
+				break;
+			case '/':
+				result = num1 / num2;
+				break;
+			default:
+				System.out.println("지원되지 않는 연산입니다.");
+				
 		}
+		System.out.println("결과: "+result);
 	}
+	
 	
 
 }
