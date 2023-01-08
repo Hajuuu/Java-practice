@@ -1,23 +1,22 @@
 package example;
 
+class Data { int x; }
 
 public class practice {
 
 	public static void main(String[] args) {
-		System.out.println("main이 시작되었음.");
-		firstMethod();
-		System.out.println("main이 끝났음.");
+		Data d = new Data();
+		d.x = 100;
+		System.out.println("main() : x = "+d.x);
+		
+		change(d.x);
+		System.out.println("After change (d.x)");
+		System.out.println("main() : x = "+d.x);
 	}
 	
-	static void firstMethod() {
-		System.out.println("firstMethod() 이 시작되었음.");
-		secondMethod();
-		System.out.println("firstMethod() 끝났음.");
-	}
-	
-	static void secondMethod() {
-		System.out.println("secondMethod() 이 시작되었음.");
-		System.out.println("secondMethod() 이 끝났음.");
+	static void change(int x) {
+		x = 1000;
+		System.out.println("change () :  x = "+x);
 	}
 
 }
