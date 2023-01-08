@@ -1,43 +1,28 @@
 package example;
 
+class Tv{
+	//Tv의 속성(멤버변수)
+	String color;
+	boolean power;
+	int channel;
+	
+	//Tv의 기능(메서드)
+	void power() {power = !power;}
+	void channelUp() {++channel;}
+	void channelDown() {--channel;}
+}
 public class practice {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		int[][] score = {
-				{100, 100, 100}
-				,{20, 20, 20}
-				,{30, 30, 30}
-				,{40, 40, 40}
-				, {50, 50, 50}
-		};
-		int korTotal = 0, engTotal = 0, mathTotal = 0;
-		
-		System.out.println("번호   국어   영어   수학   총점   평균");
-		System.out.println("==========================");
-		
-		for(int i=0; i < score.length; i++) {
-			int sum = 0;
-			float avg = 0.0f;
-			
-			korTotal += score[i][0];
-			engTotal += score[i][1];
-			mathTotal += score[i][2];
-			
-			System.out.printf("%3d", i+1);
-			
-			for(int j=0; j < score[i].length; j++) {
-				  sum += score[i][j];
-				  System.out.printf("%5d", score[i][j]);
-			}
-			
-			avg = sum/(float)score[i].length;
-			System.out.printf("%5d %5.1f%n", sum, avg);
-
-		}
-		System.out.println("==========================");
-		System.out.printf("총점: %3d %4d %4d %n", korTotal, engTotal, mathTotal);
-		
+		Tv t1 = new Tv();
+		Tv t2 = new Tv();
+		System.out.println("t1의 channel값은 "+t1.channel+"입니다.");
+		System.out.println("t2의 channel값은 "+t2.channel+"입니다.");
+		t2 = t1;
+		t1.channel = 7;
+		System.out.println("t1의 channel값을 7로 변경하였습니다.");
+		System.out.println("t1의 channel값은 "+t1.channel+"입니다.");
+		System.out.println("t2의 channel값은 "+t2.channel+"입니다.");
 	}
 
 }
