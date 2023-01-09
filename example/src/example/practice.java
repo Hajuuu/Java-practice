@@ -3,40 +3,24 @@ package example;
 public class practice {
 
 	public static void main(String[] args) {
-		int[] arr = new int[] {3, 2, 1, 6, 5, 4};
+		practice r = new practice();
 		
-		printArr(arr);
-		sortArr(arr);
-		printArr(arr);
-		System.out.println("sum="+sumArr(arr));
-	}
-	
-	static void printArr(int[] arr) {
-		System.out.print("[");
-		for(int i : arr)
-			System.out.print(i+",");
-		System.out.println("]");
-	}
-	
-	static int sumArr(int[] arr) {
-		int sum = 0;
+		int result = r.add(3,5);
+		System.out.println(result);
 		
-		for(int i = 0; i < arr.length; i++)
-			sum += arr[i];
-		return sum;
+		int[] result2 = {0};
+		r.add(3,5,result2);
+		System.out.println(result2[0]);
 	}
 	
-	static void sortArr(int[] arr) {
-		for(int i=0; i < arr.length-1; i++) {
-			for(int j=0; j < arr.length-1-i; j++) {
-				if(arr[j] > arr [j+1]) {
-					int tmp = arr[j];
-					arr[j] = arr[j+1];
-					arr[j+1] = tmp;
-				}
-			}
-		}
+	int add(int a, int b) {
+		return a + b;
 	}
+	
+	void add(int a, int b, int[] result) {
+		result[0] = a + b;
+	}
+	
 	
 
 }
