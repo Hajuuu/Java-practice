@@ -1,24 +1,23 @@
 package example;
 
+class Data  { int x; }
+
 public class practice {
 
 	public static void main(String[] args) {
-		practice r = new practice();
+		Data d = new Data();
+		d.x = 10;
 		
-		int result = r.add(3,5);
-		System.out.println(result);
-		
-		int[] result2 = {0};
-		r.add(3,5,result2);
-		System.out.println(result2[0]);
+		Data d2 = copy(d);
+		System.out.println("d.x = "+d.x);
+		System.out.println("d2.x = "+d2.x);
 	}
 	
-	int add(int a, int b) {
-		return a + b;
-	}
-	
-	void add(int a, int b, int[] result) {
-		result[0] = a + b;
+	static Data copy(Data d) {
+		Data tmp = new Data();
+		tmp.x = d.x;
+		
+		return tmp;
 	}
 	
 	
