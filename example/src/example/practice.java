@@ -1,23 +1,22 @@
 package example;
 
-class Data  { int x; }
-
 public class practice {
 
 	public static void main(String[] args) {
-		Data d = new Data();
-		d.x = 10;
+		int result = factorial(4);
 		
-		Data d2 = copy(d);
-		System.out.println("d.x = "+d.x);
-		System.out.println("d2.x = "+d2.x);
+		System.out.println(result);
 	}
 	
-	static Data copy(Data d) {
-		Data tmp = new Data();
-		tmp.x = d.x;
+	static int factorial(int n) {
+		int result = 0;
 		
-		return tmp;
+		if(n==1)
+			result = 1;
+		else
+			result = n * factorial(n-1);
+		
+		return result;
 	}
 	
 	
