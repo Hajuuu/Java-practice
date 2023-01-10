@@ -1,47 +1,31 @@
 package example;
 
+class Car{
+	String color;
+	String gearType;
+	int door;
+	
+	Car(){
+		this("white", "auto", 4);
+	}
+	
+	Car(String color){
+		this(color, "auto", 4);
+	}
+	
+	Car(String color, String gearType, int door){
+		this.color = color;
+		this.gearType = gearType;
+		this.door = door;
+	}
+}
 public class practice {
 
 	public static void main(String[] args) {
-		MyMath3 mm = new MyMath3();
-		System.out.println("mm.add(3, 3) 결과:"+mm.add(3,3));
-		System.out.println("mm.add(3L, 3) 결과:"+mm.add(3L,3));
-		System.out.println("mm.add(3, 3L) 결과:"+mm.add(3,3L));
-		System.out.println("mm.add(3L, 3L) 결과:"+mm.add(3L,3L));
+		Car c1 = new Car();
+		Car c2 = new Car("blue");
 		
-		int[] a = {100, 200, 300};
-		System.out.println("mm.add(a) 결과:"+mm.add(a));
+		System.out.println("c1의 color="+c1.color+", gearType="+c1.gearType+", door="+c1.door);
+		System.out.println("c2의 color="+c2.color+", gearType="+c2.gearType+", door="+c2.door);
 	}
-}
-
-class MyMath3 {
-	int add(int a, int b) {
-		System.out.print("int add(int a, int b) - ");
-		return a+b;
-	}
-	
-	long add(int a, long b) {
-		System.out.print("long add(int a, long b) - ");
-		return a+b;
-	}
-	
-	long add(long a, int b) {
-		System.out.print("long add(long a, int b) - ");
-		return a+b;
-	}
-	
-	long add(long a, long b) {
-		System.out.print("long add(long a, long b) - ");
-		return a+b;
-	}
-	
-	int add(int[] a) {
-		System.out.print("int add(int[] a) - ");
-		int result = 0;
-		for(int i=0; i < a.length; i++) {
-			result += a[i];
-		}
-		return result;
-	}
-	
 }
