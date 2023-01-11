@@ -2,10 +2,12 @@ package example;
 
 public class practice {
 
+	// 클래스 초기화 블럭
 	static {
 		System.out.println("static {  }");
 	}
 	
+	// 인스턴스 초기화 블럭
 	{
 		System.out.println("{ }");
 	}
