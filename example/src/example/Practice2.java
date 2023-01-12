@@ -3,70 +3,77 @@ package example;
 public class Practice2 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Point[] p = { new Point(100, 100), new Point(140, 50), new Point(200, 100) };
-		Triangle t = new Triangle(p);
-		Circle c = new Circle(new Point(150, 150), 50);
+		Deck d = new Deck();
+		Card c = d.pick(0);
+		System.out.println(c);
 		
-		t.draw();
-		c.draw();
+		d.shuffle();
+		c = d.pick(0);
+		System.out.println(c);
 	
 	}
 
 }
 
-class Shape {
-	String color = "black";
-	void draw() {
-		System.out.printf("[color=%s]%n", color);
+class Deck {
+	final int CARD_NUM = 52;
+	Card cardArr[] = new Card[CARD_NUM];
+	
+	Deck () {
+		int i = 0;
+		
+		for(int k = Card.KIND_MAX; k > 0; k--) {
+			for(int n = 0; n < Card.NUM_MAX; n++) {
+				cardArr[i++] = new Card(k, n+1);
+			}
+		}
+	}
+	
+	Card pick(int index) {
+		return cardArr[index];
+	}
+	
+	Card pick() {
+		int index = (int) (Math.random() * CARD_NUM);
+		return pick(index);
+	}
+	
+	void shuffle() {
+		for(int i = 0; i < cardArr.length; i++) {
+			int r = (int) (Math.random() * CARD_NUM);
+			
+			Card temp = cardArr[i];
+			cardArr[i] = cardArr[r];
+			cardArr[r] = temp;
+		}
 	}
 }
 
-class Point {
-	int x;
-	int y;
+class Card {
+	static final int KIND_MAX = 4;
+	static final int NUM_MAX = 13;
 	
-	Point(int x, int y) {
-		this.x = x;
-		this.y = y;
+	static final int SPADE = 4;
+	static final int DIAMOND = 3;
+	static final int HEART = 2;
+	static final int CLOVER = 1;
+	
+	int kind;
+	int number;
+	
+	Card() {
+		this(SPADE, 1);
 	}
 	
-	Point() {
-		this(0, 0);
+	Card(int kind, int number) {
+		this.kind = kind;
+		this.number = number;
 	}
 	
-	String getXY() {
-		return "("+x+","+y+")";
-	}
-}
-
-class Circle extends Shape {
-
-	Point center;
-	int r;
-	
-	Circle() {
-		this(new Point(0, 0), 100);
-	}
-	
-	Circle(Point center, int r) {
-		this.center = center;
-		this.r = r;
-	}
-	
-	void draw() {
-		System.out.printf("[center = (%d, %d), r = %d, color = %s]%n", center.x, center.y, r, color);
-	}
-}
-
-class Triangle extends Shape {
-	Point[] p = new Point[3];
-	
-	Triangle(Point[] p) {
-		this.p = p;
-	}
-	
-	void draw() {
-		System.out.printf("[p1 = %s, p2 = %s, p3 = %s, color = %s]%n", p[0].getXY(), p[1].getXY(), p[2].getXY(), color);
+	public String toString() {
+		String[] kinds = {"", "CLOVER", "HEART", "DIAMOND", "SPADE"};
+		String numbers = "0123456789XJQK";
+		
+		return "kind : " + kinds[this.kind] + ", number : " + numbers.charAt(this.number);
 	}
 }
