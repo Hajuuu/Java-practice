@@ -3,23 +3,34 @@ package example;
 public class Practice2 {
 
 	public static void main(String[] args) {
-		Child c = new Child();
-		c.method();
-	
+		
+		Point3D p3 = new Point3D(1,2,3);
 	}
 
 }
 
-class Parent {
-	int x = 10;
+class Point {
+	int x, y;
+	
+	Point(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	String getLocation() {
+		return "x: " + x + ", y: " + y;
+	}
 }
 
-class Child extends Parent {
-	int x = 20;
+class Point3D extends Point {
+	int z;
 	
-	void method() {
-		System.out.println("x=" + x);
-		System.out.println("this.x=" + this.x);
-		System.out.println("super.x=" + super.x);
+	Point3D(int x, int y, int z) {
+		super(x, y);
+		this.z = z;
+	}
+	
+	String getLocation() {
+		return "x: " + x + ", y: " + y + ", z: " + z;
 	}
 }
