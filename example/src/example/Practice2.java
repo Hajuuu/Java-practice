@@ -1,36 +1,18 @@
 package example;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 public class Practice2 {
 
 	public static void main(String[] args) {
-		Point3D p3 = new Point3D();
-		System.out.println("p3.x="+p3.x);
-		System.out.println("p3.y="+p3.y);
-		System.out.println("p3.z="+p3.z);
+		Date today = new Date();
+		
+		SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss a");
+		
+		System.out.println("오늘 날짜는 "+ date.format(today));
+		System.out.println("현재 시간은 "+ time.format(today));
 	}
 
-}
-
-
-class Point {
-	int x = 10;
-	int y = 20;
-	
-	Point(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-}
-
-class Point3D extends Point {
-	int z = 30;
-	
-	Point3D() {
-		this(100, 200, 300);
-	}
-	
-	Point3D(int x, int y, int z) {
-		super(x, y);
-		this.z = z;
-	}
 }
