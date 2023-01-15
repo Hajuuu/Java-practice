@@ -1,32 +1,43 @@
 package example;
 
-class Card {
-	final int NUMBER;
-	final String KIND; // 생성자에서 단 한번만 초기화할 수 있다.
-	static int width = 100;
-	static int height = 250;
-	
-	Card(String kind, int num) {
-		KIND = kind;
-		NUMBER = num;
-	}
-	
-	Card() {
-		this("HEART", 1);
-	}
-	
-	public String toString() {
-		return KIND + " " + NUMBER;
-	}
-}
+
 public class Practice2 {
 
 	public static void main(String[] args) {
-		Card c = new Card("HEART", 10);
-		//c.NUMBER = 5; 
-		System.out.println(c.KIND);
-		System.out.println(c.NUMBER);
-		System.out.println(c);
+		Time t = new Time(12, 35, 30);
+		System.out.println(t);
+		t.setHour(t.getHour() + 1);
+		System.out.println(t);
 	}
 
+}
+
+class Time {
+	private int hour, minute, second;
+	
+	Time(int hour, int minute, int second) {
+		setHour(hour);
+		setMinute(minute);
+		setSecond(second);
+	}
+	
+	public int getHour() { return hour; }
+	public void setHour(int hour) {
+		if (hour < 0 || hour > 23) return;
+		this.hour = hour;
+	}
+	public int getMinute() { return minute; }
+	public void setMinute(int minute) {
+		if (minute < 0 || minute > 59) return;
+		this.minute = minute;
+	}
+	public int getSecond() { return second; }
+	public void setSecond(int second) {
+		if (second < 0 || second > 59) return;
+		this.second = second;
+	}
+	
+	public String toString() {
+		return hour + ":" + minute + ":" + second;
+	}
 }
