@@ -3,15 +3,21 @@ package example;
 public class Practice2 {
 
 	public static void main(String[] args) {
-		Car car = new Car();
-		Car car2 = null;
-		FireEngine fe = null;
+		FireEngine fe = new FireEngine();
 		
-		car.drive();
-		fe = (FireEngine) car;
-		fe.drive();
-		car2 = fe;
-		car2.drive();
+		if(fe instanceof FireEngine) {
+			System.out.println("This is a FireEngine instance.");
+		}
+		
+		if(fe instanceof Car) {
+			System.out.println("This is a Car instance");
+		}
+		
+		if(fe instanceof Object) {
+			System.out.println("This is a Object instance");
+		}
+		
+		System.out.println(fe.getClass().getName());
 		
 	}
 
