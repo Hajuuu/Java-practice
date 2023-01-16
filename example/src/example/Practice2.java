@@ -1,24 +1,37 @@
 package example;
 
-final class Singleton {
-	private static Singleton s = new Singleton();
-	
-	private Singleton() {
-		
-	}
-	
-	public static Singleton getInstance() {
-		if(s==null) {
-			s = new Singleton();
-		}
-		return s;
-	}
-}
 public class Practice2 {
 
 	public static void main(String[] args) {
-		//Singleton s = new Singleton(); error, Singleton() has private access in Singleton
-		Singleton s = Singleton.getInstance();
+		Car car = null;
+		FireEngine fe = new FireEngine();
+		FireEngine fe2 = null;
+		
+		fe.water();
+		car = fe;
+		//car.water(); error. Car 타입의 참조변수인 car로는 water()를 사용 불가.
+		fe2 = (FireEngine)car;
+		fe2.water();
 	}
 
+}
+
+class Car {
+	String color;
+	int door;
+	
+	void drive() {
+		System.out.println("drive");
+	}
+	
+	void stop() {
+		System.out.println("stop");
+	}
+	
+}
+
+class FireEngine extends Car {
+	void water() {
+		System.out.println("water");
+	}
 }
