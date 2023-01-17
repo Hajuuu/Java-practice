@@ -3,42 +3,30 @@ package example;
 public class Practice2 {
 
 	public static void main(String[] args) {
-		FireEngine fe = new FireEngine();
+		Parent p = new Child();
+		Child c = new Child();
 		
-		if(fe instanceof FireEngine) {
-			System.out.println("This is a FireEngine instance.");
-		}
+		System.out.println("p.x = " + p.x);
+		p.method();
 		
-		if(fe instanceof Car) {
-			System.out.println("This is a Car instance");
-		}
-		
-		if(fe instanceof Object) {
-			System.out.println("This is a Object instance");
-		}
-		
-		System.out.println(fe.getClass().getName());
-		
+		System.out.println("c.x = " + c.x);
+		c.method();
 	}
 
 }
 
-class Car {
-	String color;
-	int door;
+class Parent {
+	int x = 100;
 	
-	void drive() {
-		System.out.println("drive");
+	void method() {
+		System.out.println("Parent Method");
 	}
-	
-	void stop() {
-		System.out.println("stop");
-	}
-	
 }
 
-class FireEngine extends Car {
-	void water() {
-		System.out.println("water");
+class Child extends Parent {
+	int x = 200;
+	
+	void method() {
+		System.out.println("Child Method");
 	}
 }
