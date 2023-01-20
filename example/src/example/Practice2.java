@@ -1,37 +1,42 @@
 package example;
 
+interface Parseable {
+	public abstract void parse(String fileName);
+}
+
+class ParserManager {
+	public static Parseable getParser(String type) {
+		if(type.equals("XML")) {
+			return new XMLParser();
+		} else {
+			Parseable p = new HTMLParser();
+			return p;
+		}
+	}
+}
+
+
+class XMLParser implements Parseable {
+	public void parse(String fileName) {
+		System.out.println(fileName + "- XML parsing completed.");
+	}
+}
+
+class HTMLParser implements Parseable {
+	public void parse(String fileName) {
+		System.out.println(fileName + "-HTML parsing completed.");
+	}
+}
+
+
 public class Practice2 {
 
 	public static void main(String[] args) {
-		Fighter f = new Fighter();
-		
-		if(f instanceof Unit)
-			System.out.println("f는 Unit클래스의 자손입니다.");
-		if(f instanceof Fightable)
-			System.out.println("f는 Fightable인터페이스를 구현했습니다.");
-		if(f instanceof Movable)
-			System.out.println("f는 Movable인터페이스를 구현했습니다.");
-		if(f instanceof Attackable)
-			System.out.println("f는 Attackable인터페이스를 구현했습니다.");
-		if(f instanceof Object)
-			System.out.println("f는 Object클래스의 자손입니다.");
+		Parseable parser = ParserManager.getParser("XML");
+		parser.parse("document.xml");
+		parser = ParserManager.getParser("HTML");
+		parser.parse("document2.html");
 		
 	}
 
 }
-
-
-class Fighter extends Unit implements Fightable {
-	public void move(int x, int y) { }
-	public void attack(Unit u) { }
-}
-
-class Unit {
-	int currentHP;
-	int x;
-	int y;
-}
-
-interface Fightable extends Movable, Attackable { }
-interface Movable { void move(int x, int y); }
-interface Attackable { void attack(Unit u); }
