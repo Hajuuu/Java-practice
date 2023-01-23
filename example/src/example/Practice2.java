@@ -1,32 +1,52 @@
 package example;
 
-class A {
-	public void method(I i) { // 인터페이스 I를 구현한 것만 매개변수 이용가능
-		i.method();
-	}
-}
 
-interface I {
-	public void method();
-}
-
-class B implements I {
-	public void method() {
-		System.out.println("B클래스의 메서드");
-	}
-}
-
-class C {
-	public void method() {
-		System.out.println("C클래스의 메서드");
-	}
-}
 
 public class Practice2 {
 
 	public static void main(String[] args) {
-		A a = new A();
-		a.method(new B());
+		Child c = new Child();
+		c.method1();
+		c.method2();
+		MyInterface.staticMethod();
+		MyInterface2.staticMethod();
+	
 	}
 
+}
+
+class Child extends Parent implements MyInterface, MyInterface2 {
+	public void method1() {
+		System.out.println("method1() in Child");
+	}
+}
+
+class Parent {
+	public void method2() {
+		System.out.println("method2() in Parent");
+	}
+}
+
+interface MyInterface {
+	default void method1() {
+		System.out.println("method1() in MyInterface");
+	}
+	
+	default void method2() {
+		System.out.println("method2() in MyInterface");
+	}
+	
+	static void staticMethod() {
+		System.out.println("staticMethod() in MyInterface");
+	}
+}
+
+interface MyInterface2 {
+	default void method1() {
+		System.out.println("method1() in MyInterface2");
+	}
+	
+	static void staticMethod() {
+		System.out.println("staticMethod() in MyInterface2");
+	}
 }
