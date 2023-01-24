@@ -5,48 +5,35 @@ package example;
 public class Practice2 {
 
 	public static void main(String[] args) {
-		Child c = new Child();
-		c.method1();
-		c.method2();
-		MyInterface.staticMethod();
-		MyInterface2.staticMethod();
-	
+		A a = new A();
+		a.methodA();
+
 	}
 
 }
 
-class Child extends Parent implements MyInterface, MyInterface2 {
-	public void method1() {
-		System.out.println("method1() in Child");
-	}
-}
-
-class Parent {
-	public void method2() {
-		System.out.println("method2() in Parent");
-	}
-}
-
-interface MyInterface {
-	default void method1() {
-		System.out.println("method1() in MyInterface");
+class A {
+	void methodA() {
+		I i = InstanceManager.getInstance();
+		i.methodB();
+		System.out.println(i.toString()); // 모든 객체는 Object 클래스에 정의된 메서드를 가지고 있기에 허용
 	}
 	
-	default void method2() {
-		System.out.println("method2() in MyInterface");
-	}
-	
-	static void staticMethod() {
-		System.out.println("staticMethod() in MyInterface");
-	}
 }
 
-interface MyInterface2 {
-	default void method1() {
-		System.out.println("method1() in MyInterface2");
+interface I {
+	public abstract void methodB();
+}
+
+class B implements I {
+	public void methodB() {
+		System.out.println("methodB in B class");
 	}
 	
-	static void staticMethod() {
-		System.out.println("staticMethod() in MyInterface2");
+	public String toString() { return "class B"; }
+}
+class InstanceManager {
+	public static I getInstance() {
+		return new B();
 	}
 }
