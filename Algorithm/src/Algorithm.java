@@ -5,28 +5,24 @@ import java.util.Scanner;
 public class Algorithm {
 
 	public static void main(String[] args) {
-		int counter = 0;
-		int ptr = 0;
-		int[] prime = new int[500];
-		
-		prime[ptr++] = 2;
-		
-		for(int n = 3; n <= 1000; n += 2) {
-			int i;
-			for(i = 1; i < ptr; i++) {
-				counter++;
-				if(n % prime[i] == 0)
-					break;
+		Scanner sc = new Scanner(System.in);
+		int testcase = sc.nextInt();
+		int answer = 0;
+		int A[] = new int[100001];
+		int S[] = new int[100001];
+		for(int i = 1; i < 1000; i++) {
+			A[i] = (int) (Math.random() * Integer.MAX_VALUE);
+			S[i] = S[i - 1] + A[i];
+		}
+		for(int t = 1; t < testcase; t++) {
+			int query = sc.nextInt();
+			for(int i = 0; i <query; i++) {
+				int start = sc.nextInt();
+				int end = sc.nextInt();
+				answer += S[end] - S[start - 1];
+				System.out.println(testcase + " " + answer);
 			}
-			if(ptr == i)
-				prime[ptr++] = n;
 		}
-		
-		for(int i = 0; i < ptr; i++) {
-			System.out.println(prime[i]);
-		}
-		
-		System.out.println("나눗셈을 수행한 횟수: " + counter);
 	}
 
 }
