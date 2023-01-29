@@ -7,8 +7,12 @@ public class Practice2 {
 		int result = 0;
 		
 		for(int i = 0; i < 10; i++) {
-			result = number / (int)(Math.random() * 10);
-			System.out.println(result);
+			try {
+				result = number / (int) (Math.random() * 10);
+				System.out.println(result);
+			} catch (ArithmeticException e) {
+				System.out.println("0");
+			}
 		}
 	}
 	
