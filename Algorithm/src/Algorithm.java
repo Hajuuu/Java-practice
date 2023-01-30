@@ -1,28 +1,39 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 
 public class Algorithm {
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int testcase = sc.nextInt();
-		int answer = 0;
-		int A[] = new int[100001];
-		int S[] = new int[100001];
-		for(int i = 1; i < 1000; i++) {
-			A[i] = (int) (Math.random() * Integer.MAX_VALUE);
-			S[i] = S[i - 1] + A[i];
+	public static void main(String[] args) throws IOException {
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(bf.readLine());
+		int M = Integer.parseInt(bf.readLine());
+		int[] A = new int[N];
+		StringTokenizer st = new StringTokenizer(bf.readLine());
+		for(int i = 0; i < N; i++) {
+			A[i] = Integer.parseInt(st.nextToken());
 		}
-		for(int t = 1; t < testcase; t++) {
-			int query = sc.nextInt();
-			for(int i = 0; i <query; i++) {
-				int start = sc.nextInt();
-				int end = sc.nextInt();
-				answer += S[end] - S[start - 1];
-				System.out.println(testcase + " " + answer);
+		Arrays.sort(A);
+		int count = 0;
+		int i = 0;
+		int j = N - 1;
+		while(i < j) {
+			if(A[i] + A[j] < M) {
+				i++;
+			} else if(A[i] + A[j] > M) {
+				j--;
+			} else {
+				count++;
+				i++;
+				j--;
 			}
 		}
+		
+		System.out.println(count);
+		bf.close();
 	}
 
 }
