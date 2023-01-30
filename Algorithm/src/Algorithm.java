@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 
@@ -45,6 +44,7 @@ public class Algorithm {
 			}
 		}
 		System.out.println(result);
+		bf.close();
 	}
 	
 	private static void Add(char c) {
@@ -98,7 +98,7 @@ public class Algorithm {
 			break;
 		case 'T':
 			if(myArr[3] == checkArr[3]) {
-				checkSecret++;
+				checkSecret--;
 			}
 			myArr[3]--;
 			break;
