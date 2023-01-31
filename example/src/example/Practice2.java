@@ -1,19 +1,34 @@
 package example;
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		int number = 100;
-		int result = 0;
+		Stack st = new Stack();
+		Queue q = new LinkedList();
 		
-		for(int i = 0; i < 10; i++) {
-			try {
-				result = number / (int) (Math.random() * 10);
-				System.out.println(result);
-			} catch (ArithmeticException e) {
-				System.out.println("0");
-			}
+		st.push("0");
+		st.push("1");
+		st.push("2");
+		
+		q.offer("0");
+		q.offer("1");
+		q.offer("2");
+		
+		
+		System.out.println("= Stack =");
+		while(!st.isEmpty()) {
+			System.out.println(st.pop());
 		}
+		
+		System.out.println("= Queue =");
+		while(!q.isEmpty()) {
+			System.out.println(q.poll());
+		}
+		
 	}
 	
 }
