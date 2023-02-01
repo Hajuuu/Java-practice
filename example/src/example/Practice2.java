@@ -5,35 +5,31 @@ import java.util.*;
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		if(args.length != 1) {
-			System.out.println("Usage : java ExpValidCheck \"EXPRESSION\"");
-			System.out.println("Example : java ExpValidCheck \"((2+3)*1)+3\"");
-			System.exit(0);
+		ArrayList list = new ArrayList();
+		list.add("1");
+		list.add("2");
+		list.add("3");
+		list.add("4");
+		list.add("5");
+		
+		Iterator it = list.iterator();
+		
+		while(it.hasNext()) {
+			Object obj = it.next();
+			System.out.println(obj);
 		}
 		
-		Stack st = new Stack();
-		String expression = args[0];
+		//iterator는 1회용이라 다 쓰고나면 다시 얻어와야 한다.
+//		it = list.iterator();
+//		
+//		while(it.hasNext()) {
+//			Object obj = it.next();
+//			System.out.println(obj);
+//		}
 		
-		System.out.println("expression:" + expression);
-		
-		try {
-			for(int i=0; i < expression.length(); i++) {
-				char ch = expression.charAt(i);
-				
-				if(ch == '(') {
-					st.push(ch+"");
-				} else if(ch==')') {
-					st.pop();
-				}
-			}
-			
-			if(st.empty()) {
-				System.out.println("괄호가 일치합니다.");
-			} else {
-				System.out.println("괄호가 일치하지 않습니다.");
-			}
-		} catch (EmptyStackException e) {
-			System.out.println("괄호가 일치하지 않습니다.");
+		for(int i = 0; i < list.size(); i++) {
+			Object obj = list.get(i);
+			System.out.println(obj);
 		}
 		
 	}
