@@ -6,34 +6,17 @@ public class Algorithm {
 	
 	
 	public static void main(String[] args) throws IOException{
-		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		int n = Integer.parseInt(bf.readLine());
-		int[] A = new int[n];
-		int[] ans = new int[n];
-		String[] str = bf.readLine().split(" ");
-		for(int i = 0; i < n; i++) {
-			A[i] = Integer.parseInt(str[i]);
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		Queue<Integer> myQueue = new LinkedList();
+		for(int i = 1; i <= n; i++) {
+			myQueue.add(i);
 		}
-		
-		Stack<Integer> stack = new Stack<>();
-		stack.add(0);
-		for(int i = 1; i < n; i++) {
-			while(!stack.isEmpty() && A[stack.peek()] < A[i]) {
-				ans[stack.pop()] = A[i];
-			}
-			stack.push(i);
+		while(myQueue.size() > 1) {
+			myQueue.poll();
+			myQueue.add(myQueue.poll());
 		}
-		
-		while(!stack.empty()) {
-			ans[stack.pop()] = -1;
-		}
-		
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		for(int i = 0; i < n; i++) {
-			bw.write(ans[i]+" ");
-		}
-		bw.flush();
+		System.out.println(myQueue.poll());
 		
 	}
 
