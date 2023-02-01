@@ -1,46 +1,39 @@
-import java.util.Scanner;
-import java.util.Stack;
+import java.io.*;
+import java.util.*;
 
 
 public class Algorithm {
 	
 	
-	public static void main(String[] args){
-		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
-		int[] A = new int[N];
-		for(int i = 0; i < N; i++) {
-			A[i] = sc.nextInt();
+	public static void main(String[] args) throws IOException{
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(bf.readLine());
+		int[] A = new int[n];
+		int[] ans = new int[n];
+		String[] str = bf.readLine().split(" ");
+		for(int i = 0; i < n; i++) {
+			A[i] = Integer.parseInt(str[i]);
 		}
 		
-		Stack<Integer> st = new Stack<>();
-		StringBuffer bf = new StringBuffer();
-		int num = 1;
-		boolean result = true;
-		for(int i = 0; i < A.length; i++) {
-			int su = A[i];
-			if(su >= num) {
-				while(su >= num) {
-					st.push(num++);
-					bf.append("+\n");
-					
-				}
-				st.pop();
-				bf.append("-\n");
-			} 
-			else {
-				int n = st.pop();
-				if(n > su) {
-					System.out.println("NO");
-					result = false;
-					break;
-				}
-				else {
-					bf.append("-\n");
-				}
+		Stack<Integer> stack = new Stack<>();
+		stack.add(0);
+		for(int i = 1; i < n; i++) {
+			while(!stack.isEmpty() && A[stack.peek()] < A[i]) {
+				ans[stack.pop()] = A[i];
 			}
+			stack.push(i);
 		}
-		if(result) System.out.println(bf.toString());
+		
+		while(!stack.empty()) {
+			ans[stack.pop()] = -1;
+		}
+		
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		for(int i = 0; i < n; i++) {
+			bw.write(ans[i]+" ");
+		}
+		bw.flush();
 		
 	}
 
