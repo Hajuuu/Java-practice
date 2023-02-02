@@ -6,26 +6,27 @@ public class Algorithm {
 	
 	
 	public static void main(String[] args) throws IOException{
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int N = Integer.parseInt(br.readLine());
-		PriorityQueue<Integer> myQueue = new PriorityQueue<>((o1, o2) ->  {
-			int first_abs = Math.abs(o1);
-			int second_abs = Math.abs(o2);
-			if(first_abs == second_abs)
-				return o1 > o2 ? 1 : -1;
-			else
-				return first_abs - second_abs;
-		});
-		for(int i = 0; i < N; i++) {
-			int request = Integer.parseInt(br.readLine());
-			if(request == 0) {
-				if(myQueue.isEmpty())
-					System.out.println("0");
-				else
-					System.out.println(myQueue.poll());
-			} else {
-				myQueue.add(request);
+		Scanner sc = new Scanner(System.in);
+		
+		int n = Integer.parseInt(sc.nextLine());
+		int[] A = new int[n];
+		for(int i = 0; i < n; i++) {
+			A[i] = Integer.parseInt(sc.nextLine());
+		}
+		
+		for(int i = 0; i < n - 1; i++) {
+			for(int j = 0; j < n - i - 1; j++) {
+				if(A[j] > A[j + 1]) {
+					int temp = A[j];
+					A[j] = A[j + 1];
+					A[j + 1] = temp;
+				}
+				
+				
 			}
+		}
+		for(int i = 0; i < n; i++) {
+			System.out.println(A[i]);
 		}
 		
 	}
