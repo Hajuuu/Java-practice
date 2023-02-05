@@ -5,27 +5,30 @@ import java.util.*;
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		String[] strArr = {"cat", "Dog", "lion", "tiger"};
+		Value v1 = new Value(10);
+		Value v2 = new Value(10);
 		
-		Arrays.sort(strArr);
-		System.out.println("strArr=" + Arrays.toString(strArr));
+		if(v1.equals(v2))
+			System.out.println("v1과 v2는 같습니다.");
+		else
+			System.out.println("v1과 v2는 다릅니다.");
 		
-		Arrays.sort(strArr, String.CASE_INSENSITIVE_ORDER);
-		System.out.println("strArr=" + Arrays.toString(strArr));
-		
-		Arrays.sort(strArr, new Descending());
-		System.out.println("strArr=" + Arrays.toString(strArr));
 	}
 	
 }
 
-class Descending implements Comparator {
-	public int compare(Object o1, Object o2) {
-		if(o1 instanceof Comparable && o2 instanceof Comparable) {
-			Comparable c1 = (Comparable) o1;
-			Comparable c2 = (Comparable) o2;
-			return c1.compareTo(c2) * -1;
-		}
-		return -1;
+class Value {
+	int value;
+	
+	Value(int value) {
+		this.value = value;
+	}
+	
+	public boolean equals(Object obj) {
+//		Value v = (Value) obj; // obj를 value로 형변환
+//		
+//		return this.value == v.value;
+		return this == obj; //주소 비교, 서로 다른 객체는 항상 거짓
 	}
 }
+
