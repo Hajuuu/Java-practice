@@ -2,37 +2,35 @@ package example;
 
 import java.util.*;
 
+class Person {
+	long id;
+	
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Person))
+			return false;
+		
+		Person p = (Person)obj;
+		
+		return this.id == p.id;
+	}
+	
+	Person(long id) {
+		this.id = id;
+	}
+}
+
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		Value v1 = new Value(10);
-		Value v2 = new Value(10);
+		Person p1 = new Person(8011081111222L);
+		Person p2 = new Person(8011081111222L);
 		
-		if(v1.equals(v2))
-			System.out.println("v1과 v2는 같습니다.");
+		if(p1.equals(p2))
+			System.out.println("p1과 p2는 같은 사람입니다.");
 		else
-			System.out.println("v1과 v2는 다릅니다.");
-		
+			System.out.println("p1과 p2는 다른 사람입니다.");
+	
 	}
 	
-}
-
-class Value {
-	int value;
-	
-	Value(int value) {
-		this.value = value;
-	}
-	
-	// Object의 equals()를 오버라이딩해서 주소가 아닌 value를 비교
-	public boolean equals(Object obj) {
-		// 참조변수의 형변환 전에는 반드시 instanceof로 확인해야함.
-		if(!(obj instanceof Value)) return false;
-		
-		Value v = (Value) obj; // obj를 value로 형변환
-		
-		return this.value == v.value;
-		//return this == obj; //주소 비교, 서로 다른 객체는 항상 거짓
-	}
 }
 
