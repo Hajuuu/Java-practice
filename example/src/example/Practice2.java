@@ -2,34 +2,20 @@ package example;
 
 import java.util.*;
 
-class Person {
-	long id;
-	
-	public boolean equals(Object obj) {
-		if(!(obj instanceof Person))
-			return false;
-		
-		Person p = (Person)obj;
-		
-		return this.id == p.id;
-	}
-	
-	Person(long id) {
-		this.id = id;
-	}
-}
-
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		Person p1 = new Person(8011081111222L);
-		Person p2 = new Person(8011081111222L);
+		int iVal = 100;
+		String strVal = iVal + "";
 		
-		if(p1.equals(p2))
-			System.out.println("p1과 p2는 같은 사람입니다.");
-		else
-			System.out.println("p1과 p2는 다른 사람입니다.");
-	
+		double dVal = 200.0;
+		String strVal2 = dVal + "";
+		
+		double sum = Integer.parseInt("+"+strVal)+Double.parseDouble(strVal2);
+		double sum2 = Integer.valueOf(strVal) + Double.valueOf(strVal2);
+		
+		System.out.println(String.join("", strVal, "+", strVal2, "=")+sum);
+		System.out.println(strVal+"+"+strVal2+"="+sum2);
 	}
 	
 }
