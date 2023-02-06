@@ -5,17 +5,26 @@ import java.util.*;
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		int iVal = 100;
-		String strVal = iVal + "";
+		StringBuffer sb = new StringBuffer("01");
+		StringBuffer sb2 = sb.append(23);
+		sb.append('4').append(56);
 		
-		double dVal = 200.0;
-		String strVal2 = dVal + "";
+		StringBuffer sb3 = sb.append(78);
+		sb3.append(9.0);
 		
-		double sum = Integer.parseInt("+"+strVal)+Double.parseDouble(strVal2);
-		double sum2 = Integer.valueOf(strVal) + Double.valueOf(strVal2);
+		System.out.println("sb = " + sb);
+		System.out.println("sb2 = " + sb2);
+		System.out.println("sb3 = " + sb3);
 		
-		System.out.println(String.join("", strVal, "+", strVal2, "=")+sum);
-		System.out.println(strVal+"+"+strVal2+"="+sum2);
+		System.out.println("sb = " + sb.deleteCharAt(10));
+		System.out.println("sb = " + sb.delete(3, 6));
+		System.out.println("sb = " + sb.insert(3, "abc"));
+		System.out.println("sb = " + sb.replace(6, sb.length(), "END"));
+		
+		System.out.println("capacity = " + sb.capacity());
+		System.out.println("length = " + sb.length());
+		
+		
 	}
 	
 }
