@@ -5,27 +5,42 @@ import java.util.*;
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		Calendar date = Calendar.getInstance();
-		date.set(2019, 7, 31);
+		if(args.length != 2) {
+			System.out.println("Usage : java Ex10_5 2019 9");
+			return;
+		}
 		
-		System.out.println(toString(date));
-		System.out.println("= 1일 후 =");
-		date.add(Calendar.DATE, 1);
-		System.out.println(toString(date));
+		int year = Integer.parseInt(args[0]);
+		int month = Integer.parseInt(args[1]);
+		int START_DAY_OF_WEEK = 0;
+		int END_DAY = 0;
 		
-		System.out.println("= 6달 전 =");
-		date.add(Calendar.MONTH, -6);
-		System.out.println(toString(date));
+		Calendar sDay = Calendar.getInstance();
+		Calendar eDay = Calendar.getInstance();
 		
-		System.out.println("= 31일 후(roll) =");
-		date.roll(Calendar.DATE, 31);
-		System.out.println(toString(date));
+		sDay.set(year, month-1, 1);
+		eDay.set(year, month, 1);
+		
+		//다음달의 첫날에서 하루를 빼면 현재달의 마지막날이 나온다.
+		eDay.add(Calendar.DATE, -1);
+		
+		START_DAY_OF_WEEK = sDay.get(Calendar.DAY_OF_WEEK);
+		
+		END_DAY = eDay.get(Calendar.DATE);
+		
+		System.out.println("     " + args[0] + "년 " + args[1] + "     ");
+		System.out.println(" SU MO TU WE TH FR SA");
+		
+		for(int i = 1; i < START_DAY_OF_WEEK; i++) {
+			System.out.print("   ");
+		}
+		for(int i = 1, n = START_DAY_OF_WEEK; i <= END_DAY; i++, n++) {
+			System.out.print((i < 10)? "  " + i : " " + i );
+			if(n%7==0) System.out.println();
+		}
 		
 	}
-	
-	public static String toString(Calendar date) {
-		return date.get(Calendar.YEAR) +"년 " + (date.get(Calendar.MONTH)+1) + "월" + date.get(Calendar.DATE) + "일";
-	}
+
 	
 }
 
