@@ -5,26 +5,19 @@ import java.util.*;
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		StringBuffer sb = new StringBuffer("01");
-		StringBuffer sb2 = sb.append(23);
-		sb.append('4').append(56);
+		Integer i = new Integer(100);
+		Integer i2 = new Integer(100);
 		
-		StringBuffer sb3 = sb.append(78);
-		sb3.append(9.0);
+		System.out.println("i==i2 ? "+(i==i2));
+		System.out.println("i.equals(i2) ? "+i.equals(i2));
+		System.out.println("i.compareTo(i2)= ? "+i.compareTo(i2));
+		System.out.println("i.toString()= ? "+i.toString());
 		
-		System.out.println("sb = " + sb);
-		System.out.println("sb2 = " + sb2);
-		System.out.println("sb3 = " + sb3);
-		
-		System.out.println("sb = " + sb.deleteCharAt(10));
-		System.out.println("sb = " + sb.delete(3, 6));
-		System.out.println("sb = " + sb.insert(3, "abc"));
-		System.out.println("sb = " + sb.replace(6, sb.length(), "END"));
-		
-		System.out.println("capacity = " + sb.capacity());
-		System.out.println("length = " + sb.length());
-		
-		
+		System.out.println("MAX_VALUE="+Integer.MAX_VALUE);
+		System.out.println("MIN_VALUE="+Integer.MIN_VALUE);
+		System.out.println("SIZE="+Integer.SIZE+" bits");
+		System.out.println("BYTES="+Integer.BYTES+" bytes");
+		System.out.println("TYPE="+Integer.TYPE);
 	}
 	
 }
