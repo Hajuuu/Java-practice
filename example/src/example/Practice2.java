@@ -5,42 +5,53 @@ import java.util.*;
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		HashSet set = new HashSet();
+		HashSet setA = new HashSet();
+		HashSet setB = new HashSet();
+		HashSet setHab = new HashSet();
+		HashSet setKyo = new HashSet();
+		HashSet setCha = new HashSet();
 		
-		set.add("abc");
-		set.add("abc");
-		set.add(new Person("David", 10));
-		set.add(new Person("David", 10));
+		setA.add("1");
+		setA.add("2");
+		setA.add("3");
+		setA.add("4");
+		setA.add("5");
+		System.out.println("A = "+setA);
 		
-		System.out.println(set);
+		setB.add("4");
+		setB.add("5");
+		setB.add("6");
+		setB.add("7");
+		setB.add("8");
+		System.out.println("B = "+setB);
+		
+		Iterator it = setB.iterator();
+		while(it.hasNext()) {
+			Object tmp = it.next();
+			if(setA.contains(tmp))
+				setKyo.add(tmp);
+		}
+		
+		it = setA.iterator();
+		while(it.hasNext()) {
+			Object tmp = it.next();
+			if(!setB.contains(tmp))
+				setCha.add(tmp);
+		}
+		
+		it = setA.iterator();
+		while(it.hasNext())
+			setHab.add(it.next());
+		it = setB.iterator();
+		while(it.hasNext())
+			setHab.add(it.next());
+		
+		//setA.retainAll(setB); 교집합, 공통된 요소만 남기고 삭제
+		//setA.addAll(setB); 합집합, setB의 모든 요소를 추가(중복 제외)
+		//setA.removeAll(setB); 차집합, setB와 공통 요소를 제거
+		System.out.println("A ∪  B = " + setHab);
+		System.out.println("A ∩ B = " + setKyo);
+		System.out.println("A - B = " + setCha);
 	}
 }
 
-class Person {
-	String name;
-	int age;
-	
-	Person(String name, int age) {
-		this.name = name;
-		this.age = age;
-	}
-	
-	public String toString() {
-		return name+":"+age;
-	}
-
-	@Override
-	public int hashCode() {
-		//가변인자
-		return Objects.hash(name, age);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if(!(obj instanceof Person)) return false;
-		
-		Person p = (Person)obj;
-		
-		return this.name.equals(p.name) && this.age == p.age;
-	}
-}
