@@ -5,29 +5,13 @@ import java.util.*;
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		TreeSet set = new TreeSet(); //범위 검색에 유리.(from~to)
+		TreeSet set = new TreeSet();
+		int[] score = {80, 95, 50, 35, 45, 65, 10, 100};
 		
-		String from = "b";
-		String to = "d";
-		
-		set.add("abc");
-		set.add("alien");
-		set.add("bat");
-		set.add("car");
-		set.add("Car");
-		set.add("disc");
-		set.add("dance");
-		set.add("dZZZZ");
-		set.add("dzzzz");
-		set.add("elephant");
-		set.add("elevator");
-		set.add("fan");
-		set.add("flower");
-		
-		System.out.println(set);
-		System.out.println("range search : from "+from +" to "+to);
-		System.out.println("result1 : "+set.subSet("b", "e"));
-		System.out.println("result2 : "+set.subSet(from, "dzzz"));
-
+		for(int i = 0; i < score.length; i++)
+			set.add(new Integer(score[i]));
+		System.out.println("50보다 작은 값:"+set.headSet(50));
+		System.out.println("50보다 큰 값:"+set.tailSet(50));
+		System.out.println("40과 80사이의 값:"+set.subSet(40, 80));
 	}
 }
