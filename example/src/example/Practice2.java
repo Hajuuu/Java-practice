@@ -5,33 +5,29 @@ import java.util.*;
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		Set set = new TreeSet(); //범위 검색, 정렬. 정렬 필요없음
+		TreeSet set = new TreeSet(); //범위 검색에 유리.(from~to)
 		
-//		for(int i = 0; set.size() < 6; i++) {
-//			int num = (int)(Math.random()*45) + 1;
-			set.add(new Test());
-//		}
+		String from = "b";
+		String to = "d";
+		
+		set.add("abc");
+		set.add("alien");
+		set.add("bat");
+		set.add("car");
+		set.add("Car");
+		set.add("disc");
+		set.add("dance");
+		set.add("dZZZZ");
+		set.add("dzzzz");
+		set.add("elephant");
+		set.add("elevator");
+		set.add("fan");
+		set.add("flower");
+		
 		System.out.println(set);
+		System.out.println("range search : from "+from +" to "+to);
+		System.out.println("result1 : "+set.subSet("b", "e"));
+		System.out.println("result2 : "+set.subSet(from, "dzzz"));
+
 	}
-}
-
-//객체가 비교 기준을 가지고 있거나 treeset이 비교 기준을 갖고있어야함.
-
-class Test implements Comparable {
-
-	@Override
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-}
-
-class TestComp implements Comparator {
-
-	@Override
-	public int compare(Object o1, Object o2) {
-		return 0;
-	}
-	
 }
