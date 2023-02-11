@@ -5,13 +5,32 @@ import java.util.*;
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		TreeSet set = new TreeSet();
-		int[] score = {80, 95, 50, 35, 45, 65, 10, 100};
+		HashMap map = new HashMap();
+		map.put("myId", "1234");
+		map.put("asdf", "1111");
+		map.put("asdf", "1234");
 		
-		for(int i = 0; i < score.length; i++)
-			set.add(new Integer(score[i]));
-		System.out.println("50보다 작은 값:"+set.headSet(50));
-		System.out.println("50보다 큰 값:"+set.tailSet(50));
-		System.out.println("40과 80사이의 값:"+set.subSet(40, 80));
+		Scanner s = new Scanner(System.in);
+		
+		while(true) {
+			System.out.println("id와 password를 입력해주세요.");
+			System.out.print("id :");
+			String id = s.nextLine().trim();
+			
+			System.out.print("password :");
+			String password = s.nextLine().trim();
+			
+			if(!map.containsKey(id)) {
+				System.out.println("입력하신 id는 존재하지 않습니다. 다시 입력해주세요");
+				continue;
+			}
+			
+			if(!(map.get(id)).equals(password)) {
+				System.out.println("비밀번호가 일치하지 않습니다. 다시 입력해주세요");
+			} else {
+				System.out.println("id와 비밀번호가 일치합니다.");
+				break;
+			}
+		}
 	}
 }
