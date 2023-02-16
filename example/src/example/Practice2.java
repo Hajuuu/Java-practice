@@ -1,41 +1,58 @@
 package example;
 
 import java.util.*;
+import static java.util.Collections.*;
 
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		HashMap map = new HashMap();
-		map.put("김자바", new Integer(90));
-		map.put("김자바", new Integer(100));
-		map.put("이자바", new Integer(100));
-		map.put("강자바", new Integer(80));
-		map.put("안자바", new Integer(90));
+		List list = new ArrayList();
+		System.out.println(list);
 		
-		Set set = map.entrySet();
-		Iterator it = set.iterator();
+		addAll(list, 1, 2, 3, 4, 5);
+		System.out.println(list);
 		
-		while(it.hasNext()) {
-			Map.Entry e = (Map.Entry)it.next();
-			System.out.println("이름: "+e.getKey()+", 점수: "+e.getValue());
-		}
+		rotate(list, 2); // 반시계 방향으로 두번 회전
+		System.out.println(list);
 		
-		set = map.keySet();
-		System.out.println("참가자 명단: "+set);
+		swap(list, 0, 2); // 첫 번째와 세 번째를 교환
+		System.out.println(list);
 		
-		Collection values = map.values();
-		it = values.iterator();
+		shuffle(list); // 저장된 요소의 위치를 임의로 변경
+		System.out.println(list);
 		
-		int total = 0;
+		sort(list, reverseOrder());
+		System.out.println(list);
 		
-		while(it.hasNext()) {
-			int i = (int)it.next();
-			total += i;
-		}
+		sort(list);
+		System.out.println(list);
 		
-		System.out.println("총점: "+total);
-		System.out.println("평균: "+(float)total/set.size());
-		System.out.println("최고점수: "+Collections.max(values));
-		System.out.println("최저점수: "+Collections.min(values));
+		int idx = binarySearch(list, 3);
+		System.out.println("index of 3 = "+idx);
+		
+		System.out.println("max="+max(list));
+		System.out.println("min="+min(list));
+		System.out.println("min="+max(list, reverseOrder()));
+		
+		fill(list, 9);
+		System.out.println("list=" + list);
+		
+		List newList = nCopies(list.size(), 2);
+		System.out.println("newList="+ newList);
+		
+		System.out.println(disjoint(list, newList)); //공통요소가 없으면 true
+		
+		copy(list, newList);
+		System.out.println("newList="+ newList);
+		System.out.println("list="+list);
+		
+		replaceAll(list, 2, 1);
+		System.out.println("list="+list);
+		
+		Enumeration e = enumeration(list);
+		ArrayList list2 = list(e);
+		
+		System.out.println("list2="+list2);
+		
 	}
 }
