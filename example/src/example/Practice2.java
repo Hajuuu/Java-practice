@@ -3,25 +3,15 @@ package example;
 import java.util.*;
 import static java.util.Collections.*;
 
-class Product {}
-class Tv extends Product {}
-class Audio extends Product {}
-
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		ArrayList<Student> list = new ArrayList<Student>();
-		list.add(new Student("자바왕", 1, 1));
-		list.add(new Student("자바짱", 1, 2));
-		list.add(new Student("홍길동", 2, 1));
+		HashMap<String, Student> map = new HashMap<>();
+		map.put("자바왕", new Student("자바왕", 1, 1, 100, 100, 100));
 		
-		Iterator<Student> it = list.iterator();
-//		Iterator it = list.iterator();
-		while(it.hasNext()) {
-//			Student s = it.next();
-//			Student s = (Student) it.next(); //지네릭스를 사용하지 않으면 형변환 필요
-			System.out.println(it.next().name);
-		}
+		Student s = map.get("자바왕");
+		
+		System.out.println(s.name);
 	}
 }
 
@@ -29,10 +19,16 @@ class Student {
 	String name = "";
 	int ban;
 	int no;
+	int kor;
+	int eng;
+	int math;
 	
-	Student(String name, int ban, int no) {
+	Student(String name, int ban, int no, int kor, int eng, int math) {
 		this.name = name;
 		this.ban = ban;
 		this.no = no;
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
 	}
 }
