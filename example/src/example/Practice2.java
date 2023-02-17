@@ -10,23 +10,29 @@ class Audio extends Product {}
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		ArrayList<Product> productList = new ArrayList<Product>();
-		ArrayList<Tv> tvList = new ArrayList<Tv>();
-//		ArrayList<Product> tvList = new ArrayList<Tv>(); //에러
-//		List<Tv> tvList = new ArrayList<Tv>(); //ok. 다형성
+		ArrayList<Student> list = new ArrayList<Student>();
+		list.add(new Student("자바왕", 1, 1));
+		list.add(new Student("자바짱", 1, 2));
+		list.add(new Student("홍길동", 2, 1));
 		
-		productList.add(new Tv());
-		productList.add(new Audio());
-		
-		tvList.add(new Tv());
-		tvList.add(new Tv());
-		
-		printAll(productList);
-//		printAll(tvList); 컴파일 에러가 발생한다.
+		Iterator<Student> it = list.iterator();
+//		Iterator it = list.iterator();
+		while(it.hasNext()) {
+//			Student s = it.next();
+//			Student s = (Student) it.next(); //지네릭스를 사용하지 않으면 형변환 필요
+			System.out.println(it.next().name);
+		}
 	}
+}
+
+class Student {
+	String name = "";
+	int ban;
+	int no;
 	
-	public static void printAll(ArrayList<Product> list) {
-		for(Product p : list)
-			System.out.println(p);
+	Student(String name, int ban, int no) {
+		this.name = name;
+		this.ban = ban;
+		this.no = no;
 	}
 }
