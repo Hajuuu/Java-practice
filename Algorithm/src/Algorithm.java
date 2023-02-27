@@ -7,17 +7,20 @@ public class Algorithm {
 		
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-		StringBuilder sb = new StringBuilder();
-		String str;
-		while((str = br.readLine()) != null) {
-			st = new StringTokenizer(str, " ");
-			int A = Integer.parseInt(st.nextToken());
-			int B = Integer.parseInt(st.nextToken());
-			
-			sb.append(A + B).append("\n");
+		int N = Integer.parseInt(br.readLine());
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		int[] A = new int[N];
+		for(int i = 0; i < N; i++) {
+			A[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		System.out.println(sb);
+		int v = Integer.parseInt(br.readLine());
+		int count = 0;
+		
+		for(int i = 0; i < N; i++) {
+			if(v == A[i])
+				count++;
+		}
+		System.out.println(count);
 	}
 }
