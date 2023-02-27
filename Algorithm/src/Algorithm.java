@@ -1,34 +1,23 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
-
 public class Algorithm {
-	
-	
-	public static void main(String[] args) throws IOException{
-		Scanner sc = new Scanner(System.in);
 		
-		int n = Integer.parseInt(sc.nextLine());
-		int[] A = new int[n];
-		for(int i = 0; i < n; i++) {
-			A[i] = Integer.parseInt(sc.nextLine());
-		}
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(br.readLine());
+		br.close();
+		StringBuilder sb = new StringBuilder();
 		
-		for(int i = 0; i < n - 1; i++) {
-			for(int j = 0; j < n - i - 1; j++) {
-				if(A[j] > A[j + 1]) {
-					int temp = A[j];
-					A[j] = A[j + 1];
-					A[j + 1] = temp;
-				}
-				
-				
+		for(int i = 1; i <= N; i++) {
+			for(int j = 1; j <= i; j++) {
+				sb.append("*");
 			}
+			sb.append("\n");
+			
 		}
-		for(int i = 0; i < n; i++) {
-			System.out.println(A[i]);
-		}
-		
+		System.out.println(sb);
 	}
-
 }
