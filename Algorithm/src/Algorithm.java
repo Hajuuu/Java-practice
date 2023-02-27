@@ -9,18 +9,14 @@ public class Algorithm {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		int[] A = new int[N];
+		
+		int[] arr = new int[N];
 		for(int i = 0; i < N; i++) {
-			A[i] = Integer.parseInt(st.nextToken());
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		int v = Integer.parseInt(br.readLine());
-		int count = 0;
+		Arrays.sort(arr);
+		System.out.println(arr[0] + " " + arr[N-1]);
 		
-		for(int i = 0; i < N; i++) {
-			if(v == A[i])
-				count++;
-		}
-		System.out.println(count);
 	}
 }
