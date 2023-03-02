@@ -7,22 +7,21 @@ public class Algorithm {
 		
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		char[] str = br.readLine().toCharArray();
-		int len = str.length;
+		int T = Integer.parseInt(br.readLine());
+		StringTokenizer st;
 		StringBuffer sb = new StringBuffer();
-		int[] arr = new int[26];
-		for(int i = 0; i < 26; i++) {
-			arr[i] = -1;
-		}
-		for(int i = 0; i < len; i++) {
-			if(arr[(int) str[i] - 97] == -1) {
-				arr[(int) str[i] - 97] = i;
+		for(int i = 0; i < T; i++) {
+			st = new StringTokenizer(br.readLine(), " ");
+			int R = Integer.parseInt(st.nextToken());
+			String str = st.nextToken();
+			int len = str.length();
+			for(int j = 0; j < len; j++) {
+				for(int q = 0; q < R; q++) {
+					sb.append(str.charAt(j));
+				}
 			}
+			sb.append("\n");
 			
-		}
-		
-		for(int i = 0; i < 26; i++) {
-			sb.append(arr[i]).append(" ");
 		}
 		
 		System.out.println(sb);
