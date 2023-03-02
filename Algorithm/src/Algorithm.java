@@ -7,25 +7,24 @@ public class Algorithm {
 		
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int T = Integer.parseInt(br.readLine());
-		StringTokenizer st;
-		StringBuffer sb = new StringBuffer();
-		for(int i = 0; i < T; i++) {
-			st = new StringTokenizer(br.readLine(), " ");
-			int R = Integer.parseInt(st.nextToken());
-			String str = st.nextToken();
-			int len = str.length();
-			for(int j = 0; j < len; j++) {
-				for(int q = 0; q < R; q++) {
-					sb.append(str.charAt(j));
-				}
+		String str = br.readLine().toUpperCase();
+		int len = str.length();
+		int[] arr = new int[26];
+		for(int i = 0; i < len; i++) {
+			arr[str.charAt(i) - 'A']++;
+		}
+		int max = 0;
+		char ch = ' ';
+		for(int i = 0; i < 26; i++) {
+			if(max < arr[i]) {
+				max = arr[i];
+				ch = (char) (i + 'A');
 			}
-			sb.append("\n");
-			
+			else if(max == arr[i]) 
+				ch = '?';
 		}
 		
-		System.out.println(sb);
-		
+		System.out.println(ch);
 	}
 	
 }
