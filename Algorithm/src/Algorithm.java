@@ -7,16 +7,32 @@ public class Algorithm {
 		
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		StringBuffer a = new StringBuffer(st.nextToken());
-		StringBuffer b = new StringBuffer(st.nextToken());
 		
-		int A = Integer.parseInt(a.reverse().toString());
-		int B  = Integer.parseInt(b.reverse().toString());
-		if(A > B)
-			System.out.println(A);
-		else
-			System.out.println(B);
+		String str = br.readLine();
+		int len = str.length();
+		int time = 0;
+		for(int i = 0; i < len; i++) {
+			int num = str.charAt(i) - 'A';
+			if(num > 21)
+				time += 10;
+			else if(num > 18)
+				time += 9;
+			else if(num > 14)
+				time += 8;
+			else if(num > 11)
+				time += 7;
+			else if(num > 8)
+				time += 6;
+			else if(num > 5)
+				time += 5;
+			else if(num > 2)
+				time += 4;
+			else
+				time += 3;
+				
+			
+		}
+		System.out.println(time);
 	}
 	
 }
