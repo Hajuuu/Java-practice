@@ -7,18 +7,33 @@ public class Algorithm {
 		
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String word = br.readLine();
-		int len = word.length();
-		int q = 0;
-		for(int i = 0; i <= len / 2; i++) {
-			if(word.charAt(i) != word.charAt(len - i - 1)) {
-				q += 1;
+		StringTokenizer st;
+		StringBuilder sb = new StringBuilder();
+		
+		int C = Integer.parseInt(br.readLine());
+		for(int i = 0; i < C; i++) {
+			int sum = 0;
+			double avg = 0;
+			st = new StringTokenizer(br.readLine(), " ");
+			int n = Integer.parseInt(st.nextToken());
+			int[] arr = new int[n];
+
+			for(int j = 0; j < n; j++) {
+				arr[j] = Integer.parseInt(st.nextToken());
+				sum += arr[j];
 			}
+			
+			avg = sum / n;
+			double a = 0;
+			for(int j = 0; j < n; j++) {
+				if(arr[j] > avg) {
+					a++;
+				}
+			}
+			sb.append(String.format("%.3f", a * 100 / n) + "%").append("\n");
 		}
-		if(q == 0)
-			System.out.println(1);
-		else
-			System.out.println(0);
+		
+		System.out.println(sb);
 		
 	}
 	
