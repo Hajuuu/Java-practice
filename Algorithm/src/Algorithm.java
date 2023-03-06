@@ -7,15 +7,29 @@ public class Algorithm {
 		
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		StringBuffer sb = new StringBuffer();
-		int[] peace = {1, 1, 2, 2, 2, 8};
-		
-		for(int i = 0; i < 6; i++) {
-			int p = Integer.parseInt(st.nextToken());
-			sb.append(peace[i] - p).append(" ");
+		int N = Integer.parseInt(br.readLine());
+		int star = 2 * N - 1;
+		for(int i = 1; i <= N; i++) {
+			for(int j = N - i; j > 0; j--) {
+				sb.append(" ");
+			}
+			for(int p = 1; p <= star - 2 * (N - i); p++) {
+				sb.append("*");
+			}
+			
+			sb.append("\n");
 		}
-		
+		for(int i = 1; i < N; i++) {
+			for(int j = 0; j < i; j++) {
+				sb.append(" ");
+			}
+			for(int p = 1; p <= star - 2 * i; p++) {
+				sb.append("*");
+			}
+			
+			sb.append("\n");
+		}
 		System.out.println(sb);
 		
 	}
