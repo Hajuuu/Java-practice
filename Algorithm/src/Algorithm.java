@@ -8,36 +8,24 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		int N = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
-		int[][] A = new int[N][M];
-		int[][] B = new int[N][M];
-		
-		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < N; i++) {
+		StringTokenizer st;
+		int max = 0;
+		int p = 0;
+		int q = 0;
+		for(int i = 0; i < 9; i++) {
 			st = new StringTokenizer(br.readLine(), " ");
-			for(int j = 0; j < M; j++) {
-				A[i][j] = Integer.parseInt(st.nextToken());
+			for(int j = 0; j < 9; j++) {
+				int num = Integer.parseInt(st.nextToken());
+				if(max <= num) {
+					max = num;
+					p = i + 1;
+					q = j + 1;
+				}
 			}
 		}
 		
-		for(int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine(), " ");
-			for(int j = 0; j < M; j++) {
-				B[i][j] = Integer.parseInt(st.nextToken());
-			}
-		}
-		
-		for(int i = 0; i < N; i++) {
-			for(int j = 0; j < M; j++) {
-				sb.append(A[i][j] + B[i][j] + " ");
-			}
-			sb.append("\n");
-		}
-		
-		
-		System.out.println(sb);
+		System.out.println(max);
+		System.out.println(p + " " + q);
 	}
 	
 	
