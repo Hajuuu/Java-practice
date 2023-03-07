@@ -8,44 +8,36 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		double total = 0;
-		double sum = 0;
-		for(int i = 0; i < 20; i++) {
-			String[] grade = br.readLine().split(" ");
-			if(!grade[2].equals("P")) {
-				total += Double.parseDouble(grade[1]);
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+		int[][] A = new int[N][M];
+		int[][] B = new int[N][M];
+		
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < N; i++) {
+			st = new StringTokenizer(br.readLine(), " ");
+			for(int j = 0; j < M; j++) {
+				A[i][j] = Integer.parseInt(st.nextToken());
 			}
-			
-			if(grade[2].equals("A+")) {
-				sum += 4.5 * Double.parseDouble(grade[1]);
-			}
-			else if(grade[2].equals("A0")) {
-				sum += 4.0 * Double.parseDouble(grade[1]);
-			}
-			else if(grade[2].equals("B+")) {
-				sum += 3.5 * Double.parseDouble(grade[1]);
-			}
-			else if(grade[2].equals("B0")) {
-				sum += 3.0 * Double.parseDouble(grade[1]);
-			}
-			else if(grade[2].equals("C+")) {
-				sum += 2.5 * Double.parseDouble(grade[1]);
-			}
-			else if(grade[2].equals("C0")) {
-				sum += 2.0 * Double.parseDouble(grade[1]);
-			}
-			else if(grade[2].equals("D+")) {
-				sum += 1.5 * Double.parseDouble(grade[1]);
-			}
-			else if(grade[2].equals("D0")) {
-				sum += 1.0 * Double.parseDouble(grade[1]);
-			}
-			else if(grade[2].equals("F")) {
-				sum += 0;
-			}
-			
 		}
-		System.out.println(sum / total);
+		
+		for(int i = 0; i < N; i++) {
+			st = new StringTokenizer(br.readLine(), " ");
+			for(int j = 0; j < M; j++) {
+				B[i][j] = Integer.parseInt(st.nextToken());
+			}
+		}
+		
+		for(int i = 0; i < N; i++) {
+			for(int j = 0; j < M; j++) {
+				sb.append(A[i][j] + B[i][j] + " ");
+			}
+			sb.append("\n");
+		}
+		
+		
+		System.out.println(sb);
 	}
 	
 	
