@@ -8,24 +8,24 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-		int max = 0;
-		int p = 0;
-		int q = 0;
-		for(int i = 0; i < 9; i++) {
-			st = new StringTokenizer(br.readLine(), " ");
-			for(int j = 0; j < 9; j++) {
-				int num = Integer.parseInt(st.nextToken());
-				if(max <= num) {
-					max = num;
-					p = i + 1;
-					q = j + 1;
+		String[] arr = new String[5];
+		StringBuffer sb = new StringBuffer();
+		for(int i = 0; i < 5; i++) {
+			arr[i] = br.readLine();
+		}
+		
+		for(int i = 0; i < 15; i++) {
+			for(int j = 0; j < 5; j++) {
+				if(arr[j].length() > i) {
+					sb.append(arr[j].charAt(i));
+				} else {
+					continue;
 				}
+				
 			}
 		}
 		
-		System.out.println(max);
-		System.out.println(p + " " + q);
+		System.out.println(sb);
 	}
 	
 	
