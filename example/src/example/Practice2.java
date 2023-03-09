@@ -2,43 +2,53 @@ package example;
 
 import java.util.*;
 
-class Fruit implements Eatable {
-	public String toString() { return "Fruit"; }
+class Fruit2 { public String toString() { return "Fruit"; }}
+class Apple2 extends Fruit2 { public String toString() { return "Apple"; }}
+class Grape2 extends Fruit2 { public String toString() { return "Grape"; }}
+
+class Juice {
+	String name;
+	
+	Juice(String name) { this.name = name + "Juice"; }
+	public String toString() { return name; }
 }
-class Apple extends Fruit { public String toString() { return "Apple"; }}
-class Grape extends Fruit { public String toString() { return "Grape"; }}
-class Toy { public String toString() { return "Toy"; }}
 
-interface Eatable {}
-
+class Juicer {
+	static Juice makeJuice(FruitBox2<? extends Fruit2> box) {
+		String tmp = "";
+		
+		for(Fruit2 f : box.getList()) 
+			tmp += f + " ";
+		return new Juice(tmp);
+	}
+	
+}
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		FruitBox<Fruit> fruitBox = new FruitBox<Fruit>();
-		FruitBox<Apple> appleBox = new FruitBox<Apple>();
-		FruitBox<Grape> grapeBox = new FruitBox<Grape>();
-//		FruitBox<Grape> grapeBox = new FruitBox<Apple>(); // 에러. 타입 불일치
-//		FruitBox<Toy> toyBox = new FruitBox<Toy>(); // 에러
+		FruitBox2<Fruit2> fruitBox = new FruitBox2<Fruit2>();
+		FruitBox2<Apple2> appleBox = new FruitBox2<Apple2>();
+//		// Fruit2와 그 자손들 Apple, Grape
+//		FruitBox2<? extends Fruit2> appleBox = new FruitBox2<Apple2>();
 		
-		fruitBox.add(new Fruit());
-		fruitBox.add(new Apple());
-		fruitBox.add(new Grape());
-		appleBox.add(new Apple());
-//		appleBox.add(new Grape()); // 에러. Grape는 Apple의 자손이 아님
-		grapeBox.add(new Grape());
+		fruitBox.add(new Apple2());
+		fruitBox.add(new Grape2());
+		appleBox.add(new Apple2());
+		appleBox.add(new Apple2());
 		
-		System.out.println("fruitBox-"+fruitBox);
-		System.out.println("appleBox-"+appleBox);
-		System.out.println("grapeBox-"+grapeBox);
+		System.out.println(Juicer.makeJuice(fruitBox));
+		System.out.println(Juicer.makeJuice(appleBox));
 	}
 }
 
-class FruitBox<T extends Fruit & Eatable> extends Box<T> {}
 
-class Box<T> {
-	ArrayList<T> list = new ArrayList<T>(); // item을 저장할 list
-	void add(T item) { list.add(item); } // 박스에 item을 추가
-	T get(int i) { return list.get(i); } // 박스에서 item을 꺼낼떄
+class FruitBox2<T extends Fruit2> extends Box2<T>{};
+
+class Box2<T> {
+	ArrayList<T> list = new ArrayList<T>();
+	void add(T item) { list.add(item); }
+	T get(int i) { return list.get(i); }
+	ArrayList<T> getList() { return list; }
 	int size() { return list.size(); }
 	public String toString() { return list.toString(); }
 }
