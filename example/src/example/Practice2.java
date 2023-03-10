@@ -2,54 +2,48 @@ package example;
 
 import java.util.*;
 
-class Fruit2 { public String toString() { return "Fruit"; }}
-class Apple2 extends Fruit2 { public String toString() { return "Apple"; }}
-class Grape2 extends Fruit2 { public String toString() { return "Grape"; }}
+//					0	1		2		3
+enum Direction { EAST, SOUTH, WEST, NORTH }
 
-class Juice {
-	String name;
-	
-	Juice(String name) { this.name = name + "Juice"; }
-	public String toString() { return name; }
-}
-
-class Juicer {
-	static Juice makeJuice(FruitBox2<? extends Fruit2> box) {
-		String tmp = "";
-		
-		for(Fruit2 f : box.getList()) 
-			tmp += f + " ";
-		return new Juice(tmp);
-	}
-	
-}
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		FruitBox2<Fruit2> fruitBox = new FruitBox2<Fruit2>();
-		FruitBox2<Apple2> appleBox = new FruitBox2<Apple2>();
-//		// Fruit2와 그 자손들 Apple, Grape
-//		FruitBox2<? extends Fruit2> appleBox = new FruitBox2<Apple2>();
+		Direction d1 = Direction.EAST; // 열거형 타입.상수 이름
+		Direction d2 = Direction.valueOf("WEST");
+		Direction d3 = Enum.valueOf(Direction.class, "EAST");
 		
-		fruitBox.add(new Apple2());
-		fruitBox.add(new Grape2());
-		appleBox.add(new Apple2());
-		appleBox.add(new Apple2());
+		System.out.println("d1=" + d1);
+		System.out.println("d2=" + d2);
+		System.out.println("d3=" + d3);
 		
-		System.out.println(Juicer.makeJuice(fruitBox));
-		System.out.println(Juicer.makeJuice(appleBox));
+		System.out.println("d1==d2 ? " + (d1==d2));
+		System.out.println("d1==d3 ? " + (d1==d3));
+		System.out.println("d1.compareTo(d3) ?" + (d1.compareTo(d3)));
+		System.out.println("d1.compareTo(d2) ?" + (d1.compareTo(d2)));
+		
+		switch(d1) {
+			case EAST:
+				System.out.println("The direction is EAST.");
+				break;
+			case SOUTH:
+				System.out.println("The direction is SOUTH.");
+				break;
+			case WEST:
+				System.out.println("The direction is WEST.");
+				break;
+			case NORTH:
+				System.out.println("The direction is NORTH.");
+				break;
+			default:
+				System.out.println("Invalid direction.");
+				break;
+		}
+		
+		Direction[] dArr = Direction.values();
+		
+		for(Direction d : dArr)
+			System.out.printf("%s=%d%n", d.name(), d.ordinal()); //ordinal은 순서
 	}
 }
 
-
-class FruitBox2<T extends Fruit2> extends Box2<T>{};
-
-class Box2<T> {
-	ArrayList<T> list = new ArrayList<T>();
-	void add(T item) { list.add(item); }
-	T get(int i) { return list.get(i); }
-	ArrayList<T> getList() { return list; }
-	int size() { return list.size(); }
-	public String toString() { return list.toString(); }
-}
 
