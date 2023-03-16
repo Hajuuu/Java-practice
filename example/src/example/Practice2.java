@@ -8,12 +8,14 @@ class Parent {
 
 class Child extends Parent {
 	@Override
-	void parentmethod() { } // 조상 메서드의 이름을 잘못 적음.
+	@Deprecated
+	void parentMethod() { } // 조상 메서드의 이름을 잘못 적음.
 }
 public class Practice2 {
 	
 	public static void main(String[] args) {
-			
+		Child c = new Child();
+		c.parentMethod();
 	}
 }
 
