@@ -8,23 +8,31 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int N = Integer.parseInt(br.readLine());
+		int T = Integer.parseInt(br.readLine());
+		StringBuffer sb = new StringBuffer();
 		
-		int count = 1;
-		int range = 2;
+		int[][] arr = new int[15][14];
 		
-		if(N == 1) {
-			System.out.print(1);
+		for(int i = 0; i < 14; i++) {
+			arr[0][i] = i + 1;
 		}
-		else {
-			while(range <= N) {
-				range = range + (6 * count);
-				count++;
+		
+		for(int i = 0; i < 15; i++) {
+			arr[i][0] = 1;
+		}
+		
+		for(int i = 1; i < 15; i++) {
+			for(int j = 1; j < 14; j++) {
+				arr[i][j] = arr[i][j-1] + arr[i-1][j];
 			}
-			
-			System.out.print(count);
 		}
-				
+		
+		for(int i = 0; i < T; i++) {
+			int k = Integer.parseInt(br.readLine());
+			int n = Integer.parseInt(br.readLine());
+			sb.append(arr[k][n-1]).append("\n");
+		}
+		System.out.println(sb);
 		
 	}	
 }
