@@ -11,7 +11,7 @@ public class Algorithm {
 		int N = Integer.parseInt(br.readLine());
 		
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		int dec = 0;
+		int prime = 0;
 		while(st.hasMoreTokens()) {
 			int a = Integer.parseInt(st.nextToken());
 			int sum = 0;
@@ -25,11 +25,11 @@ public class Algorithm {
 					
 			}
 			if(sum == 0) {
-				dec++;
+				prime++;
 			}
 		}
 		
-		System.out.println(dec);
+		System.out.println(prime);
 
 	}
 }
