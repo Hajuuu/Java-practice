@@ -8,39 +8,28 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-		StringBuilder sb = new StringBuilder();
-		while(true) {
-			int n = Integer.parseInt(br.readLine());
-			if(n == -1) break;
-			
+		int N = Integer.parseInt(br.readLine());
+		
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		int dec = 0;
+		while(st.hasMoreTokens()) {
+			int a = Integer.parseInt(st.nextToken());
 			int sum = 0;
-			String str = "";
+			if(a == 1)
+				continue;
 			
-			for(int i = 1; i < n; i++) {
-				if(n % i == 0) {
-					sum += i;
-					str += i + " ";
+			for(int i = 2; i < a; i++) {
+				if(a % i == 0) {
+					sum++;
 				}
-				
+					
 			}
-			
-			if(sum == n) {
-				st = new StringTokenizer(str, " ");
-				sb.append(n + " = ");
-				sb.append(st.nextToken());
-				while(st.hasMoreTokens()) {
-					sb.append(" + ");
-					sb.append(st.nextToken());
-				}
-				sb.append("\n");
-			} else {
-				sb.append(n + " is NOT perfect.\n");
+			if(sum == 0) {
+				dec++;
 			}
 		}
 		
-		System.out.println(sb);
-		
+		System.out.println(dec);
 
 	}
 }
