@@ -8,23 +8,39 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		int a = Integer.parseInt(st.nextToken());
-		int b = Integer.parseInt(st.nextToken());
-		
-		System.out.println(factor(a, b));
-
-	}	
-	
-	public static int factor(int a, int b) {
-		int[] arr = new int[a];
-		int j = 1;
-		for(int i = 1; i <= a; i++) {
-			if(a % i == 0) {
-				arr[j] = i;
-				j++;
+		StringTokenizer st;
+		StringBuilder sb = new StringBuilder();
+		while(true) {
+			int n = Integer.parseInt(br.readLine());
+			if(n == -1) break;
+			
+			int sum = 0;
+			String str = "";
+			
+			for(int i = 1; i < n; i++) {
+				if(n % i == 0) {
+					sum += i;
+					str += i + " ";
+				}
+				
+			}
+			
+			if(sum == n) {
+				st = new StringTokenizer(str, " ");
+				sb.append(n + " = ");
+				sb.append(st.nextToken());
+				while(st.hasMoreTokens()) {
+					sb.append(" + ");
+					sb.append(st.nextToken());
+				}
+				sb.append("\n");
+			} else {
+				sb.append(n + " is NOT perfect.\n");
 			}
 		}
-		return arr[b];
+		
+		System.out.println(sb);
+		
+
 	}
 }
