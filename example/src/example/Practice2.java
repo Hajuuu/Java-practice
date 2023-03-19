@@ -11,6 +11,13 @@ class Child extends Parent {
 	@Deprecated
 	void parentMethod() { } // 조상 메서드의 이름을 잘못 적음.
 }
+
+@FunctionalInterface
+interface Testable {
+	void test(); // 추상메서드
+//	void check(); // 추상메서드
+}
+
 public class Practice2 {
 	
 	public static void main(String[] args) {
