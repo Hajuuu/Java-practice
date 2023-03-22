@@ -7,22 +7,34 @@ import javax.swing.JOptionPane;
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		ThreadEx5_1 th1 = new ThreadEx5_1();
-		th1.start();
+		ThreadEx6_1 th1 = new ThreadEx6_1();
+		ThreadEx6_2 th2 = new ThreadEx6_2();
 		
-		String input = JOptionPane.showInputDialog("아무 값이나 입력하세요.");
-		System.out.println("입력하신 값은 " + input + "입니다.");
+		//th1.setPriority(5); 가 생략된 것
+		th2.setPriority(9);
+		
+		System.out.println("Priority of th1(-) : " + th1.getPriority());
+		System.out.println("Priority of th2(ㅣ) : " + th2.getPriority());
+		th1.start();
+		th2.start();
+		
 	}
 }
 
-class ThreadEx5_1 extends Thread {
+class ThreadEx6_1 extends Thread {
 	public void run() {
-		for(int i = 10; i > 0; i--) {
-			System.out.println(i);
-			try {
-				sleep(1000);
-			} catch(Exception e) {}
+		for(int i = 0; i < 300; i++) {
+			System.out.print("-");
+			for(int x = 0; x < 10000000; x++); //시간지연용
 		}
 	}
 }
 
+class ThreadEx6_2 extends Thread {
+	public void run() {
+		for(int i = 0; i < 300; i++) {
+			System.out.print("ㅣ");
+			for(int x = 0; x < 10000000; x++); //시간지연용
+		}
+	}
+}
