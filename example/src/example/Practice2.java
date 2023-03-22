@@ -4,37 +4,37 @@ import java.util.*;
 
 import javax.swing.JOptionPane;
 
-public class Practice2 {
+public class Practice2 implements Runnable {
+	static boolean autoSave = false;
 	
 	public static void main(String[] args) {
-		ThreadEx6_1 th1 = new ThreadEx6_1();
-		ThreadEx6_2 th2 = new ThreadEx6_2();
+		Thread t = new Thread(new Practice2());
+		t.setDaemon(true);
+		t.start();
 		
-		//th1.setPriority(5); 가 생략된 것
-		th2.setPriority(9);
+		for(int i = 1; i <= 10; i++) {
+			try {
+				Thread.sleep(1000);
+			} catch(InterruptedException e) {}
+			System.out.println(i);
+			
+			if(i==5) autoSave = true;
+		}
 		
-		System.out.println("Priority of th1(-) : " + th1.getPriority());
-		System.out.println("Priority of th2(ㅣ) : " + th2.getPriority());
-		th1.start();
-		th2.start();
-		
+		System.out.println("프로그램을 종료합니다.");
 	}
-}
-
-class ThreadEx6_1 extends Thread {
+	
 	public void run() {
-		for(int i = 0; i < 300; i++) {
-			System.out.print("-");
-			for(int x = 0; x < 10000000; x++); //시간지연용
+		while(true) {
+			try {
+				Thread.sleep(3 * 1000);
+			} catch(InterruptedException e) {}
+			
+			// autoSave의 값이 true이면 autoSave()를 호출한다.
+			if(autoSave) autoSave(); 
 		}
 	}
-}
-
-class ThreadEx6_2 extends Thread {
-	public void run() {
-		for(int i = 0; i < 300; i++) {
-			System.out.print("ㅣ");
-			for(int x = 0; x < 10000000; x++); //시간지연용
-		}
+	public void autoSave() {
+		System.out.println("작업파일이 자동저장되었습니다.");
 	}
 }
