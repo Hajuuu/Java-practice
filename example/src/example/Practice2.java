@@ -4,37 +4,36 @@ import java.util.*;
 
 import javax.swing.JOptionPane;
 
-public class Practice2 implements Runnable {
-	static boolean autoSave = false;
+public class Practice2 {
 	
 	public static void main(String[] args) {
-		Thread t = new Thread(new Practice2());
-		t.setDaemon(true);
-		t.start();
+		ThreadEx8_1 th1 = new ThreadEx8_1();
+		ThreadEx8_2 th2 = new ThreadEx8_2();
+		th1.start();
+		th2.start();
 		
-		for(int i = 1; i <= 10; i++) {
-			try {
-				Thread.sleep(1000);
-			} catch(InterruptedException e) {}
-			System.out.println(i);
-			
-			if(i==5) autoSave = true;
-		}
-		
-		System.out.println("프로그램을 종료합니다.");
+		delay(2*1000);
+		System.out.print("<<main 종료>>");
 	}
 	
-	public void run() {
-		while(true) {
-			try {
-				Thread.sleep(3 * 1000);
-			} catch(InterruptedException e) {}
-			
-			// autoSave의 값이 true이면 autoSave()를 호출한다.
-			if(autoSave) autoSave(); 
-		}
+	static void delay(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch(InterruptedException e) {}
 	}
-	public void autoSave() {
-		System.out.println("작업파일이 자동저장되었습니다.");
+	
+}
+
+class ThreadEx8_1 extends Thread {
+	public void run() {
+		for(int i = 0; i < 300; i++) System.out.print("-");
+		System.out.print("<<th1 종료>>");
+	}
+}
+
+class ThreadEx8_2 extends Thread {
+	public void run() {
+		for(int i = 0; i < 300; i++) System.out.print("ㅣ");
+		System.out.print("<<th2 종료>>");
 	}
 }
