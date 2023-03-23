@@ -8,36 +8,37 @@ public class Practice2 {
 	static long startTime = 0;
 	
 	public static void main(String[] args) {
-		ThreadEx11_1 th1 = new ThreadEx11_1();
-		ThreadEx11_2 th2 = new ThreadEx11_2();
+		Runnable r = new RunnableEx12();
 		
-		th1.start();
-		th2.start();
-		
-		startTime = System.currentTimeMillis();
-		
-		try {
-			th1.join();
-			th2.join();
-		} catch(InterruptedException e) {}
-		
-		System.out.print("소요시간:" + (System.currentTimeMillis() - startTime));
+		new Thread(r).start();
+		new Thread(r).start();
 	}
 	
 }
 
-class ThreadEx11_1 extends Thread {
-	public void run() {
-		for(int i = 0; i < 300; i++) {
-			System.out.print("-");
+class Account {
+	private int balance = 1000;
+	
+	public int getBalance() {
+		return balance;
+	}
+	
+	public void withdraw(int money) {
+		if(balance >= money) {
+			try { Thread.sleep(1000);} catch(InterruptedException e) {}
+			balance -= money;
 		}
 	}
 }
 
-class ThreadEx11_2 extends Thread {
+class RunnableEx12 implements Runnable {
+	Account acc = new Account();
+	
 	public void run() {
-		for(int i = 0; i < 300; i++) {
-			System.out.print("ㅣ");
+		while(acc.getBalance() > 0) {
+			int money = (int)(Math.random() * 3 + 1) * 100;
+			acc.withdraw(money);
+			System.out.println("balance:" + acc.getBalance());
 		}
 	}
 }
