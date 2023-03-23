@@ -7,33 +7,26 @@ import javax.swing.JOptionPane;
 public class Practice2 {
 	
 	public static void main(String[] args) {
-		ThreadEx8_1 th1 = new ThreadEx8_1();
-		ThreadEx8_2 th2 = new ThreadEx8_2();
+		ThreadEx9_1 th1 = new ThreadEx9_1();
 		th1.start();
-		th2.start();
 		
-		delay(2*1000);
-		System.out.print("<<main 종료>>");
-	}
-	
-	static void delay(long millis) {
-		try {
-			Thread.sleep(millis);
-		} catch(InterruptedException e) {} //예외처리 필수
+		String input = JOptionPane.showInputDialog("아무 값이나 입력하세요.");
+		System.out.println("입력하신 값은 " + input + "입니다.");
+		th1.interrupt(); // interrupted상태가 true가 된다.
+		System.out.println("isInterrupted():" + th1.isInterrupted());
 	}
 	
 }
 
-class ThreadEx8_1 extends Thread {
+class ThreadEx9_1 extends Thread {
 	public void run() {
-		for(int i = 0; i < 300; i++) System.out.print("-");
-		System.out.print("<<th1 종료>>");
-	}
-}
-
-class ThreadEx8_2 extends Thread {
-	public void run() {
-		for(int i = 0; i < 300; i++) System.out.print("ㅣ");
-		System.out.print("<<th2 종료>>");
+		int i = 10;
+		
+		while(i!=0 && !isInterrupted()) {
+			System.out.println(i--);
+			for(long x = 0; x < 2500000000L; x++); //시간 지연
+		}
+		
+		System.out.println("카운트가 종료되었습니다.");
 	}
 }
