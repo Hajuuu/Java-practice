@@ -19,7 +19,7 @@ public class Practice2 {
 	static void delay(long millis) {
 		try {
 			Thread.sleep(millis);
-		} catch(InterruptedException e) {}
+		} catch(InterruptedException e) {} //예외처리 필수
 	}
 	
 }
