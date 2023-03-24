@@ -7,27 +7,29 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		StringTokenizer st;
+		StringBuilder sb = new StringBuilder();
 		
-		int x = Integer.parseInt(st.nextToken());
-		int y = Integer.parseInt(st.nextToken());
-		int w = Integer.parseInt(st.nextToken());
-		int h = Integer.parseInt(st.nextToken());
+		int[] x = new int[1001];
+		int[] y = new int[1001];
 		
-		int min = Integer.MAX_VALUE;
-		if(w - x < min) {
-			min = w - x;
-		}
-		if(h - y < min) {
-			min = h - y;
-		}
-		if(x < min) {
-			min = x;
-		}
-		if(y < min) {
-			min = y;
+		for(int i = 0; i < 3; i++) {
+			st = new StringTokenizer(br.readLine(), " ");
+			x[Integer.parseInt(st.nextToken())]++;
+			y[Integer.parseInt(st.nextToken())]++;
 		}
 		
-		System.out.println(min);
+		for(int i = 1; i < 1001; i++) {
+			if(x[i] == 1) {
+				sb.append(i);
+			}
+		}
+		for(int i = 1; i < 1001; i++) {
+			if(y[i] == 1) {
+				sb.append(" " + i);
+			}
+		}	
+		System.out.println(sb);
+		
 	}
 }
