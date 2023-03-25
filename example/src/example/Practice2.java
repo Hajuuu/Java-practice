@@ -9,7 +9,7 @@ public class Practice2 {
 	
 	public static void main(String[] args) throws Exception {
 //		MyFunction f = new MyFunction() {
-//			public int max(int a, int b) { // 오버라이딩 - 접근제어자는 좁게 못바꾼다.
+//			public int max(int a, int b) { //오버라이딩 - 접근제어자는 좁게 못바꾼다.
 //				return a > b ? a : b;
 //			}
 //		};
