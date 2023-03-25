@@ -7,35 +7,42 @@ import java.util.function.*;
 public class Practice2 {
 	
 	public static void main(String[] args) throws Exception {
-		Function<String, Integer> f = (s) -> Integer.parseInt(s, 16);
-		Function<Integer, String> g = (i) -> Integer.toBinaryString(i);
+		ArrayList<Integer> list = new ArrayList<>();
+		for(int i = 0; i < 10; i++) {
+			list.add(i);
+		}
 		
-		Function<String, String> h = f.andThen(g);
-		Function<Integer, Integer> h2 = f.compose(g);
+		// list의 모든 요소를 출력
+		list.forEach(i -> System.out.print(i + ","));
+//		System.out.println(list);
+//		Iterator it = list.iterator();
+//		while(it.hasNext()) {
+//			System.out.println(it.next());
+//		}
 		
-		System.out.println(h.apply("FF"));
-		System.out.println(h2.apply(2));
+		System.out.println();
 		
-		Function<String, String> f2 = x -> x; // 항등 함수
-		System.out.println(f2.apply("AAA")); // AAA가 그대로 출력됨
+		// list에서 2 또는 3의 배수를 제거한다.
+		list.removeIf(x -> x % 2 == 0 || x % 3 == 0);
+		System.out.println(list);
 		
-		Predicate<Integer> p = i -> i < 100;
-		Predicate<Integer> q = i -> i < 200;
-		Predicate<Integer> r = i -> i % 2 == 0;
-		Predicate<Integer> notP = p.negate();
+		list.replaceAll(i -> i * 10);
+		System.out.println(list);
 		
-		Predicate<Integer> all = notP.and(q.or(r));
-		System.out.println(all.test(150));
+		Map<String, String> map = new HashMap<>();
+		map.put("1", "1");
+		map.put("2", "2");
+		map.put("3", "3");
+		map.put("4", "4");
 		
+		// map의 모든 요소를 {k, v}의 형식으로 출력한다.
+		map.forEach((k, v) -> System.out.print("{" + k + "," + v + "},"));
 		
-		String str1 = new String("abc");
-		String str2 = new String("abc");
-		
-		// str1과 str2가 같은지 비교한 결과를 반환
-		Predicate<String> p2 = Predicate.isEqual(str1);
-		boolean result = p2.test(str2);
-		System.out.println(result);
-		
+//		Iterator it = map.entrySet().iterator();
+//		
+//		while(it.hasNext()) {
+//			System.out.println(it.next());
+//		}
 	}
 	
 }
