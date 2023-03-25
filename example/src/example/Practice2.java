@@ -4,26 +4,41 @@ import java.util.*;
 
 import javax.swing.JOptionPane;
 
+@FunctionalInterface
+interface MyFunction {
+	void run();
+}
 
 public class Practice2 {
 	
-	public static void main(String[] args) throws Exception {
-//		MyFunction f = new MyFunction() {
-//			public int max(int a, int b) { //오버라이딩 - 접근제어자는 좁게 못바꾼다.
-//				return a > b ? a : b;
-//			}
-//		};
-		
-		//람다식(익명 객체)을 다루기 위한 참조변수의 타입은 함수형 인터페이스로 한다.
-		MyFunction f = (a, b) -> a > b ? a : b;
-		
-		int value = f.max(3, 5);
-		System.out.println("value=" + value);
+	static void execute(MyFunction f) { // 매개변수의 타입이 MyFunction인 메서드
+		f.run();
 	}
 	
-}
-
-@FunctionalInterface
-interface MyFunction {
-	public abstract int max(int a, int b);
+	static MyFunction getMyFunction() { // 반환 타입이 MyFunction인 메서드
+//		MyFunction f = () -> System.out.println("f3.run()");
+//		return f;
+		return () -> System.out.println("f3.run()");
+	}
+	
+	public static void main(String[] args) throws Exception {
+		// 람다식으로 MyFunction의 run()을 구현
+		MyFunction f1 = () -> System.out.println("f1.run()");
+		
+		MyFunction f2 = new MyFunction() { // 익명클래스로 run()을 구현
+			public void run() { //public을 반드시 붙여야 함
+				System.out.println("f2.run()");
+			}
+		};
+		
+		MyFunction f3 = getMyFunction();
+		
+		f1.run();
+		f2.run();
+		f3.run();
+		
+		execute(f1);
+		execute(() ->  System.out.println("run()"));
+	}
+	
 }
