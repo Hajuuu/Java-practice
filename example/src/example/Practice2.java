@@ -7,43 +7,35 @@ import java.util.function.*;
 public class Practice2 {
 	
 	public static void main(String[] args) throws Exception {
-		Supplier<Integer> s = () -> (int)(Math.random()*100)+1;
-		Consumer<Integer> c = i -> System.out.print(i + ", "); // 출력
-		Predicate<Integer> p = i -> i % 2 == 0; // 짝수인지 검사
-		Function<Integer, Integer> f = i -> i / 10 * 10;
+		Function<String, Integer> f = (s) -> Integer.parseInt(s, 16);
+		Function<Integer, String> g = (i) -> Integer.toBinaryString(i);
 		
-		List<Integer> list = new ArrayList<>();
-		makeRandomList(s, list); // list를 랜덤값으로 채운다.
-		System.out.println(list);
-		printEvenNum(p, c, list); // 짝수를 출력
-		List<Integer> newList = doSomething(f, list);
-		System.out.println(newList);
-	}
-	
-	static <T> List<T> doSomething(Function<T, T> f, List<T> list) {
-		List<T> newList = new ArrayList<T>(list.size());
+		Function<String, String> h = f.andThen(g);
+		Function<Integer, Integer> h2 = f.compose(g);
 		
-		for(T i : list) {
-			newList.add(f.apply(i));
-		}
+		System.out.println(h.apply("FF"));
+		System.out.println(h2.apply(2));
 		
-		return newList;
-	}
-	
-	static <T> void printEvenNum(Predicate<T> p, Consumer<T> c, List<T> list) {
-		System.out.print("[");
-		for(T i : list) {
-			if(p.test(i)) { // 짝수인지 검사
-				c.accept(i); // i -> System.out.print(i+", "); 화면에 i 출력
-			}
-		}
-		System.out.println("]");
-	}
-	
-	static <T> void makeRandomList(Supplier<T> s, List<T> list) {
-		for(int i = 0; i < 10; i++) {
-			list.add(s.get()); //Supplier로 부터 1~100의 난수를 받아서 list에 추가
-		}
+		Function<String, String> f2 = x -> x; // 항등 함수
+		System.out.println(f2.apply("AAA")); // AAA가 그대로 출력됨
+		
+		Predicate<Integer> p = i -> i < 100;
+		Predicate<Integer> q = i -> i < 200;
+		Predicate<Integer> r = i -> i % 2 == 0;
+		Predicate<Integer> notP = p.negate();
+		
+		Predicate<Integer> all = notP.and(q.or(r));
+		System.out.println(all.test(150));
+		
+		
+		String str1 = new String("abc");
+		String str2 = new String("abc");
+		
+		// str1과 str2가 같은지 비교한 결과를 반환
+		Predicate<String> p2 = Predicate.isEqual(str1);
+		boolean result = p2.test(str2);
+		System.out.println(result);
+		
 	}
 	
 }
