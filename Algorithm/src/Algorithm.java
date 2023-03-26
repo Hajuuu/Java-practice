@@ -8,28 +8,39 @@ public class Algorithm {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
-		StringBuilder sb = new StringBuilder();
+		int N = Integer.parseInt(br.readLine());
 		
-		int[] x = new int[1001];
-		int[] y = new int[1001];
-		
-		for(int i = 0; i < 3; i++) {
-			st = new StringTokenizer(br.readLine(), " ");
-			x[Integer.parseInt(st.nextToken())]++;
-			y[Integer.parseInt(st.nextToken())]++;
+		if(N == 1) {
+			System.out.println(0);
+			return;
 		}
 		
-		for(int i = 1; i < 1001; i++) {
-			if(x[i] == 1) {
-				sb.append(i);
-			}
+		int[][] arr = new int[N][2];
+		for(int i = 0; i < N; i++) {
+			st = new StringTokenizer(br.readLine());
+			arr[i][0] = Integer.parseInt(st.nextToken());
+			arr[i][1] = Integer.parseInt(st.nextToken());
 		}
-		for(int i = 1; i < 1001; i++) {
-			if(y[i] == 1) {
-				sb.append(" " + i);
-			}
-		}	
-		System.out.println(sb);
 		
+		int minX = Integer.MAX_VALUE;
+		int maxX = Integer.MIN_VALUE;
+		int minY = Integer.MAX_VALUE;
+		int maxY = Integer.MIN_VALUE;
+		
+		for(int i = 0; i < N; i++) {
+			if(arr[i][0] < minX)
+				minX = arr[i][0];
+			if(arr[i][0] > maxX)
+				maxX = arr[i][0];
+		}
+		
+		for(int i = 0; i < N; i++) {
+			if(arr[i][1] < minY)
+				minY = arr[i][1];
+			if(arr[i][1] > maxY)
+				maxY = arr[i][1];
+		}
+		
+		System.out.println((maxX - minX) * (maxY - minY));
 	}
 }
