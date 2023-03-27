@@ -7,40 +7,36 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuffer sb = new StringBuffer();
 		StringTokenizer st;
-		int N = Integer.parseInt(br.readLine());
-		
-		if(N == 1) {
-			System.out.println(0);
-			return;
+		while(true) {			
+			st = new StringTokenizer(br.readLine(), " ");
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			int c = Integer.parseInt(st.nextToken());
+			
+			if(a == 0) {
+				break;
+			}
+			int max = Math.max(a, b);
+			int max1 = Math.max(max, c);
+			
+			if(max1 >= (a + b + c - max1)) {
+				sb.append("Invalid\n");
+				continue;
+			}
+				
+			
+			if(a == b && b == c && a == c) {
+				sb.append("Equilateral\n");
+			} else if(a == b || b == c || a == c) {
+				sb.append("Isosceles\n");
+			} else {
+				sb.append("Scalene\n");
+			}
 		}
 		
-		int[][] arr = new int[N][2];
-		for(int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine());
-			arr[i][0] = Integer.parseInt(st.nextToken());
-			arr[i][1] = Integer.parseInt(st.nextToken());
-		}
+		System.out.println(sb);
 		
-		int minX = Integer.MAX_VALUE;
-		int maxX = Integer.MIN_VALUE;
-		int minY = Integer.MAX_VALUE;
-		int maxY = Integer.MIN_VALUE;
-		
-		for(int i = 0; i < N; i++) {
-			if(arr[i][0] < minX)
-				minX = arr[i][0];
-			if(arr[i][0] > maxX)
-				maxX = arr[i][0];
-		}
-		
-		for(int i = 0; i < N; i++) {
-			if(arr[i][1] < minY)
-				minY = arr[i][1];
-			if(arr[i][1] > maxY)
-				maxY = arr[i][1];
-		}
-		
-		System.out.println((maxX - minX) * (maxY - minY));
 	}
 }
