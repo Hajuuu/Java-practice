@@ -7,36 +7,24 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuffer sb = new StringBuffer();
-		StringTokenizer st;
-		while(true) {			
-			st = new StringTokenizer(br.readLine(), " ");
-			int a = Integer.parseInt(st.nextToken());
-			int b = Integer.parseInt(st.nextToken());
-			int c = Integer.parseInt(st.nextToken());
-			
-			if(a == 0) {
-				break;
-			}
-			int max = Math.max(a, b);
-			int max1 = Math.max(max, c);
-			
-			if(max1 >= (a + b + c - max1)) {
-				sb.append("Invalid\n");
-				continue;
-			}
-				
-			
-			if(a == b && b == c && a == c) {
-				sb.append("Equilateral\n");
-			} else if(a == b || b == c || a == c) {
-				sb.append("Isosceles\n");
-			} else {
-				sb.append("Scalene\n");
-			}
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		
+		int[] arr = new int[3];
+		
+		for(int i = 0; i < 3; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		System.out.println(sb);
+		Arrays.sort(arr);
 		
+		if(arr[2] >= arr[0] + arr[1]) {
+			System.out.println(arr[0] * 2 + arr[1] * 2 - 1);
+		} else {
+			System.out.println(arr[0] + arr[1] + arr[2]);
+		}
+		
+		
+		
+		    
 	}
 }
