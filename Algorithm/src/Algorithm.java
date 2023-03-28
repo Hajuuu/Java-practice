@@ -7,11 +7,10 @@ import java.util.*;
 public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
-		// O(N^3)의 시간 복잡도
+		// 시간 복잡도 O(N^3)
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		BigInteger n = new BigInteger(br.readLine());
-		System.out.println(n.multiply(n.multiply(n)));
+		long n = Integer.parseInt(br.readLine());
+		System.out.println(n * (n - 1) * (n - 2) / 6);
 		System.out.println(3);
 		    
 	}
