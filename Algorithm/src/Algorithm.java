@@ -6,11 +6,11 @@ import java.util.*;
 public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
-		// O(N)의 시간 복잡도
+		// O(N^2)의 시간 복잡도
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		System.out.println(br.readLine());
-		System.out.println(1);
+		long n = Integer.parseInt(br.readLine());
+		System.out.println(n * n);
+		System.out.println(2);
 		
 		    
 	}
