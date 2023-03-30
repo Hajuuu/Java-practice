@@ -8,41 +8,30 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
 		
-		int N = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
+		int N = Integer.parseInt(br.readLine());
+		int result = sum(N);
+		System.out.println(result);
+	}
+	
+	static int sum(int N) {
 		
-		int[] card = new int[N];
-		
-		st = new StringTokenizer(br.readLine());
-		
-		for(int i = 0; i < N; i++) {
-			card[i] = Integer.parseInt(st.nextToken());
-		}
-		
-		int max = 0;
-		int sum = 0;
-		
-		Loop1: 
-		for(int i = 0; i < N; i++) {
-			for(int j = i + 1; j < N; j++) {
-				for(int k = j + 1; k < N; k++) {
-					sum = card[i] + card[j] + card[k];
-					if(sum > M)
-						continue;
-					else if(sum < M) {
-						if(max < sum)
-							max = sum;
-					}
-					else {
-						max = sum;
-						break Loop1;
+		for(int i = 0; i <= 9; i++) {
+			for(int j = 0; j <= 9; j++) {
+				for(int k = 0; k <= 9; k++) {
+					for(int a = 0; a <= 9; a++) {
+						for(int b = 0; b <= 9; b++) {
+							for(int c = 0; c <= 9; c++) {
+								int tmp = i * 100000 + j * 10000 + k * 1000 + a * 100 + b * 10 + c;
+								if(i + j + k + a + b + c + tmp == N)
+									return tmp;
+							}
+						}
 					}
 				}
 			}
 		}
-		System.out.println(max);
-		    
+		
+		return 0;
 	}
-}
+} 
