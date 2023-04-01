@@ -8,19 +8,17 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int[] arr = new int[5];
+		int sum = 0;
 		
-		int N = Integer.parseInt(br.readLine());
-		
-		for(int i = 0; i <= 1000; i++) {
-			for(int j = 0; j <= 1000; j++) {
-				if((3 * i + 5 * j) == N) {
-					System.out.println(i + j);
-					return;
-				}
-			}
+		for(int i = 0; i < 5; i++) {
+			arr[i] = Integer.parseInt(br.readLine());
+			sum += arr[i];
 		}
-		
-		System.out.println(-1);
+		Arrays.sort(arr);
+	
+		System.out.println(sum / 5);
+		System.out.println(arr[2]);
 		
 	}
 	
