@@ -8,21 +8,23 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		StringBuilder sb = new StringBuilder();
 		
-		int N = Integer.parseInt(st.nextToken());
-		int k = Integer.parseInt(st.nextToken());
-		
+		int N = Integer.parseInt(br.readLine());
 		int[] arr = new int[N];
 		
-		st = new StringTokenizer(br.readLine(), " ");
 		for(int i = 0; i < N; i++) {
-			arr[i] = Integer.parseInt(st.nextToken());
+			arr[i] = Integer.parseInt(br.readLine());
 		}
 		
 		Arrays.sort(arr);
 		
-		System.out.println(arr[N - k]);
+		for(int i = 0; i < N; i++) {
+			sb.append(arr[i] + "\n");
+		}
+		
+		System.out.println(sb);
+		
 	}
 	
 } 
