@@ -1,8 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
-import java.util.*;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Algorithm {
 	
@@ -11,7 +11,8 @@ public class Algorithm {
 		StringTokenizer st;
 		StringBuffer sb = new StringBuffer();
 		int N = Integer.parseInt(br.readLine());
-		int[][] arr = new int[N][2];
+		
+		Integer [][] arr = new Integer[N][2];
 		
 		for(int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -19,11 +20,11 @@ public class Algorithm {
 			arr[i][1] = Integer.parseInt(st.nextToken());
 		}
 		
-		Arrays.sort(arr, (o1, o2) -> {
-			if(o1[0] == o2[0]) {
-				return Integer.compare(o1[1], o2[1]);
+		Arrays.sort(arr, (e1, e2) -> {
+			if(e1[1].equals(e2[1])) {
+				return e1[0] - e2[0]; 
 			} else {
-				return Integer.compare(o1[0], o2[0]);
+				return e1[1] - e2[1];
 			}
 		});
 		
@@ -32,7 +33,6 @@ public class Algorithm {
 		}
 		
 		System.out.println(sb);
-		
 	}
 	
 } 
