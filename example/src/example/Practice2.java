@@ -7,42 +7,33 @@ import java.util.function.*;
 public class Practice2 {
 	
 	public static void main(String[] args) throws Exception {
-		ArrayList<Integer> list = new ArrayList<>();
-		for(int i = 0; i < 10; i++) {
-			list.add(i);
-		}
-		
-		// list의 모든 요소를 출력
-		list.forEach(i -> System.out.print(i + ","));
-//		System.out.println(list);
-//		Iterator it = list.iterator();
-//		while(it.hasNext()) {
-//			System.out.println(it.next());
-//		}
-		
-		System.out.println();
-		
-		// list에서 2 또는 3의 배수를 제거한다.
-		list.removeIf(x -> x % 2 == 0 || x % 3 == 0);
-		System.out.println(list);
-		
-		list.replaceAll(i -> i * 10);
-		System.out.println(list);
-		
-		Map<String, String> map = new HashMap<>();
-		map.put("1", "1");
-		map.put("2", "2");
-		map.put("3", "3");
-		map.put("4", "4");
-		
-		// map의 모든 요소를 {k, v}의 형식으로 출력한다.
-		map.forEach((k, v) -> System.out.print("{" + k + "," + v + "},"));
-		
-//		Iterator it = map.entrySet().iterator();
-//		
-//		while(it.hasNext()) {
-//			System.out.println(it.next());
-//		}
+		MyMath mm = new MyMath(3, 4);
+		long result = MyMath.add(3L, 4L);
+		int result2 = mm.add(3,4);
+		long result3 = mm.add();
+		System.out.println(result + " " + result2 + " " + result3);
 	}
 	
+}
+
+class MyMath {
+	long a, b;
+	int sum = 5;
+	
+	MyMath(int a, int b) {
+		this.a = a;
+		this.b = b;
+	}
+	
+	long add() {
+		return this.a + this.b;
+	}
+	
+	static long add(long a, long b) {
+		return a + b;
+	}
+	
+	int add(int a, int b) {
+		return sum + a + b;
+	}
 }
