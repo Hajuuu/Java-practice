@@ -7,28 +7,43 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int n = Integer.parseInt(br.readLine());
 		StringBuffer sb = new StringBuffer();
+		String str = br.readLine();
+		int N = str.length();
+		int M = Integer.parseInt(br.readLine());
 		
-		Stack<Integer> stack = new Stack<>();
-		int j = 1;
-		for(int i = 0; i < n; i++) {
-			int num = Integer.parseInt(br.readLine());
-			while(j <= num) {
-				stack.push(j);
-				sb.append("+\n");
-				j++;
-			}
-			if(stack.peek() == num) {
-				stack.pop();
-				sb.append("-\n");
-				continue;
-			} else if(stack.peek() > num) {
-				System.out.println("\nNO");
-				return;
+		Stack<Character> stack1 = new Stack<>();
+		Stack<Character> stack2 = new Stack<>();
+		
+		for(int i = 0; i < N; i++) {
+			stack1.push(str.charAt(i));
+		}
+		for(int i = 0; i < M; i++) {
+			String cur = br.readLine();
+			if(cur.charAt(0) == 'L') {
+				if(!stack1.empty()) {
+					stack2.push(stack1.pop());
+				}
+			} else if(cur.charAt(0) == 'D') {
+				if(!stack2.empty()) {
+					stack1.push(stack2.pop());
+				} 
+				
+			} else if(cur.charAt(0) == 'B') {
+				if(!stack1.empty()) {
+					stack1.pop();
+				}
+			} else if(cur.charAt(0) == 'P'){
+				stack1.push(cur.charAt(2));
 			}
 		}
 		
+		while(!stack1.empty()) {
+			stack2.push(stack1.pop());
+		}
+		while(!stack2.empty()) {
+			sb.append(stack2.pop());
+		}
 		System.out.println(sb);
 	}
 	
