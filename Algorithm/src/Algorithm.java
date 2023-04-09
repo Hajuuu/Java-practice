@@ -7,35 +7,30 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int N = Integer.parseInt(br.readLine());
+		int n = Integer.parseInt(br.readLine());
 		StringBuffer sb = new StringBuffer();
-		Stack<String> stack = new Stack<>();
-		// '(' 일때 push ')' 일때 pop
 		
-		for(int i = 0; i < N; i++) {
-			String[] arr = br.readLine().split("");
-			stack.clear();
-			for(String s : arr) {
-				
-				if(s.equals("(")) {
-					stack.push("(");
-				}
-				else {
-					if(!stack.empty() && stack.peek() != ")") {
-						stack.pop();
-					} else {
-						stack.push(")");
-					}
-				}
-				
+		Stack<Integer> stack = new Stack<>();
+		int j = 1;
+		for(int i = 0; i < n; i++) {
+			int num = Integer.parseInt(br.readLine());
+			while(j <= num) {
+				stack.push(j);
+				sb.append("+\n");
+				j++;
 			}
-			if(stack.empty()) {
-				sb.append("YES\n");
-			} else {
-				sb.append("NO\n");
+			if(stack.peek() == num) {
+				stack.pop();
+				sb.append("-\n");
+				continue;
+			} else if(stack.peek() > num) {
+				System.out.println("\nNO");
+				return;
 			}
 		}
-			
+		
 		System.out.println(sb);
 	}
+	
+	
 } 
