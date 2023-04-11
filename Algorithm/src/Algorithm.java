@@ -6,41 +6,27 @@ import java.util.Stack;
 public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
-		//스택에 넣다가 괄호 나오면 sb.append, pop
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuffer sb = new StringBuffer();
-		
-		Stack<Character> stack = new Stack<>();
 		String str = br.readLine();
 		int len = str.length();
+		
+		int stick = 0;
+		Stack<Character> stack = new Stack<>();
 		for(int i = 0; i < len; i++) {
-			if(str.charAt(i) == '<') {
-				while(!stack.empty()) {
-					sb.append(stack.pop());
+			if(str.charAt(i) == '(') {
+				stack.push('(');
+			} else if(str.charAt(i) == ')') {
+				if(str.charAt(i - 1) == '(') {
+					stack.pop();
+					stick += stack.size();
+				} else {			
+					stack.pop();
+					stick += 1;
 				}
-				while(str.charAt(i) != '>') {
-					sb.append(str.charAt(i));
-					i++;
-				}
-				if(str.charAt(i) == '>') {
-					sb.append(">");
-				}
-			}
-			else if(str.charAt(i) == ' ') {
-				while(!stack.empty()) {
-					sb.append(stack.pop());
-				}
-				sb.append(" ");
-			}
-			else {
-				stack.push(str.charAt(i));
 			}
 		}
 		
-		while(!stack.empty()) {
-			sb.append(stack.pop());
-		}
-		System.out.println(sb);
+		System.out.println(stick);
 		
 	}
 	
