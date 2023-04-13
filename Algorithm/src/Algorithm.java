@@ -9,30 +9,16 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	
-		String str = br.readLine();
-		int len = str.length();
-		String answer = "";
-		for(int i = 0; i < len; i++) {
-			if(str.charAt(i) >= 'A' && str.charAt(i) <= 'Z') {
-				if(str.charAt(i) + 13 > 90) {
-					answer += (char) (str.charAt(i) + 13 - 26);
-				} else {
-					answer += (char) (str.charAt(i) + 13);
-				}
-			} else if(str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){
-				if(str.charAt(i) + 13 > 122) {
-					answer += (char) (str.charAt(i) + 13 - 26);
-				} else {
-					answer += (char) (str.charAt(i) + 13);
-				}
-			} else {
-				answer += str.charAt(i);
-			}
-		}
 		
-		System.out.println(answer);
-	}
+		String[] str = br.readLine().split(" ");
+		
+		String AB = str[0] + str[1];
+		String CD = str[2] + str[3];
+		
+		long sum = Long.parseLong(AB) + Long.parseLong(CD);
+		
+		System.out.println(sum);
+ 	}
 	
 	
 } 
