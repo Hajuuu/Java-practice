@@ -9,21 +9,29 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		String s = br.readLine();
-		
-		int len = s.length();
-		int[] arr = new int[26];
+	
+		String str = br.readLine();
+		int len = str.length();
+		String answer = "";
 		for(int i = 0; i < len; i++) {
-			arr[s.charAt(i) - 'a']++;
+			if(str.charAt(i) >= 'A' && str.charAt(i) <= 'Z') {
+				if(str.charAt(i) + 13 > 90) {
+					answer += (char) (str.charAt(i) + 13 - 26);
+				} else {
+					answer += (char) (str.charAt(i) + 13);
+				}
+			} else if(str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){
+				if(str.charAt(i) + 13 > 122) {
+					answer += (char) (str.charAt(i) + 13 - 26);
+				} else {
+					answer += (char) (str.charAt(i) + 13);
+				}
+			} else {
+				answer += str.charAt(i);
+			}
 		}
 		
-		StringBuffer sb = new StringBuffer();
-		for(int i = 0; i < 26; i++) {
-			sb.append(arr[i] + " ");
-		}
-		
-		System.out.println(sb);
+		System.out.println(answer);
 	}
 	
 	
