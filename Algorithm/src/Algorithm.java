@@ -10,61 +10,20 @@ public class Algorithm {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		String str = br.readLine();
-		int len = str.length();
+		String s = br.readLine();
 		
-		String answer = "";
-		Stack<Character> operator = new Stack<>();
+		int len = s.length();
+		int[] arr = new int[26];
 		for(int i = 0; i < len; i++) {
-			if(str.charAt(i) >= 65 && str.charAt(i) <= 90) {
-				answer += str.charAt(i);
-			} 
-			else {
-				if(operator.empty()) {
-					operator.push(str.charAt(i));
-				} else {
-					if(str.charAt(i) == '*' || str.charAt(i) == '/') {
-						if(operator.peek() == '/' || operator.peek() == '*') {
-							answer += operator.pop();
-							operator.push(str.charAt(i));
-						} else {
-							operator.push(str.charAt(i));
-						}
-					} else if(str.charAt(i) == ')') {
-						while(operator.peek() != '(') {
-							answer += operator.pop();
-						}
-						operator.pop();
-					} else if(str.charAt(i) == '+' || str.charAt(i) == '-') {
-						if(operator.peek() == '*' || operator.peek() == '/') {
-							answer += operator.pop();
-							if(!operator.empty() && (operator.peek() == '+' || operator.peek() == '-')) {
-								answer += operator.pop();
-							}
-							operator.push(str.charAt(i));
-							
-						} else {
-							if(!operator.empty() && operator.peek() == '(') {
-								operator.push(str.charAt(i));
-							} else {
-								answer += operator.pop();
-								operator.push(str.charAt(i));
-							}
-							
-						}
-						
-					} else {
-						operator.push(str.charAt(i));
-					}
-				}
-			}
+			arr[s.charAt(i) - 'a']++;
 		}
 		
-		while(!operator.empty()) {
-			answer += operator.pop();
+		StringBuffer sb = new StringBuffer();
+		for(int i = 0; i < 26; i++) {
+			sb.append(arr[i] + " ");
 		}
 		
-		System.out.println(answer);
+		System.out.println(sb);
 	}
 	
 	
