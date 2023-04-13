@@ -9,48 +9,62 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int N = Integer.parseInt(br.readLine());
 		
 		String str = br.readLine();
-		double[] arr = new double[N];
-		
-		for(int i = 0; i < N; i++) {
-			arr[i] = Double.parseDouble(br.readLine());
-		}
-		
-		Stack<Double> stack = new Stack<>();
-		
 		int len = str.length();
 		
+		String answer = "";
+		Stack<Character> operator = new Stack<>();
 		for(int i = 0; i < len; i++) {
 			if(str.charAt(i) >= 65 && str.charAt(i) <= 90) {
-				stack.push((arr[str.charAt(i) - 'A']));
-			} else {
-				if(str.charAt(i) == '*') {
-					double n = stack.pop() * stack.pop();
-					stack.push(n);
+				answer += str.charAt(i);
+			} 
+			else {
+				if(operator.empty()) {
+					operator.push(str.charAt(i));
+				} else {
+					if(str.charAt(i) == '*' || str.charAt(i) == '/') {
+						if(operator.peek() == '/' || operator.peek() == '*') {
+							answer += operator.pop();
+							operator.push(str.charAt(i));
+						} else {
+							operator.push(str.charAt(i));
+						}
+					} else if(str.charAt(i) == ')') {
+						while(operator.peek() != '(') {
+							answer += operator.pop();
+						}
+						operator.pop();
+					} else if(str.charAt(i) == '+' || str.charAt(i) == '-') {
+						if(operator.peek() == '*' || operator.peek() == '/') {
+							answer += operator.pop();
+							if(!operator.empty() && (operator.peek() == '+' || operator.peek() == '-')) {
+								answer += operator.pop();
+							}
+							operator.push(str.charAt(i));
+							
+						} else {
+							if(!operator.empty() && operator.peek() == '(') {
+								operator.push(str.charAt(i));
+							} else {
+								answer += operator.pop();
+								operator.push(str.charAt(i));
+							}
+							
+						}
+						
+					} else {
+						operator.push(str.charAt(i));
+					}
 				}
-				else if(str.charAt(i) == '/') {
-					double a = stack.pop();
-					double b = stack.pop();
-					double n = b / a;
-					stack.push(n);
-				}else if(str.charAt(i) == '+') {
-					double n = stack.pop() + stack.pop();
-					stack.push(n);
-				}
-				else if(str.charAt(i) == '-') {
-					double a = stack.pop();
-					double b = stack.pop();
-					stack.push(b - a);
-				}
-				
 			}
-			
-			
 		}
 		
-		System.out.printf("%.2f", stack.pop());
+		while(!operator.empty()) {
+			answer += operator.pop();
+		}
+		
+		System.out.println(answer);
 	}
 	
 	
