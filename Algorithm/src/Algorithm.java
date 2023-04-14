@@ -10,25 +10,27 @@ public class Algorithm {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		String S = br.readLine();
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		
-		int len = S.length();
+		int a = Integer.parseInt(st.nextToken());
+		int b = Integer.parseInt(st.nextToken());
 		
-		String[] arr = new String[len];
+		int max = Math.max(a, b);
+		int min = Math.min(a, b);
+		int gcd = GCD(max, min);
+		int lcm = a * b / gcd;
+		System.out.println(gcd);
+		System.out.println(lcm);
 		
-		for(int i = 0; i < len; i++) {
-			arr[i] = S.substring(i, len);
-		}
-		
-		Arrays.sort(arr);
-		
-		StringBuffer sb = new StringBuffer();
-		for(int i = 0; i < len; i++) {
-			sb.append(arr[i] + "\n");
-		}
-		
-		System.out.println(sb);
  	}
+	
+	public static int GCD(int a, int b) {
+		if(b == 0)
+			return a;
+		else {
+			return GCD(b, a % b);
+		}
+	}
 	
 	
 } 
