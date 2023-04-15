@@ -9,33 +9,42 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int T = Integer.parseInt(br.readLine());
-		StringTokenizer st;
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		int M = Integer.parseInt(st.nextToken());
+		int N = Integer.parseInt(st.nextToken());
+		
+		boolean[] prime = prime(N);
 		StringBuffer sb = new StringBuffer();
-		for(int i = 0; i < T; i++) {
-			st = new StringTokenizer(br.readLine());
-			int A = Integer.parseInt(st.nextToken());
-			int B = Integer.parseInt(st.nextToken());
-			
-			int max = Math.max(A, B);
-			int min = Math.min(A, B);
-			
-			int gcd = GCD(max, min);
-			int lcm = A * B / gcd;
-			
-			sb.append(lcm + "\n");
+		for(int i = M; i <= N; i++) {
+			if(prime[i] == false) {
+				sb.append(i + "\n");
+			}
 		}
 		
 		System.out.println(sb);
+		
  	}
 	
-	public static int GCD(int a, int b) {
-		if(b == 0) {
-			return a;
+	public static boolean[] prime(int N) {
+		boolean[] prime = new boolean[N + 1];
+		
+		prime[0] = true;
+		prime[1] = true;
+		
+		for(int i = 2; i <= Math.sqrt(N); i++) {
+			if(prime[i] == true) {
+				continue;
+			}
+			
+			for(int j = i * i; j <= N; j += i) {
+				prime[j] = true;
+			}
+			
 		}
-		else {
-			return GCD(b, a % b);
-		}
+		
+		return prime;
+		
 	}
 	
 	
