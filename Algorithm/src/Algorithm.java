@@ -9,37 +9,34 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		
-		int n = Integer.parseInt(st.nextToken());
-		int m = Integer.parseInt(st.nextToken());
-		
-		int count1 = zero1(n) - zero1(n - m) - zero1(m);
-		int count2 = zero2(n) - zero2(n - m) - zero2(m);
-		
-		System.out.println(Math.min(count1, count2));
-	}
-	
-	public static int zero1(int num) {
-		int count = 0;
-		
-		while(num >= 5) {
-			count += num / 5;
-			num /= 5;
+		int t = Integer.parseInt(br.readLine());
+		StringBuffer sb = new StringBuffer();
+		StringTokenizer st;
+		for(int i = 0; i < t; i++) {
+			st = new StringTokenizer(br.readLine());
+			int n = Integer.parseInt(st.nextToken());
+			int[] arr = new int[n];
+			for(int j = 0; j < n; j++) {
+				arr[j] = Integer.parseInt(st.nextToken());
+			}
+			long sum = 0;
+			for(int k = 0; k < n; k++) {
+				for(int q = k + 1; q < n; q++) {
+					sum += GCD(arr[k], arr[q]);
+				}			
+			}
+			
+			sb.append(sum + "\n");
 		}
 		
-		return count;
+		System.out.println(sb);
 	}
 	
-	public static int zero2(int num) {
-		int count = 0;
-		
-		while(num >= 2) {
-			count += num / 2;
-			num /= 2;
+	public static int GCD(int a, int b) {
+		if(b == 0) {
+			return a;
+		} else {
+			return GCD(b, a % b);
 		}
-		
-		return count;
 	}
 } 
