@@ -11,18 +11,13 @@ public class Algorithm {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int N = Integer.parseInt(br.readLine());
-		
-		int fac = factorial(1, N);
-		
-		System.out.println(fac);
- 	}
-	
-	public static int factorial(int a, int b) {
-		if(b == 0) {
-			return a;
-		} else {
-			return factorial(a * b, b - 1);
+
+		int count = 0;
+		while(N >= 5) {
+			count += N / 5;
+			N /= 5;
 		}
-	}
-	
+		
+		System.out.println(count);
+ 	}
 } 
