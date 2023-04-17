@@ -9,34 +9,41 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int t = Integer.parseInt(br.readLine());
-		StringBuffer sb = new StringBuffer();
-		StringTokenizer st;
-		for(int i = 0; i < t; i++) {
-			st = new StringTokenizer(br.readLine());
-			int n = Integer.parseInt(st.nextToken());
-			int[] arr = new int[n];
-			for(int j = 0; j < n; j++) {
-				arr[j] = Integer.parseInt(st.nextToken());
-			}
-			long sum = 0;
-			for(int k = 0; k < n; k++) {
-				for(int q = k + 1; q < n; q++) {
-					sum += GCD(arr[k], arr[q]);
-				}			
-			}
-			
-			sb.append(sum + "\n");
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		int N = Integer.parseInt(st.nextToken());
+		int S = Integer.parseInt(st.nextToken());
+		int[] x = new int[N];
+		st = new StringTokenizer(br.readLine());
+		for(int i = 0; i < N; i++) {
+			x[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		System.out.println(sb);
+		if(N == 1) {
+			System.out.println(x[0] - S);
+			return;
+		}
+		int[] arr = new int[N];
+		
+		for(int i = 0; i < N; i++) {
+			arr[i] = Math.abs(S - x[i]);
+		}
+		
+		int answer = arr[0];
+		for(int i = 1; i < N; i++) {
+			answer = GCD(answer, arr[i]);
+		}
+		
+		System.out.println(answer);
 	}
 	
 	public static int GCD(int a, int b) {
 		if(b == 0) {
 			return a;
-		} else {
+		}
+		else {
 			return GCD(b, a % b);
 		}
 	}
+	
 } 
