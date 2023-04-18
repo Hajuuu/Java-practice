@@ -11,22 +11,30 @@ public class Algorithm {
 	public static void main(String[] args) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
+		StringBuffer sb = new StringBuffer();
 		int n = Integer.parseInt(br.readLine());
 		
 		dp = new Integer[1001];
 		dp[1] = 1;
-		dp[2] = 3;
+		dp[2] = 2;
+		dp[3] = 4;
 		
-		System.out.println(block(n));
+		for(int i = 0; i < n; i++) {
+			int num = Integer.parseInt(br.readLine());
+			sb.append(calc(num) + "\n");
+		}
+		
+		System.out.println(sb);
 	}
 	
-	static int block(int n) {
+	static int calc(int n) {
 		
 		if(dp[n] == null) {
-			dp[n] = (block(n - 2) * 2 + block(n - 1)) % 10007;
+			dp[n] = calc(n - 3) + calc(n - 2) + calc(n - 1);
 		}
+		
 		return dp[n];
 	}
+
 
 } 
