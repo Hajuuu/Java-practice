@@ -9,35 +9,24 @@ public class Algorithm {
 	
 	static Integer[] dp;
 	public static void main(String[] args) throws IOException {
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		int N = Integer.parseInt(br.readLine());
+		int n = Integer.parseInt(br.readLine());
 		
-		dp = new Integer[N + 1];
-		dp[0] = dp[1] = 0;
+		dp = new Integer[1001];
+		dp[1] = 1;
+		dp[2] = 2;
 		
-		System.out.println(calc(N));
+		System.out.println(block(n));
 	}
 	
-	public static int calc(int N) {
+	static int block(int n) {
 		
-		if(dp[N] == null) {
-			if(N % 6 == 0) {
-				dp[N] = Math.min(calc(N - 1), Math.min(calc(N / 2), calc(N / 3))) + 1;
-			}
-			else if(N % 3 == 0) {
-				dp[N] = Math.min(calc(N / 3), calc(N - 1)) + 1;
-			}
-			else if(N % 2 == 0) {
-				dp[N] = Math.min(calc(N / 2), calc(N - 1)) + 1;
-			}
-			else {
-				dp[N] = calc(N - 1) + 1;
-			}
+		if(dp[n] == null) {
+			dp[n] = (block(n - 2) + block(n - 1)) % 10007;
 		}
-		
-		return dp[N];
-		
+		return dp[n];
 	}
 
 } 
