@@ -16,7 +16,7 @@ public class Algorithm {
 		
 		dp = new Integer[1001];
 		dp[1] = 1;
-		dp[2] = 2;
+		dp[2] = 3;
 		
 		System.out.println(block(n));
 	}
@@ -24,7 +24,7 @@ public class Algorithm {
 	static int block(int n) {
 		
 		if(dp[n] == null) {
-			dp[n] = (block(n - 2) + block(n - 1)) % 10007;
+			dp[n] = (block(n - 2) * 2 + block(n - 1)) % 10007;
 		}
 		return dp[n];
 	}
