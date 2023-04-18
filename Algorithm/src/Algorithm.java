@@ -7,26 +7,37 @@ import java.util.StringTokenizer;
 
 public class Algorithm {
 	
+	static Integer[] dp;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		String str = br.readLine();
-		StringBuffer sb = new StringBuffer();
+		int N = Integer.parseInt(br.readLine());
 		
-		int i = 0;
-		if(str.length() % 3 == 1) {
-			sb.append((str.charAt(0) - '0') * 1);
-			i++;
-		} else if(str.length() % 3 == 2) {
-			sb.append((str.charAt(1) - '0') * 1 + (str.charAt(0) - '0') * 2);
-			i += 2;
-		} 
+		dp = new Integer[N + 1];
+		dp[0] = dp[1] = 0;
 		
-		for(int j = i; j <= str.length() - 3; j += 3) {
-			sb.append((str.charAt(j + 2) - '0') * 1 + (str.charAt(j + 1) - '0') * 2 + (str.charAt(j) - '0') * 4);
-		}
-		
-		System.out.println(sb);
+		System.out.println(calc(N));
 	}
 	
+	public static int calc(int N) {
+		
+		if(dp[N] == null) {
+			if(N % 6 == 0) {
+				dp[N] = Math.min(calc(N - 1), Math.min(calc(N / 2), calc(N / 3))) + 1;
+			}
+			else if(N % 3 == 0) {
+				dp[N] = Math.min(calc(N / 3), calc(N - 1)) + 1;
+			}
+			else if(N % 2 == 0) {
+				dp[N] = Math.min(calc(N / 2), calc(N - 1)) + 1;
+			}
+			else {
+				dp[N] = calc(N - 1) + 1;
+			}
+		}
+		
+		return dp[N];
+		
+	}
+
 } 
