@@ -7,34 +7,36 @@ import java.util.StringTokenizer;
 
 public class Algorithm {
 	
-	static Integer[] dp;
 	public static void main(String[] args) throws IOException {
-		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int[] arr = new int[9];
+		int sum = 0;
+		for(int i = 0; i < 9; i++) {
+			arr[i] = Integer.parseInt(br.readLine());
+			sum += arr[i];
+		}
+		
+		int a = 0;
+		int b = 0;
+		for(int i = 0; i < 9; i++) {
+			for(int j = i + 1; j < 9; j++) {
+				if((sum - arr[i] - arr[j]) == 100) {
+					a = arr[i];
+					b = arr[j];
+				}
+			}
+		}
+		
+		Arrays.sort(arr);
 		StringBuffer sb = new StringBuffer();
-		int n = Integer.parseInt(br.readLine());
-		
-		dp = new Integer[1001];
-		dp[1] = 1;
-		dp[2] = 2;
-		dp[3] = 4;
-		
-		for(int i = 0; i < n; i++) {
-			int num = Integer.parseInt(br.readLine());
-			sb.append(calc(num) + "\n");
+		for(int i = 0; i < 9; i++) {
+			if(arr[i] != a && arr[i] != b) {
+				sb.append(arr[i] + "\n");
+			}
 		}
 		
 		System.out.println(sb);
+			
 	}
-	
-	static int calc(int n) {
-		
-		if(dp[n] == null) {
-			dp[n] = calc(n - 3) + calc(n - 2) + calc(n - 1);
-		}
-		
-		return dp[n];
-	}
-
-
 } 
