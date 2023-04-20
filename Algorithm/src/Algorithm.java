@@ -1,42 +1,83 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Stack;
-import java.util.StringTokenizer;
 
 public class Algorithm {
 	
+	static char[][] arr;
+	static int max = 1, N = 0;
 	public static void main(String[] args) throws IOException {
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		int[] arr = new int[9];
-		int sum = 0;
-		for(int i = 0; i < 9; i++) {
-			arr[i] = Integer.parseInt(br.readLine());
-			sum += arr[i];
+		N = Integer.parseInt(br.readLine());
+		arr = new char[N][N];
+
+		for(int i = 0; i < N; i++) {
+			String str = br.readLine();
+			for(int j = 0; j < N; j++) {
+				arr[i][j] = str.charAt(j);
+			}
 		}
 		
-		int a = 0;
-		int b = 0;
-		for(int i = 0; i < 9; i++) {
-			for(int j = i + 1; j < 9; j++) {
-				if((sum - arr[i] - arr[j]) == 100) {
-					a = arr[i];
-					b = arr[j];
+		//인접 가로 변경 비교
+		for(int i = 0; i < N; i++) {
+			for(int j = 0; j < N - 1; j++) {
+				if(arr[i][j] != arr[i][j + 1]) {
+					change(i, j, i, j + 1);
+					candyCheck();
+					change(i, j + 1, i, j);
 				}
 			}
 		}
 		
-		Arrays.sort(arr);
-		StringBuffer sb = new StringBuffer();
-		for(int i = 0; i < 9; i++) {
-			if(arr[i] != a && arr[i] != b) {
-				sb.append(arr[i] + "\n");
+		//인접 세로  변경 비교
+		for(int i = 0; i < N; i++) {
+			for(int j = 0; j < N - 1; j++) {
+				if(arr[j][i] != arr[j + 1][i]) {
+					change(j, i, j + 1, i);
+					candyCheck();
+					change(j + 1, i, j, i);
+				}
 			}
 		}
+		System.out.println(max);
 		
-		System.out.println(sb);
+	}
+	
+	public static void change(int x1, int y1, int x2, int y2) {
+		char ch = ' ';
+		ch = arr[x1][y1];
+		arr[x1][y1] = arr[x2][y2];
+		arr[x2][y2] = ch;
+	}
+	
+	public static void candyCheck() {
+		
+		for(int i = 0; i < N; i++) {
+			int numX = 1;
+			for(int j = 0; j < N - 1; j++) {
+				if(arr[i][j] == arr[i][j + 1]) {
+					numX++;
+				} else {
+					numX = 1;
+				}
+				max = Math.max(max, numX);
+			}
 			
+		}
+		
+		for(int i = 0; i < N; i++) {
+			int numY = 1;
+			for(int j = 0; j < N - 1; j++) {
+				if(arr[j][i] == arr[j + 1][i]) {
+					numY++;
+				} else {
+					numY = 1;
+				}
+
+				max = Math.max(max, numY);
+			}
+		}
 	}
 } 
