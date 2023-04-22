@@ -8,41 +8,28 @@ public class Algorithm {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int T = Integer.parseInt(br.readLine());
 		
-		StringTokenizer st;
-		StringBuffer sb = new StringBuffer();
-		for(int i = 0; i < T; i++) {
-			st = new StringTokenizer(br.readLine());
-			
-			int M = Integer.parseInt(st.nextToken());
-			int N = Integer.parseInt(st.nextToken());
-			int x = Integer.parseInt(st.nextToken()) - 1;
-			int y = Integer.parseInt(st.nextToken()) - 1;
-			
-			int year = x;
-			int last = M * N / gcd(M, N);
-			
-			while(year <= last) {
-				if((year % N == y)) {
-					sb.append(year + 1 + "\n");
-					break;
-				}
-				year += M;
-			}
-			
-			if(year > last) {
-				sb.append(-1 + "\n");
-				continue;
-			}
+		long N = Integer.parseInt(br.readLine());
+		if(N < 10) {
+			System.out.println(N);
 		}
-		
-		System.out.println(sb);
-	}
-	
-	public static int gcd(int M, int N) {
-		if(N == 0)
-			return M;
-		return gcd(N, M % N);
+		else if(N < 100) {
+			System.out.println((N - 9) * 2 + 9);
+		} 
+		else if(N < 1000) {
+			System.out.println((N - 99) * 3 + 90 * 2 + 9);
+		} else if(N < 10000) {
+			System.out.println((N - 999) * 4 + 900 * 3 + 90 * 2 + 9);
+		} else if(N < 100000) {
+			System.out.println((N - 9999) * 5 + 9000 * 4 + 900 * 3 + 90 * 2 + 9);
+		} else if(N < 1000000) {
+			System.out.println((N - 99999) * 6 + 90000 * 5 + 9000 * 4 + 900 * 3 + 90 * 2 + 9);
+		} else if(N < 10000000) {
+			System.out.println((N - 999999) * 7 + 900000 * 6 + 90000 * 5 + 9000 * 4 + 900 * 3 + 90 * 2 + 9);
+		} else if(N < 100000000) {
+			System.out.println((N - 9999999) * 8 + 9000000 * 7 + 900000 * 6 + 90000 * 5 + 9000 * 4 + 900 * 3 + 90 * 2 + 9);
+		} else {
+			System.out.println(90000000 * 8 + 9000000 * 7 + 900000 * 6 + 90000 * 5 + 9000 * 4 + 900 * 3 + 90 * 2 + 9 + 9);
+		}
 	}
 } 
