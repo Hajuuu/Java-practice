@@ -29,14 +29,14 @@ public class Algorithm {
 		
 		Arrays.sort(arr);
 		
-		dfs(0, 0);
+		dfs(0);
 		
 		
 		System.out.println(sb);
 		
 	}
 	
-	public static void dfs(int at, int depth) {
+	public static void dfs(int depth) {
 		if(depth == M) {
 			for(int i = 0; i < M; i++) {
 				sb.append(darr[i] + " ");			
@@ -45,9 +45,9 @@ public class Algorithm {
 			return;
 		}
 		
-		for(int i = at; i < N; i++) {
+		for(int i = 0; i < N; i++) {
 			darr[depth] = arr[i];
-			dfs(i + 1, depth + 1);		
+			dfs(depth + 1);		
 		}
 	}
 } 
