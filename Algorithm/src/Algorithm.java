@@ -10,7 +10,6 @@ public class Algorithm {
 	static int M;
 	static int[] arr;
 	static int[] darr;
-	static boolean[] isUsed;
 	static StringBuilder sb = new StringBuilder();
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -30,16 +29,14 @@ public class Algorithm {
 		
 		Arrays.sort(arr);
 		
-		isUsed = new boolean[arr[N - 1] + 1];
-		
-		dfs(0);
+		dfs(0, 0);
 		
 		
 		System.out.println(sb);
 		
 	}
 	
-	public static void dfs(int depth) {
+	public static void dfs(int at, int depth) {
 		if(depth == M) {
 			for(int i = 0; i < M; i++) {
 				sb.append(darr[i] + " ");			
@@ -48,16 +45,9 @@ public class Algorithm {
 			return;
 		}
 		
-		for(int i = 0; i < N; i++) {
-			if(!isUsed[arr[i]]) {
-				isUsed[arr[i]] = true;
-				darr[depth] = arr[i];
-				dfs(depth + 1);
-				
-				isUsed[arr[i]] = false;
-			}
-			
-			
+		for(int i = at; i < N; i++) {
+			darr[depth] = arr[i];
+			dfs(i + 1, depth + 1);		
 		}
 	}
 } 
