@@ -10,119 +10,15 @@ public class boj_1924 {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int x = Integer.parseInt(st.nextToken());
 		int y = Integer.parseInt(st.nextToken());
-		if(x == 1 || x == 10) {
-			if(y % 7 == 1) {
-				System.out.println("MON");
-			} else if(y % 7 == 2) {
-				System.out.println("TUE");
-			} else if(y % 7 == 3) {
-				System.out.println("WED");
-			} else if(y % 7 == 4) {
-				System.out.println("THU");
-			} else if(y % 7 == 5) {
-				System.out.println("FRI");
-			} else if(y % 7 == 6) {
-				System.out.println("SAT");
-			} else if(y % 7 == 0) {
-				System.out.println("SUN");
-			}
-		} else if(x == 2 || x == 3 || x == 11) {
-			if(y % 7 == 5) {
-				System.out.println("MON");
-			} else if(y % 7 == 6) {
-				System.out.println("TUE");
-			} else if(y % 7 == 0) {
-				System.out.println("WED");
-			} else if(y % 7 == 1) {
-				System.out.println("THU");
-			} else if(y % 7 == 2) {
-				System.out.println("FRI");
-			} else if(y % 7 == 3) {
-				System.out.println("SAT");
-			} else if(y % 7 == 4) {
-				System.out.println("SUN");
-			}
-		} else if(x == 4 || x == 7) {
-			if(y % 7 == 2) {
-				System.out.println("MON");
-			} else if(y % 7 == 3) {
-				System.out.println("TUE");
-			} else if(y % 7 == 4) {
-				System.out.println("WED");
-			} else if(y % 7 == 5) {
-				System.out.println("THU");
-			} else if(y % 7 == 6) {
-				System.out.println("FRI");
-			} else if(y % 7 == 0) {
-				System.out.println("SAT");
-			} else if(y % 7 == 1) {
-				System.out.println("SUN");
-			}
-		} else if(x == 5) {
-			if(y % 7 == 0) {
-				System.out.println("MON");
-			} else if(y % 7 == 1) {
-				System.out.println("TUE");
-			} else if(y % 7 == 2) {
-				System.out.println("WED");
-			} else if(y % 7 == 3) {
-				System.out.println("THU");
-			} else if(y % 7 == 4) {
-				System.out.println("FRI");
-			} else if(y % 7 == 5) {
-				System.out.println("SAT");
-			} else if(y % 7 == 6) {
-				System.out.println("SUN");
-			}
-		} else if(x == 6) {
-			if(y % 7 == 4) {
-				System.out.println("MON");
-			} else if(y % 7 == 5) {
-				System.out.println("TUE");
-			} else if(y % 7 == 6) {
-				System.out.println("WED");
-			} else if(y % 7 == 0) {
-				System.out.println("THU");
-			} else if(y % 7 == 1) {
-				System.out.println("FRI");
-			} else if(y % 7 == 2) {
-				System.out.println("SAT");
-			} else if(y % 7 == 3) {
-				System.out.println("SUN");
-			}
-		} else if(x == 8) {
-			if(y % 7 == 6) {
-				System.out.println("MON");
-			} else if(y % 7 == 0) {
-				System.out.println("TUE");
-			} else if(y % 7 == 1) {
-				System.out.println("WED");
-			} else if(y % 7 == 2) {
-				System.out.println("THU");
-			} else if(y % 7 == 3) {
-				System.out.println("FRI");
-			} else if(y % 7 == 4) {
-				System.out.println("SAT");
-			} else if(y % 7 == 5) {
-				System.out.println("SUN");
-			}
-		} else if(x == 9 || x == 12) {
-			if(y % 7 == 3) {
-				System.out.println("MON");
-			} else if(y % 7 == 4) {
-				System.out.println("TUE");
-			} else if(y % 7 == 5) {
-				System.out.println("WED");
-			} else if(y % 7 == 6) {
-				System.out.println("THU");
-			} else if(y % 7 == 0) {
-				System.out.println("FRI");
-			} else if(y % 7 == 1) {
-				System.out.println("SAT");
-			} else if(y % 7 == 2) {
-				System.out.println("SUN");
-			}
+		String[] day = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
+		int[] month = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		
+		int n = y;
+		for(int i = 0; i < x - 1; i++) {
+			n += month[i];
 		}
+		
+		System.out.println(day[n % 7]);
 	}
 
 }
