@@ -16,14 +16,15 @@ public class boj_11399 {
 			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		for(int i = 0; i < N; i++) {
-			int min = i;
-			for(int j = i + 1; j < N; j++) {
-				if(arr[min] > arr[j]) {
-					min = j;
-				}
+		for(int i = 1; i < N; i++) {
+			int t = arr[i];
+			int j = i - 1;
+			while(j >= 0 && t < arr[j]) {
+				arr[j + 1] = arr[j];
+				j--;
 			}
-			swap(i, min);
+			
+			arr[j + 1] = t;
 		}
 		
 		long[] sum = new long[N];
@@ -38,12 +39,6 @@ public class boj_11399 {
 		}
 		
 		System.out.println(answer);
-	}
-	
-	public static void swap(int a, int b) {
-		int num = arr[a];
-		arr[a] = arr[b];
-		arr[b] = num;
 	}
 
 }
