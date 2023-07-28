@@ -10,73 +10,72 @@ import java.util.StringTokenizer;
 public class boj_1167 {
 
 	static ArrayList<Edge>[] nodeList;
-	static int[] distance;
-	static boolean[] visited;
-	
+	static boolean[] visit;
+	static int max;
+	static int node;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int N = Integer.parseInt(br.readLine());
 		StringTokenizer st;
 		
-		nodeList = new ArrayList[N + 1];
-		distance = new int[N + 1];
-		visited = new boolean[N + 1];
-		for(int i = 1; i <= N; i++) {
-			nodeList[i] = new ArrayList<>(); 
+		int V = Integer.parseInt(br.readLine());
+		
+		nodeList = new ArrayList[V + 1];
+		visit = new boolean[V + 1];
+		
+		for(int i = 1; i <= V; i++) {
+			nodeList[i] = new ArrayList<>();
 		}
 		
-		for(int i = 0; i < N; i++) {
+		for(int i = 0; i < V; i++) {
 			st = new StringTokenizer(br.readLine());
-			int S = Integer.parseInt(st.nextToken());
+			int now = Integer.parseInt(st.nextToken());
 			while(true) {
-				int E = Integer.parseInt(st.nextToken());
-				if(E == -1) break;
-				int V = Integer.parseInt(st.nextToken());
-				nodeList[S].add(new Edge(E, V));
+				int next = Integer.parseInt(st.nextToken());
+				if(next == -1) {
+					break;
+				}
+				int weight = Integer.parseInt(st.nextToken());
+				nodeList[now].add(new Edge(next, weight));
 			}
+			
 		}
 		
-		BFS(1);
-		int max = 1;
-		for(int i = 2; i <= N; i++) {
-			if(distance[i] > distance[max]) {
-				max = i;
-			}
-		}
+		max = Integer.MIN_VALUE;
+		DFS(1, 0);
 		
-		visited = new boolean[N + 1];
-		distance = new int[N + 1];
-		BFS(max);
-		Arrays.sort(distance);
-		System.out.println(distance[N]);
+		visit = new boolean[V + 1];
+		DFS(node, 0);
 		
+		
+		System.out.println(max);
 	}
 	
-	public static void BFS(int index) {
-		Queue<Integer> queue = new LinkedList<>();
-		queue.add(index);
-		visited[index] = true;
-		while(!queue.isEmpty()) {
-			int now = queue.poll();
-			for(Edge i : nodeList[now]) {
-				int e = i.e;
-				int v = i.value;
-				if(!visited[e]) {
-					visited[e] = true;
-					queue.add(e);
-					distance[e] = distance[now] + v;
-				}
+	public static void DFS(int u, int count) {
+		if(count > max) {
+			max = count;
+			node = u;
+		}
+		visit[u] = true;
+		
+		for(Edge e: nodeList[u]) {
+			int next = e.u;
+			int weight = e.weight;
+			
+			if(!visit[next]) {
+				visit[next] = true;
+				DFS(next, count + weight);
 			}
 		}
 	}
-
 }
 
 class Edge {
-	int e;
-	int value;
-	public Edge(int e, int value) {
-		this.e = e;
-		this.value = value;
+	int u;
+	int weight;
+	
+	public Edge(int u, int weight) {
+		this.u = u;
+		this.weight = weight;
 	}
 }
+	
