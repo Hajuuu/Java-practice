@@ -20,7 +20,7 @@ public class boj_1715 {
 		
 		int sum = 0;
 		int count = 0;
-		while(queue.size() >= 2) {
+		while(queue.size() > 1) {
 			count = queue.poll() + queue.poll();
 			sum += count;
 			queue.offer(count);
