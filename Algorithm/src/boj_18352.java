@@ -10,66 +10,66 @@ import java.util.StringTokenizer;
 public class boj_18352 {
 
 	static ArrayList<Integer>[] nodeList;
+	static boolean[] visit;
+	static int[] count;
 	static int K;
-	static StringBuilder sb = new StringBuilder();
-	static int[] num;
-	static ArrayList<Integer> ans;
+	static ArrayList<Integer> answer;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		
+		StringBuilder sb = new StringBuilder();
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 		K = Integer.parseInt(st.nextToken());
 		int X = Integer.parseInt(st.nextToken());
 		
 		nodeList = new ArrayList[N + 1];
-		num = new int[N + 1];
-		ans = new ArrayList<>();
+		visit = new boolean[N + 1];
+		count = new int[N + 1];
+		
 		for(int i = 1; i <= N; i++) {
 			nodeList[i] = new ArrayList<>();
 		}
-		for(int i = 1; i <= M; i++) {
+		
+		for(int i = 0; i < M; i++) {
 			st = new StringTokenizer(br.readLine());
 			int a = Integer.parseInt(st.nextToken());
 			int b = Integer.parseInt(st.nextToken());
-			
 			nodeList[a].add(b);
 		}
-		BFS(X);
+		answer = new ArrayList<>();
 		
-		
-		if(ans.isEmpty()) {
-			System.out.println(-1);
-			return;
-		}
-		Collections.sort(ans);
-		for(int i : ans) {
+		bfs(X);
+		Collections.sort(answer);
+		for(int i : answer) {
 			sb.append(i + "\n");
 		}
-
+		
+		if(answer.size() == 0) {
+			sb.append(-1);
+		}
 		System.out.println(sb);
+	
+		
 	}
 	
-	public static void BFS(int x) {
+	public static void bfs(int node) {
 		Queue<Integer> queue = new LinkedList<>();
-		boolean check = false;
-		queue.offer(x);
-		num[x] = 1;
+		
+		visit[node] = true;
+		queue.offer(node);
 		while(!queue.isEmpty()) {
-			x = queue.poll();
-			if(num[x] == K + 1) {
-				ans.add(x);
+			int next = queue.poll();
+			if(count[next] == K) {
+				answer.add(next);
 			}
-			for(int i = 0; i < nodeList[x].size(); i++) {
-				int now = nodeList[x].get(i);
-				if(num[now] == 0) {
-					num[now] += num[x] + 1;
-					queue.offer(now);
+			for(int i : nodeList[next]) {
+				if(!visit[i]) {
+					queue.offer(i);
+					count[i] = count[next] + 1;
+					visit[i] = true;
 				}
 			}
- 		}
+		}
 	}
-
 }
