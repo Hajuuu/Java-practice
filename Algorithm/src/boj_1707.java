@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class boj_1707 {
@@ -37,7 +39,7 @@ public class boj_1707 {
 			
 			for(int i = 1; i <= V; i++) {
 				if(color[i] == 0) {
-					DFS(i, 1);
+					BFS(i, 1);
 				}
 			}
 			
@@ -62,6 +64,28 @@ public class boj_1707 {
 			else {
 				if(color[i] == 0) {
 					DFS(i, -c);
+				}
+			}
+		}
+	}
+	
+	public static void BFS(int node, int c) {
+		Queue<Integer> queue = new LinkedList<>();
+		queue.offer(node);
+		color[node] = c;
+		
+		while(!queue.isEmpty()) {
+			int next = queue.poll();
+			c = color[next];
+			for(int i : nodeList[next]) {
+				if(color[i] == color[next]) {
+					check = false;
+					return;
+				} else {
+					if(color[i] == 0) {
+						queue.offer(i);
+						color[i] = -c;
+					}
 				}
 			}
 		}
