@@ -18,11 +18,11 @@ public class java_example1 {
 	}
 	
 	public static int[] gugu(int num) {
-		int[] gugudan = new int[9];
+		int[] result = new int[9];
 		for(int i = 0; i < 9; i++) {
-			gugudan[i] = num * (i + 1);
+			result[i] = num * (i + 1);
 		}
-		return gugudan;
+		return result;
 	}
 
 }
