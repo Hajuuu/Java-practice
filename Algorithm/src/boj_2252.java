@@ -8,19 +8,19 @@ import java.util.StringTokenizer;
 
 public class boj_2252 {
 
-	public static ArrayList<Integer>[] nodeList;
-	public static int[] count;
-	public static int[] check;
-	public static StringBuilder sb = new StringBuilder();
+	static ArrayList<Integer>[] nodeList;
+	static int[] inDegree;
+	static int N, M;
+	static StringBuilder sb = new StringBuilder();
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int N = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
+		
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
 		
 		nodeList = new ArrayList[N + 1];
-		count = new int[N + 1];
-		check = new int[N + 1];
+		inDegree = new int[N + 1];
 		for(int i = 1; i <= N; i++) {
 			nodeList[i] = new ArrayList<>();
 		}
@@ -30,33 +30,37 @@ public class boj_2252 {
 			int a = Integer.parseInt(st.nextToken());
 			int b = Integer.parseInt(st.nextToken());
 			nodeList[a].add(b);
-			count[b]++;
-			check[b]++;
+			inDegree[b]++;
 		}
 		
-		for(int i = 1; i <= N; i++) {
-			if(count[i] == 0) {
-				BFS(i);
-			}
-		}
+		topologySort();
 		
 		System.out.println(sb);
 	}
 	
-	static void BFS(int start) {
-		Queue<Integer> queue = new LinkedList<>();
-		queue.offer(start);
+	public static void topologySort() {
+		Queue<Integer> queue = new LinkedList<>();		
+		int[] result = new int[N + 1];
+		for(int i = 1; i <= N; i++) {
+			if(inDegree[i] == 0) {
+				queue.offer(i);
+			}
+		}
 		
-		while(!queue.isEmpty()) {
-			int now = queue.poll();
-			sb.append(now + " ");
-			for(int i : nodeList[now]) {
-				check[i]--;
-				if(check[i] == 0) {
-					queue.offer(i);
+		for(int i = 1; i <= N; i++) {
+			int x = queue.poll();
+			result[i] = x;
+			for(int j : nodeList[x]) {
+				if(--inDegree[j] == 0) {
+					queue.offer(j);
 				}
 			}
 		}
+		
+		for(int i = 1; i <= N; i++) {
+			sb.append(result[i] + " ");
+		}
 	}
+	
 
 }
