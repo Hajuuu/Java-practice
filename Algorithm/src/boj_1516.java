@@ -13,6 +13,7 @@ public class boj_1516 {
 	static int[] inDegree;
 	static int N;
 	static int[] result;
+	static StringBuilder sb = new StringBuilder();
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
@@ -37,32 +38,32 @@ public class boj_1516 {
 				if(x == -1) {
 					break;
 				}
-				nodeList[i].add(x);
-				inDegree[x]++;
+				nodeList[x].add(i);
+				inDegree[i]++;
 			}
 		}
 		
 		topologySort();
-		
-		int[] count = new int[N + 1];
-		for(int i = 1; i <= N; i++) {
-			int n = result[N - i + 1];
-			count[n] += time[n];
-			if(nodeList[n].size() > 0) {
-				int max = Integer.MIN_VALUE;
-				for(int j : nodeList[n]) {
-					max = Math.max(max, count[j]);
-				}
-				
-				count[n] += max;
-			}
-			
-		}
-		
-		StringBuilder sb = new StringBuilder();
-		for(int i = 1; i <= N; i++) {
-			sb.append(count[i] + "\n");
-		}
+//		
+//		int[] count = new int[N + 1];
+//		for(int i = 1; i <= N; i++) {
+//			int n = result[N - i + 1];
+//			count[n] += time[n];
+//			if(nodeList[n].size() > 0) {
+//				int max = Integer.MIN_VALUE;
+//				for(int j : nodeList[n]) {
+//					max = Math.max(max, count[j]);
+//				}
+//				
+//				count[n] += max;
+//			}
+//			
+//		}
+//		
+//		StringBuilder sb = new StringBuilder();
+//		for(int i = 1; i <= N; i++) {
+//			sb.append(count[i] + "\n");
+//		}
 		
 		System.out.println(sb);
 	}
@@ -78,12 +79,17 @@ public class boj_1516 {
 		
 		for(int i = 1; i <= N; i++) {
 			int x = queue.poll();
-			result[i] = x;
+			
 			for(int j : nodeList[x]) {
+				result[j] = Math.max(result[j], result[x] + time[x]);
 				if(--inDegree[j] == 0) {
 					queue.offer(j);
 				}
 			}
+		}
+		
+		for(int i = 1; i <= N; i++) {
+			sb.append((result[i] + time[i]) + "\n");
 		}
 	}
 	
