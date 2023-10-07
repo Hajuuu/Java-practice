@@ -22,7 +22,6 @@ public class boj_10819 {
 			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		dfs(0);
-
 		System.out.println(answer);
 	}
 	
