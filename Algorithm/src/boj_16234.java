@@ -1,9 +1,11 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class boj_16234 {
@@ -13,7 +15,7 @@ public class boj_16234 {
 	static int[] dx = {0, 1, 0, -1};
 	static int[] dy = {1, 0, -1, 0};
 	static boolean[][] visit;
-	static boolean check;
+	static Queue<int[]> point;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -35,29 +37,43 @@ public class boj_16234 {
 		int day = 0;
 		while(true) {
 			visit = new boolean[N][N];
-			check = false;
-			for(int i = 0; i < N; i++) {
-				for(int j = 0; j < N; j++) {
-					if(!visit[i][j]) {
-						bfs(i, j);
-					}
-				}
-			}
-			if(!check) {
+			if(!bfs()) {
 				break;
 			}
 			day++;
-			
 		}
 		
 		System.out.println(day);
 	}
 	
-	public static void bfs(int x, int y) {
+	public static boolean bfs() {
+		boolean check = false;
+		for(int i = 0; i < N; i++) {
+			for(int j = 0; j < N; j++) {
+				if(!visit[i][j]) {
+					point = new LinkedList<>();
+					int answer = check(i, j);
+					if(point.size() == 1) {
+						continue;
+					}
+					while(!point.isEmpty()) {
+						int[] now = point.poll();
+						arr[now[0]][now[1]] = answer;
+					}
+					check = true;
+				}
+			}
+		}
+		if(check) {
+			return true;
+		}
+		return false;
+	} 
+	
+	public static int check(int x, int y) {
 		Queue<int[]> queue = new LinkedList<>();
-		ArrayList<int[]> point = new ArrayList<>();
 		queue.offer(new int[] {x, y});
-		point.add(new int[] {x, y});
+		point.offer(new int[] {x, y});
 		visit[x][y] = true;
 		int sum = arr[x][y];
 		while(!queue.isEmpty()) {
@@ -70,7 +86,7 @@ public class boj_16234 {
 					if(nextX >= 0 && nextX < N && nextY >= 0 && nextY < N) {
 						if(!visit[nextX][nextY] && Math.abs(arr[now[0]][now[1]] - arr[nextX][nextY]) >= L && Math.abs(arr[now[0]][now[1]] - arr[nextX][nextY]) <= R) {
 							queue.offer(new int[] {nextX, nextY});
-							point.add(new int[] {nextX, nextY});
+							point.offer(new int[] {nextX, nextY});
 							visit[nextX][nextY] = true;
 							sum += arr[nextX][nextY];
 						}
@@ -79,15 +95,9 @@ public class boj_16234 {
 			}
 		}
 		
-		if(point.size() > 1) {
-			int people = sum / point.size();
-			for(int[] i : point) {
-				arr[i[0]][i[1]] = people;
-			}
-			check = true;
-		}
-	} 
-	
+		return sum / point.size();
+		
+	}
 	
 
 }
