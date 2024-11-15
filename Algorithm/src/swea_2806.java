@@ -2,18 +2,18 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class swea_2806 {
-
-	static int count;
-	static int[] queen;
+	
+	static int[] board;
 	static int N;
+	static int count;
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int t = Integer.parseInt(br.readLine());
 		StringBuilder sb = new StringBuilder();
-		for(int tc = 1; tc <= t; tc++) {
+		int T = Integer.parseInt(br.readLine());
+		for(int tc = 1; tc <= T; tc++) {
 			N = Integer.parseInt(br.readLine());
 			count = 0;
-			queen = new int[N];
+			board = new int[N];
 			dfs(0);
 			sb.append("#" + tc + " " + count + "\n");
 		}
@@ -27,16 +27,16 @@ public class swea_2806 {
 		}
 		
 		for(int i = 0; i < N; i++) {
-			queen[depth] = i;
+			board[depth] = i;
 			if(check(depth)) {
 				dfs(depth + 1);
 			}
-		} 
+		}
 	}
 	
-	public static boolean check(int N) {
-		for(int i = 0; i < N; i++) {
-			if(queen[i] == queen[N] || (N - i) == Math.abs(queen[N] - queen[i])) {
+	public static boolean check(int num) {
+		for(int i = 0; i < num; i++) {
+			if(board[i] == board[num] || ((board[num] - board[i] == num - i) || (board[i] - board[num] == num - i))) {
 				return false;
 			}
 		}
