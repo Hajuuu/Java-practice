@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 
+
 public class boj_10026 {
 
 	static char[][] arr1;
