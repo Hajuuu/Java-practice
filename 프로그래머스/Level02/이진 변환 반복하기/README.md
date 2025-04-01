@@ -6,4 +6,4 @@
 ## 풀이
 - for문으로 돌면서 sb에 1 추가
 - 2진법으로 변환 -> 반복
-- > replaceAll 사용 가능
+> replaceAll 사용 가능
