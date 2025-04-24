@@ -1,45 +1,30 @@
 class Solution {
-    static int[] dx = {1, 0, -1, 0};
-    static int[] dy = {0, 1, 0, -1};
-    static boolean[][] visited;
-    static int N, M;
-    static int[][] map;
     public int numIslands(char[][] grid) {
-        N = grid.length;
-        M = grid[0].length;
-        map = new int[N][M];
-        visited = new boolean[N][M];
         int answer = 0;
 
-        for(int i = 0; i < N; i++) {
-            for(int j = 0; j < M; j++) {
-                map[i][j]= grid[i][j] - '0';
-            }
-        }
-
-        for(int i = 0; i < N; i++) {
-            for(int j = 0; j < M; j++) {
-                if(visited[i][j] || map[i][j] == 0) {
+        for(int i = 0; i < grid.length; i++) {
+            for(int j = 0; j < grid[0].length; j++) {
+                if(grid[i][j] == '0') {
                     continue;
                 }
-                dfs(i, j);
                 answer++;
+                dfs(grid, i, j);
             }
         }
         return answer;
     }
 
-    public void dfs(int x, int y) {
-        visited[x][y] = true;
-        for(int i = 0; i < 4; i++) {
-            int nowX = x + dx[i];
-            int nowY = y + dy[i];
-            if(nowX >= 0 && nowX < N && nowY >= 0 && nowY < M) {
-                if(visited[nowX][nowY] || map[nowX][nowY] == 0) {
-                    continue;
-                }
-                dfs(nowX, nowY);
-            }
+    public void dfs(char[][] grid, int x, int y) {
+        if(x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || grid[x][y] == '0') {
+            return;
         }
+
+        grid[x][y] = '0';
+
+        dfs(grid, x + 1, y);
+        dfs(grid, x - 1, y);
+        dfs(grid, x, y + 1);
+        dfs(grid, x, y - 1);
+        
     }
 }
