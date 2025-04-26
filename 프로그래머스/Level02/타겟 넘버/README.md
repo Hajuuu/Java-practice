@@ -4,8 +4,8 @@
 
 ## 풀이
 - numbers의 개수가 20개이므로 dfs를 이용해서 구하기
-- 각 numbers를 뺴거나 더해서 dfs 탐색
-- depth가 numbers.length와 같을 때 target과 같다면 answer 증가
+- 각 numbers를 빼거나 더해서 dfs 탐색
+- idx가 numbers.length와 같을 때 target과 같다면 answer 증가
 
 ## 참고
 - dfs에서 굳이 for문 사용할 필요 없음
