@@ -1,40 +1,38 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class swea_1206 {
+public class Main {
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
-		for(int t = 1; t <= 10; t++) {
-			int N = Integer.parseInt(br.readLine());
-			
-			int[] arr = new int[N];
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			for(int i = 0; i < N; i++) {
-				arr[i] = Integer.parseInt(st.nextToken());
-			}
-			int count = 0;
-			for(int i = 2; i < N - 2; i++) {
-				int min = Integer.MAX_VALUE;
-				if(arr[i - 2] < arr[i] && arr[i - 1] < arr[i] && arr[i + 1] < arr[i] && arr[i + 2] < arr[i]) {
-					min = Math.min(min, (arr[i] - arr[i - 2]));
-					min = Math.min(min, (arr[i] - arr[i - 1]));
-					min = Math.min(min, (arr[i] - arr[i + 1]));
-					min = Math.min(min, (arr[i] - arr[i + 2]));
-					count += min;
-				}
-				
-			}
-			
-			sb.append("#" + t + " " + count + "\n");
-		}
-		
-		System.out.println(sb);
-		
-
-	}
+    /**
+     * 왼쪽과 오른쪽으로 창문을 열었을 때, 양쪽 모두 거리 2 이상의 공간이 확보될 때 조망권 확보
+     */
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
+        for (int tc = 1; tc <= 10; tc++) {
+            int N = Integer.parseInt(br.readLine());
+            st = new StringTokenizer(br.readLine());
+            int[] buildings = new int[N];
+            for (int i = 0; i < N; i++) {
+                buildings[i] = Integer.parseInt(st.nextToken());
+            }
+            int sum = 0;
+            for (int i = 2; i < N - 2; i++) {
+                int max = Integer.MIN_VALUE;
+                if (buildings[i] < buildings[i + 1] || buildings[i] < buildings[i - 1]) {
+                    continue;
+                }
+                if (buildings[i] < buildings[i + 2] || buildings[i] < buildings[i - 2]) {
+                    continue;
+                }
+                max = Math.max(max, Math.max(buildings[i - 1], Math.max(buildings[i - 2], Math.max(buildings[i + 1], buildings[i + 2]))));
+                sum += buildings[i] - max;
+            }
+            sb.append("#" + tc + " " + sum + "\n");
+        }
+        System.out.println(sb);
+    }
 
 }
