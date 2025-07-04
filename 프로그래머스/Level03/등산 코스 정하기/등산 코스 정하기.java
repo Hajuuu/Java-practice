@@ -47,18 +47,18 @@ class Solution {
             
         }
         
-            Arrays.sort(summits);
-            int minSummit = 0;
-            int minIntensity = Integer.MAX_VALUE;
+        Arrays.sort(summits);
+        int minSummit = 0;
+        int minIntensity = Integer.MAX_VALUE;
             
-            for(int sum : summits) {
-                if(intensity[sum] < minIntensity) {
-                    minIntensity = intensity[sum];
-                    minSummit = sum;
-                }
+        for(int sum : summits) {
+            if(intensity[sum] < minIntensity) {
+                minIntensity = intensity[sum];
+                minSummit = sum;
             }
+        }
             
-            return new int[] {minSummit, minIntensity};
+        return new int[] {minSummit, minIntensity};
     }
 
 }
