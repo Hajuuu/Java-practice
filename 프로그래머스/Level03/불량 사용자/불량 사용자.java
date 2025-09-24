@@ -1,47 +1,45 @@
 import java.util.*;
 class Solution {
-    static boolean[] visited;
-    static Set<Set<String>> answer;
-    static Set<String> now;
+    static String[] userIds;
+    static String[] bannedIds;
+    static HashSet<HashSet<String>> result = new HashSet<>();
     public int solution(String[] user_id, String[] banned_id) {
-        visited = new boolean[user_id.length];
-        answer = new HashSet<>();
-        now = new HashSet<>();
-        dfs(user_id, banned_id, 0);
-        return answer.size();
+        userIds = user_id;
+        bannedIds = banned_id;
+        
+        dfs(0, new HashSet<>());
+        return result.size();
     }
     
-    public void dfs(String[] user_id, String[] banned_id, int depth) {
-        if(depth == banned_id.length) {
-            answer.add(new HashSet<>(now));
+    public void dfs(int bannedIdx, HashSet<String> set) {
+        if(bannedIdx == bannedIds.length) {
+            result.add(set);
             return;
         }
         
-        for(int i = 0; i < user_id.length; i++) {
-            if(!visited[i]) {
-                
-                if(checkId(user_id[i], banned_id[depth])) {
-                    visited[i] = true;
-                    now.add(user_id[i]);
-                    dfs(user_id, banned_id, depth + 1);
-                    now.remove(user_id[i]);
-                    visited[i] = false;
-                }
-               
+        for(int i = 0; i < userIds.length; i++) {
+            if(set.contains(userIds[i])) {
+                continue;
+            }
+            if(check(userIds[i], bannedIds[bannedIdx])) {
+                set.add(userIds[i]);
+                dfs(bannedIdx + 1, new HashSet<>(set)); // result에 add가 될때 해시코드를 따라감
+                set.remove(userIds[i]);
             }
         }
     }
     
-    public boolean checkId(String id, String banned) {
-        if(id.length() != banned.length()) {
+    public boolean check(String userId, String bannedId) {
+        if(userId.length() != bannedId.length()) {
             return false;
         }
         
-        for(int i = 0; i < id.length(); i++) {
-            if(banned.charAt(i) != '*' && id.charAt(i) != banned.charAt(i)) {
+        for(int i = 0; i < userId.length(); i++) {
+            if(bannedId.charAt(i) != '*' && bannedId.charAt(i) != userId.charAt(i)) {
                 return false;
             }
         }
+        
         return true;
     }
 }
