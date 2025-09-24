@@ -1,30 +1,44 @@
 import java.util.*;
 class Solution {
-    static String[] userIds;
-    static String[] bannedIds;
-    static HashSet<HashSet<String>> result = new HashSet<>();
+    String[] userIds;
+    String[] bannedIds;
+    HashSet<HashSet<String>> result = new HashSet<>();
+    class Node {
+        int bannedIdx;
+        HashSet<String> set = new HashSet<>();
+        
+        Node(int bannedIdx, HashSet<String> set) {
+            this.bannedIdx = bannedIdx;
+            this.set = set;
+        }
+    }
+    Queue<Node> queue = new ArrayDeque<>();
     public int solution(String[] user_id, String[] banned_id) {
         userIds = user_id;
         bannedIds = banned_id;
         
-        dfs(0, new HashSet<>());
+        bfs();
         return result.size();
     }
-    
-    public void dfs(int bannedIdx, HashSet<String> set) {
-        if(bannedIdx == bannedIds.length) {
-            result.add(set);
-            return;
-        }
-        
-        for(int i = 0; i < userIds.length; i++) {
-            if(set.contains(userIds[i])) {
+    public void bfs() {
+        queue.offer(new Node(0, new HashSet<>()));
+        while(!queue.isEmpty()) {
+            Node node = queue.poll();
+            if(node.bannedIdx == bannedIds.length) {
+                result.add(node.set);
                 continue;
             }
-            if(check(userIds[i], bannedIds[bannedIdx])) {
-                set.add(userIds[i]);
-                dfs(bannedIdx + 1, new HashSet<>(set)); // result에 add가 될때 해시코드를 따라감
-                set.remove(userIds[i]);
+            
+            for(int i = 0; i < userIds.length; i++) {
+                if(node.set.contains(userIds[i])) {
+                    continue;
+                }
+                
+                if(check(userIds[i], bannedIds[node.bannedIdx])) {
+                    node.set.add(userIds[i]);
+                    queue.offer(new Node(node.bannedIdx + 1, new HashSet<>(node.set)));
+                    node.set.remove(userIds[i]);
+                }
             }
         }
     }
