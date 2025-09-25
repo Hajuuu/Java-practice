@@ -1,38 +1,49 @@
 import java.util.*;
 class Solution {
-    static int[] islands;
     public int solution(int n, int[][] costs) {
         int answer = 0;
-        Arrays.sort(costs, (o1, o2) -> {
-            return o1[2] - o2[2];
-        });
-        islands = new int[n];
-        for(int i = 0; i < n; i++) {
-            islands[i] = i;
-        }
+    	
+    	boolean[] visit = new boolean[n]; 
+    	List<List<int[]>> adjList = new ArrayList<>();
+    	PriorityQueue<int[]> pqueue = new PriorityQueue<>( (x, y) -> x[1] - y[1]);
+    	
+    	for (int i = 0; i < n; i++) {
+			adjList.add(new ArrayList<>());
+		}
+    	
+    	for (int[] e : costs) {
+			int a = e[0]; 
+			int b = e[1]; 
+			int c = e[2]; 
+			
+			adjList.get(a).add(new int[] {b, c});
+			adjList.get(b).add(new int[] {a, c});
+		}
+    	
+    	visit[0] = true;
+    	for (int[] edge : adjList.get(0)) {
+			pqueue.offer(new int[] { edge[0], edge[1] });
+		}
         
-        for(int i = 0; i < costs.length; i++) {
-            if(find(costs[i][0]) != find(costs[i][1])) {
-                union(costs[i][0], costs[i][1]);
-                answer += costs[i][2];
-            }
-            
-        }
+    	int count = 0;
+    	while( ! pqueue.isEmpty() ) {
+    		
+    		int[] cur = pqueue.poll(); 
+    		int v = cur[0]; 
+    		int c = cur[1]; 
+    		
+    		if(visit[v]) continue;
+    		visit[v] = true;
+    		answer += c;
+    		count++;
+    		
+    		if( count == n ) break;
+    		
+    		for (int[] e : adjList.get(v)) {
+				pqueue.offer(new int[] {e[0], e[1]});
+			}
+    	}
+    	
         return answer;
-    }
-    
-    public int find(int x) {
-        if(islands[x] == x) {
-            return x;
-        }
-        return islands[x] = find(islands[x]);
-    }
-    
-    public void union(int a, int b) {
-        a = find(a);
-        b = find(b);
-        if(a != b) {
-            islands[b] = a;
-        }
     }
 }
