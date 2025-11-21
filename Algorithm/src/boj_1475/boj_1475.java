@@ -6,23 +6,28 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String num = br.readLine();
-		int[] arr = new int[10];
-		for(int i = 0; i < num.length(); i++) {
-			arr[num.charAt(i) - '0']++;
-		}
-		
-		int max = Integer.MIN_VALUE;
-		for(int i = 0; i < 10; i++) {
-			if(i == 6 || i == 9) {
+		String str = br.readLine();
+		int[] number = new int[10];
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) - '0' == 6) {
+				number[9]++;
 				continue;
 			}
-			max = Math.max(max, arr[i]);
+			number[str.charAt(i) - '0']++;
 		}
-		
-		int number = (arr[6] + arr[9]) / 2 + (arr[6] + arr[9]) % 2;
-		
-		System.out.println(Math.max(max, number));
+		int max = 0;
+		int count = 0;
+		for (int i = 0; i <= 9; i++) {
+			if (count < number[i]) {
+				max = i;
+				count = number[i];
+			}
+		}
+		if (max == 9) {
+			System.out.println((count / 2) + (count % 2));
+			return;
+		}
+		System.out.println(count);
 	}
 
 }
