@@ -25,3 +25,10 @@ class Solution {
 }
 ```
 - 해시맵으로 풀이
+
+
+### 1226 복습
+- 단 한명의 선수를 제외하고 모든 선수들이 완주
+- participant를 담은 해시맵 구현
+- participant에서 completion 돌면서 해당하는 선수 value값 -1
+- 남아있는 값이 0보다 크면 리턴
