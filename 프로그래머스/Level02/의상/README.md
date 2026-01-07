@@ -8,4 +8,30 @@
 
 ## 풀이
 - HashMap 이용해서 의상 종류별 개수 구하기
-- 조합 구하기
+- 각 map의 value값 크기를 곱한거에 1 빼기 (한개는 입어야 하므로)
+- Map의 key는 String, value는 Set으로 설정
+
+
+```java
+import java.util.*;
+class Solution {
+    public int solution(String[][] clothes) {
+        Map<String, Set<String>> cloth = new HashMap<>();
+        for(String[] row : clothes) {
+            Set<String> c = cloth.getOrDefault(row[1], new HashSet<>());
+            c.add(row[0]);
+            cloth.put(row[1], c);   
+        }
+        
+        int answer = 1;
+        for(String key : cloth.keySet()) {
+            Set<String> c = cloth.get(key);
+            answer *= c.size() + 1;
+        }
+        return answer - 1;
+    }
+}
+```
+
+## 다른 풀이
+옷의 이름을 알아야 풀 수 있는 문제가 아니고 같은 이름을 가진 의상이 없기 때문에 value를 Integer로 해도됨
