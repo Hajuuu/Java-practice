@@ -1,35 +1,33 @@
 import java.util.*;
 class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
-        int[] day = new int[progresses.length];
+        Queue<Integer> queue = new ArrayDeque<>();
         for(int i = 0; i < progresses.length; i++) {
-            int left = 100 - progresses[i];
-            if(left % speeds[i] != 0) {
-                day[i] = left / speeds[i] + 1;
-                continue;
-            
-                }
-            day[i] = left / speeds[i];
-
+            int days = (100 - progresses[i]) / speeds[i];
+            if((100 - progresses[i]) % speeds[i] > 0) {
+                days++;
+            }
+            queue.offer(days);
         }
-        ArrayList<Integer> list = new ArrayList<>();
-        int max = day[0];
-        int count = 1;
-        for(int i = 1; i < day.length; i++) {        
-            if(day[i] > max) {
-                max = day[i];
-                list.add(count);
-                count = 1;
-                continue;
+    
+        int prev = queue.peek();
+        int count = 0;
+        List<Integer> deployments = new ArrayList<>();
+        while(!queue.isEmpty()) {
+            int progress = queue.peek();
+            if(prev < progress) {
+                deployments.add(count);
+                count = 0;
+                prev = progress;
             }
             count++;
-            
+            queue.poll();
         }
-
-        list.add(count);
-        int[] answer = new int[list.size()];
-        for(int i = 0; i < list.size(); i++) {
-            answer[i] = list.get(i);
+        
+        deployments.add(count);
+        int[] answer = new int[deployments.size()];
+        for(int i = 0; i < deployments.size(); i++) {
+            answer[i] = deployments.get(i);
         }
         return answer;
     }
