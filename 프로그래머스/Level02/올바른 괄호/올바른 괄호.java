@@ -12,7 +12,8 @@ class Solution {
             }
             stack.pop();
         }
-        if(stack.size() > 0) {
+        
+        if(!stack.isEmpty()) {
             return false;
         }
         return true;
