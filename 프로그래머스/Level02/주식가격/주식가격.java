@@ -4,17 +4,18 @@ class Solution {
         Stack<Integer> stack = new Stack<>();
         int[] answer = new int[prices.length];
         for(int i = 0; i < prices.length; i++) {
-            while(!stack.isEmpty() && prices[stack.peek()] > prices[i]) {
-                answer[stack.peek()] = i - stack.peek();
-                stack.pop();
+            while(!stack.isEmpty()) {
+                if(prices[stack.peek()] > prices[i]) {
+                    answer[stack.peek()] = i - stack.pop();
+                    continue;
+                }
+                break;
             }
             stack.push(i);
         }
         
-        
         while(!stack.isEmpty()) {
-            answer[stack.peek()] = prices.length - stack.peek() - 1;
-            stack.pop();
+            answer[stack.peek()] = prices.length - stack.pop() - 1;
         }
         return answer;
     }
