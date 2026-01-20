@@ -1,29 +1,49 @@
 import java.util.*;
 class Solution {
     public int solution(int[][] jobs) {
-        Arrays.sort(jobs, (o1, o2) -> o1[0] - o2[0]);
-        PriorityQueue<int[]> queue = new PriorityQueue<>((o1, o2) -> o1[1] - o2[1]);
+        PriorityQueue<int[]> queue = new PriorityQueue<>((o1, o2) -> {
+            if(o1[2] == o2[2]) {
+                if(o1[1] == o2[1]) {
+                    return o1[0] - o2[0];
+                }
+                return o1[1] - o2[1];
+            }
+            return o1[2] - o2[2];
+        });
         
-        int currentTime = 0;
+        Arrays.sort(jobs, (o1, o2) -> {
+            return o1[0] - o2[0];
+        });
+        
+        
+        int now = 0;
         int index = 0;
         int totalTime = 0;
-        int count = 0;
-        while(count < jobs.length) {
-            while(index < jobs.length && jobs[index][0] <= currentTime) {
-                queue.offer(jobs[index]);
-                index++;
+        while(true) {
+            if(index == jobs.length && queue.isEmpty()) {
+                break;
             }
             
+            
+            for(int i = index; i < jobs.length; i++) {
+                if(jobs[i][0] <= now) {
+                    queue.offer(new int[] {i, jobs[i][0], jobs[i][1]});
+                    index++;
+                    continue;
+                } 
+                break;
+            }
             if(queue.isEmpty()) {
-                currentTime = jobs[index][0];
+                now = jobs[index][0];
                 continue;
             }
-            int[] job = queue.poll();
-            currentTime += job[1];
-            totalTime += currentTime - job[0];
-            count++;
+            int[] job = queue.poll();       
+            totalTime += now - job[1] + job[2];
+            now += job[2];
+            
         }
-         
+        
         return totalTime / jobs.length;
+        
     }
 }
