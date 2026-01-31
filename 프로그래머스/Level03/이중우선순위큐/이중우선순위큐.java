@@ -1,35 +1,38 @@
 import java.util.*;
 class Solution {
     public int[] solution(String[] operations) {
-        PriorityQueue<Integer> max = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> max = new PriorityQueue<>((o1, o2) -> o2 - o1);
         PriorityQueue<Integer> min = new PriorityQueue<>();
-        int[] answer = new int[2];
-        StringTokenizer st;
-        for(int i = 0; i < operations.length; i++) {
-            st = new StringTokenizer(operations[i]);
-            String operation = st.nextToken();
-            if(operation.equals("I")) {
-                int num = Integer.parseInt(st.nextToken());
-                max.offer(num);
-                min.offer(num);
+        
+        for(String op : operations) {
+            String[] input = op.split(" ");
+            if(input[0].equals("I")) {
+                max.offer(Integer.parseInt(input[1]));
+                min.offer(Integer.parseInt(input[1]));
                 continue;
             }
-            if(operation.equals("D")) {
-                if(Integer.parseInt(st.nextToken()) == 1 && !max.isEmpty()) {
+            
+            if(Integer.parseInt(input[1]) == 1) {
+                if(!max.isEmpty()) {
                     min.remove(max.poll());
-                    continue;
-                } 
-                if(!min.isEmpty()) {
-                    max.remove(min.poll());
-                }           
+                }
+                continue;
+            }
+            
+            if(!min.isEmpty()) {
+                max.remove(min.poll());
             }
         }
-        if(max.isEmpty() && min.isEmpty()) {
-            return answer;
+        
+        int[] answer = new int[2];
+        if(!max.isEmpty()) {
+            answer[0] = max.poll();
         }
-        answer[0] = max.poll();
-        answer[1] = min.poll();
+        
+        if(!min.isEmpty()) {
+            answer[1] = min.poll();
+        }
+        
         return answer;
     }
 }
-
