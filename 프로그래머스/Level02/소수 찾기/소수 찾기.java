@@ -1,30 +1,41 @@
 import java.util.*;
 class Solution {
-    static Set<Integer> primes;
-    static boolean[] visited;
+    static boolean[] visit;
+    static Set<Integer> nums;
     public int solution(String numbers) {
-        primes = new HashSet<>();
-        visited = new boolean[numbers.length()];
-        findNumbers("0", numbers);
-        return primes.size();
-    }
+        int answer = 0;
+        visit = new boolean[numbers.length()];
+        nums = new HashSet<>();
+        for(int i = 1; i <= numbers.length(); i++) {
+            find(numbers, "", i);
+        }
+        
+        for(int num : nums) {
+            if(isPrime(num)) {
+                answer++;
+            }
+        }
+        
+        return answer;
+    } 
     
-    public void findNumbers(String num, String numbers) {
-        if(isPrime(Integer.parseInt(num))) {
-            primes.add(Integer.parseInt(num));
+    public void find(String numbers, String now, int depth) {
+        if(depth == now.length()) {
+            nums.add(Integer.parseInt(now));
+            return;
         }
         
         for(int i = 0; i < numbers.length(); i++) {
-            if(!visited[i]) {
-                visited[i] = true;
-                findNumbers(num + numbers.charAt(i), numbers);
-                visited[i] = false;
+            if(visit[i]) {
+                continue;
             }
+            visit[i] = true;
+            find(numbers, now + numbers.charAt(i), depth);
+            visit[i] = false;
         }
     }
-    
-    public static boolean isPrime(int num) {
-        if(num == 0 || num == 1) {
+    public boolean isPrime(int num) {
+        if(num <= 1) {
             return false;
         }
         for(int i = 2; i <= Math.sqrt(num); i++) {
