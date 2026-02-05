@@ -1,25 +1,22 @@
 class Solution {
-    static int length = 0;
-    static int answer = 0;
-    static int[][] dun;
-    static boolean[] visited;
+    static int answer;
+    static boolean[] visit;
     public int solution(int k, int[][] dungeons) {
-        dun = dungeons;
-        length = dungeons.length;
-        visited = new boolean[length];
-        find(k, 0);
+        answer = Integer.MIN_VALUE;
+        visit = new boolean[dungeons.length];
+        count(dungeons, 0, k);
         return answer;
     }
     
-    public static void find(int k, int count) {
+    public void count(int[][] dungeons, int count, int k) {
         answer = Math.max(answer, count);
-        for(int i = 0; i < length; i++) {
-            if(!visited[i] && k >= dun[i][0]) {
-                visited[i] = true;
-                find(k - dun[i][1], count + 1);
-                visited[i] = false;
+        for(int i = 0; i < dungeons.length; i++) {
+            if(visit[i] || dungeons[i][0] > k) {
+                continue;
             }
+            visit[i] = true;
+            count(dungeons, count + 1, k - dungeons[i][1]);
+            visit[i] = false;
         }
-        
     }
 }
