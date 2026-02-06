@@ -1,52 +1,56 @@
 import java.util.*;
 class Solution {
-    static List<List<Integer>> nodeList;
-    static boolean[] visited;
     public int solution(int n, int[][] wires) {
+        List<List<Integer>> nodeList = new ArrayList<>();
         int answer = Integer.MAX_VALUE;
-        nodeList = new ArrayList<>();
+        
         for(int i = 0; i <= n; i++) {
             nodeList.add(new ArrayList<>());
         }
         
-        for(int i = 0; i < wires.length; i++) {
-            int u = wires[i][0];
-            int v = wires[i][1];
+        for(int[] wire : wires) {
+            int u = wire[0];
+            int v = wire[1];
+            
             nodeList.get(u).add(v);
             nodeList.get(v).add(u);
         }
         
-        for(int i = 0; i < wires.length; i++) {
-            int u = wires[i][0];
-            int v = wires[i][1];
+        for(int[] wire : wires) {
+            int u = wire[0];
+            int v = wire[1];
+            
             nodeList.get(u).remove(Integer.valueOf(v));
             nodeList.get(v).remove(Integer.valueOf(u));
-            visited = new boolean[n + 1];
-            int c = bfs(n, 1);
+            int count = bfs(nodeList, 1, n);
+            answer = Math.min(answer, Math.abs(count - (n - count)));
             nodeList.get(u).add(v);
             nodeList.get(v).add(u);
-            answer = Math.min(answer, Math.abs(c - (n - c)));
+            
         }
         
         return answer;
+        
+        
     }
     
-    public static int bfs(int n, int start) {      
-        int size = 0;
-        ArrayDeque<Integer> queue = new ArrayDeque<>();
-        queue.offer(start);
-        visited[start] = true;
-        while(!queue.isEmpty()) {
-            int cur = queue.poll();
-            size++;
-            for(int i : nodeList.get(cur)) {
-                if(visited[i]) {
-                    continue;
-                }
-                visited[i] = true;
-                queue.offer(i);
+    
+        public int bfs(List<List<Integer>> nodeList, int start, int n) {
+            int count = 0;
+            Queue<Integer> queue = new ArrayDeque<>();
+            boolean[] visit = new boolean[n + 1];
+            queue.offer(start);
+            while(!queue.isEmpty()) {
+                int now = queue.poll();
+                for(int node : nodeList.get(now)) {
+                    if(!visit[node]) {
+                        visit[node] = true;
+                        count++;
+                        queue.offer(node);
+                    }
+                }   
             }
+            return count;
+            
         }
-        return size;
-    }
 }
