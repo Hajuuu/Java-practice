@@ -19,3 +19,16 @@
 - losts와 reserves를 정렬해야됨
 - lost 배열을 돌면서 losts와 reserves에 중복인 요소를 지워야 하는데 losts를 돌면서 지우려고 해서 `ConcurrentModificationException` 발생
 - remove시 인덱스값으로 찾는데 값으로 찾으려고 해서 에러 발생, `new Integer()`로 해결
+
+
+# 복습
+## 문제
+- 학생들의 번호는 체격 순이기 떄문에 바로 앞번호나 뒷번호의 학생에게만 체육복을 빌려줄 수 있음
+- 체육수업을 들을 수 있는 학생의 최댓값을 리턴
+
+## 풀이
+- 여벌 체육복을 가진 학생중에 도난 당한 학생 제외
+- lost - 1이 reserve에 있는지 체크 -> answer 증가시키고 reserve 리스트에서 삭제
+- lost + 1이 reserve에 있는지 체크 -> answer 증가시키고 reserve 리스트에서 삭제
+- answer는 n - lost 리스트 사이즈로 시작 (안빌려도 되는 사람 + 빌릴 수 있는 사람 하나씩 증가시키기)
+- lost - 1, lost + 1 이 순서대로 탐색하기 때문에 lost 리스트를 무조건 오름차순 정렬해야됨
