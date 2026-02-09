@@ -1,18 +1,20 @@
 import java.util.*;
 class Solution {
     public int solution(int[] people, int limit) {
+        int start = 0;
+        int end = people.length - 1;
         int answer = 0;
-        int left = 0;
-        int right = people.length - 1;
         Arrays.sort(people);
-        while(left <= right) {
-            int sum = people[left] + people[right];
+        while(start <= end) {
+            int sum = people[start] + people[end];
             if(sum <= limit) {
-                left++;
+                start++;
+                sum += people[start];
             }
-            right--;
             answer++;
+            end--;
         }
+        
         return answer;
     }
 }
