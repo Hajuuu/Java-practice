@@ -1,49 +1,49 @@
 import java.util.*;
 class Solution {
+    static int[] parent;
     public int solution(int n, int[][] costs) {
+        Arrays.sort(costs, (o1, o2) -> o1[2] - o2[2]);
+        parent = new int[n + 1];
         int answer = 0;
-    	
-    	boolean[] visit = new boolean[n]; 
-    	List<List<int[]>> adjList = new ArrayList<>();
-    	PriorityQueue<int[]> pqueue = new PriorityQueue<>( (x, y) -> x[1] - y[1]);
-    	
-    	for (int i = 0; i < n; i++) {
-			adjList.add(new ArrayList<>());
-		}
-    	
-    	for (int[] e : costs) {
-			int a = e[0]; 
-			int b = e[1]; 
-			int c = e[2]; 
-			
-			adjList.get(a).add(new int[] {b, c});
-			adjList.get(b).add(new int[] {a, c});
-		}
-    	
-    	visit[0] = true;
-    	for (int[] edge : adjList.get(0)) {
-			pqueue.offer(new int[] { edge[0], edge[1] });
-		}
         
-    	int count = 0;
-    	while( ! pqueue.isEmpty() ) {
-    		
-    		int[] cur = pqueue.poll(); 
-    		int v = cur[0]; 
-    		int c = cur[1]; 
-    		
-    		if(visit[v]) continue;
-    		visit[v] = true;
-    		answer += c;
-    		count++;
-    		
-    		if( count == n ) break;
-    		
-    		for (int[] e : adjList.get(v)) {
-				pqueue.offer(new int[] {e[0], e[1]});
-			}
-    	}
-    	
+        for(int i = 1; i <= n; i++) {
+            parent[i] = i;
+        }
+        
+        for(int[] cost : costs) {
+            if(find(cost[0]) == find(cost[1])) {
+                continue;
+            }
+            
+            union(cost[0], cost[1]);
+            answer += cost[2];
+        }
+        
         return answer;
+    }
+    
+    
+    public boolean union(int x, int y) {
+        x = find(x);
+        y = find(y);
+        
+        if(x == y) {
+            return false;
+        }
+        
+        if(x <= y) {
+            parent[y] = x;
+        } else {
+            parent[x] = y;
+        }
+        
+        return true;
+    }
+    
+    public int find(int x) {
+        if(parent[x] == x) {
+            return x;
+        }
+        return find(parent[x]);
     }
 }
