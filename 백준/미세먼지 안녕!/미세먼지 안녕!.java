@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -20,129 +18,102 @@ public class Main {
         T = Integer.parseInt(st.nextToken());
 
         arr = new int[R][C];
-        int purifier = 0;
+        int bottom = 0;
         for (int i = 0; i < R; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < C; j++) {
                 arr[i][j] = Integer.parseInt(st.nextToken());
                 if (arr[i][j] == -1) {
-                    purifier = i;
+                    bottom = i;
                 }
             }
         }
 
         for (int i = 0; i < T; i++) {
             spreadDust();
-            purifierOperation(purifier);
+            purifierOperation(bottom);
         }
 
         int answer = 0;
-        for (int[] num : arr) {
-            for (int n : num) {
-                if (n < 0) {
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                if (arr[i][j] == -1) {
                     continue;
                 }
-                answer += n;
+                answer += arr[i][j];
             }
         }
-
         System.out.println(answer);
     }
 
     public static void spreadDust() {
-        Queue<int[]> queue = new ArrayDeque<>();
         int[][] temp = new int[R][C];
-        for (int i = 0; i < R; i++) {
-            for (int j = 0; j < C; j++) {
-                temp[i][j] = arr[i][j];
-            }
-        }
-        for (int i = 0; i < R; i++) {
-            for (int j = 0; j < C; j++) {
-                if (arr[i][j] > 0) {
-                    queue.offer(new int[]{i, j});
-                }
-            }
-        }
 
-        while (!queue.isEmpty()) {
-            int[] now = queue.poll();
-            int count = 0;
-            for (int i = 0; i < 4; i++) {
-                int nextX = now[0] + dirX[i];
-                int nextY = now[1] + dirY[i];
-                if (nextX >= 0 && nextY >= 0 && nextX < R && nextY < C && arr[nextX][nextY] >= 0) {
-                    temp[nextX][nextY] += arr[now[0]][now[1]] / 5;
-                    count++;
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                if (arr[i][j] == -1) {
+                    temp[i][j] = -1;
+                    continue;
                 }
+
+                if (arr[i][j] == 0) {
+                    continue;
+                }
+
+                int count = 0;
+                for (int d = 0; d < 4; d++) {
+                    int nextX = i + dirX[d];
+                    int nextY = j + dirY[d];
+                    if (nextX >= 0 && nextX < R && nextY >= 0 && nextY < C && arr[nextX][nextY] >= 0) {
+                        temp[nextX][nextY] += arr[i][j] / 5;
+                        count++;
+                    }
+                }
+
+                temp[i][j] += arr[i][j] - (arr[i][j] / 5) * count;
             }
-            int size = arr[now[0]][now[1]];
-            temp[now[0]][now[1]] -= (size / 5) * count;
         }
 
         arr = temp;
     }
 
 
-    public static void purifierOperation(int x) {
-        int nowX1 = x - 1;
-        int nowX2 = x;
-        int nowY1 = 0;
-        int nowY2 = 0;
-        Queue<Integer> dust = new ArrayDeque<>();
-        for (int i = 0; i < 4; i++) {
-            while (true) {
-                boolean check = false;
-                if (nowX1 + dirX[i] * -1 < 0 || nowX1 + dirX[i] * -1 >= R || nowY1 + dirY[i] < 0
-                        || nowY1 + dirY[i] >= C || (nowX1 + dirX[i] * -1 == x - 1 && nowY1 + dirY[i] == 0)) {
-                    break;
-                }
-
-                nowX1 += dirX[i] * -1;
-                nowY1 += dirY[i];
-                if (arr[nowX1][nowY1] > 0) {
-                    dust.offer(arr[nowX1][nowY1]);
-                    check = true;
-                }
-                if (dust.size() > 1) {
-                    arr[nowX1][nowY1] = dust.poll();
-                } else if (dust.size() == 1 && !check) {
-                    arr[nowX1][nowY1] = dust.poll();
-                } else {
-                    arr[nowX1][nowY1] = 0;
-                }
-
-
-            }
+    public static void purifierOperation(int bottom) {
+        int top = bottom - 1;
+        for (int i = top - 1; i > 0; i--) {
+            arr[i][0] = arr[i - 1][0];
         }
 
-        dust = new ArrayDeque<>();
-
-        for (int i = 0; i < 4; i++) {
-            while (true) {
-                boolean check = false;
-                if (nowX2 + dirX[i] < 0 || nowX2 + dirX[i] >= R || nowY2 + dirY[i] < 0
-                        || nowY2 + dirY[i] >= C || (nowX2 + dirX[i] == x && nowY2 + dirY[i] == 0)) {
-                    break;
-                }
-
-                nowX2 += dirX[i];
-                nowY2 += dirY[i];
-                if (arr[nowX2][nowY2] > 0) {
-                    dust.offer(arr[nowX2][nowY2]);
-                    check = true;
-                }
-                if (dust.size() > 1) {
-                    arr[nowX2][nowY2] = dust.poll();
-                } else if (dust.size() == 1 && !check) {
-                    arr[nowX2][nowY2] = dust.poll();
-                } else {
-                    arr[nowX2][nowY2] = 0;
-                }
-
-
-            }
+        for (int i = 0; i < C - 1; i++) {
+            arr[0][i] = arr[0][i + 1];
         }
+
+        for (int i = 0; i < top; i++) {
+            arr[i][C - 1] = arr[i + 1][C - 1];
+        }
+
+        for (int i = C - 1; i > 1; i--) {
+            arr[top][i] = arr[top][i - 1];
+        }
+        arr[top][1] = 0;
+
+        for (int i = bottom + 1; i < R - 1; i++) {
+            arr[i][0] = arr[i + 1][0];
+        }
+
+        for (int i = 0; i < C - 1; i++) {
+            arr[R - 1][i] = arr[R - 1][i + 1];
+        }
+
+        for (int i = R - 1; i > bottom; i--) {
+            arr[i][C - 1] = arr[i - 1][C - 1];
+        }
+
+        for (int i = C - 1; i > 1; i--) {
+            arr[bottom][i] = arr[bottom][i - 1];
+        }
+
+        arr[bottom][1] = 0;
     }
 
 }
