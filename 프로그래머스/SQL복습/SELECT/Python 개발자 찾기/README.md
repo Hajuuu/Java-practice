@@ -1,2 +1,3 @@
 ## 문제
 - Python 스킬을 가진 개발자의 정보 조회
+- ID, EMAIL, FIRST_NAME, LAST_NAME 조회
